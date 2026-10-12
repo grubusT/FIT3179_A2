@@ -1,7 +1,6 @@
 # Learning outside
 
 A data story about outdoor education and learning in nature across Australia.
-FIT3179 Data Visualisation 2, Monash University. Ryan Nguyen, October 2026.
 
 - **Live page:** https://YOUR-USERNAME.github.io/REPO-NAME/
 - **Sketch:** [sketch.pdf](sketch.pdf)
