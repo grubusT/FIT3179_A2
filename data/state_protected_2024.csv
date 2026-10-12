@@ -1,0 +1,9 @@
+state,protected_km2,state_name,land_km2,pct_protected,n_areas
+ACT,1319,Australian Capital Territory,2358,55.9,76
+NSW,78515,New South Wales,800642,9.8,1018
+NT,332087,Northern Territory,1349129,24.6,282
+QLD,161832,Queensland,1730648,9.4,1278
+SA,299635,South Australia,983482,30.5,2211
+TAS,29281,Tasmania,68401,42.8,4236
+VIC,39445,Victoria,227444,17.3,3285
+WA,786742,Western Australia,2527013,31.1,2084

@@ -1,0 +1,13 @@
+age_group,age_order,where,share
+1 to 4 years,1,Outside away from home,45
+1 to 4 years,1,Outside at home,44
+1 to 4 years,1,Inside without a screen,71
+1 to 4 years,1,Inside on a screen,27
+5 to 12 years,2,Outside away from home,35
+5 to 12 years,2,Outside at home,33
+5 to 12 years,2,Inside without a screen,48
+5 to 12 years,2,Inside on a screen,57
+13 to 17 years,3,Outside away from home,21
+13 to 17 years,3,Outside at home,18
+13 to 17 years,3,Inside without a screen,18
+13 to 17 years,3,Inside on a screen,70

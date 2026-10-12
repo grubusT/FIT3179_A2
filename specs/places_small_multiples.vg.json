@@ -1,0 +1,176 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Small multiples: where Australian adults are active, by age group (AusPlay 2025).",
+  "data": {
+    "url": "data/places_2025.csv",
+    "format": {
+      "type": "csv",
+      "parse": {
+        "rate": "number"
+      }
+    }
+  },
+  "transform": [
+    {
+      "filter": "datum.sex == 'All' && datum.age != 'Total'"
+    },
+    {
+      "filter": {
+        "field": "place",
+        "oneOf": [
+          "Public space",
+          "Home environment",
+          "Gym/fitness club/sports/ leisure centre",
+          "Free community facilities",
+          "Sports club or association facilities",
+          "Educational institution facilities"
+        ]
+      }
+    },
+    {
+      "calculate": "{'Public space':'Parks, trails and beaches','Home environment':'At home','Gym/fitness club/sports/ leisure centre':'Gyms and leisure centres','Free community facilities':'Free community facilities','Sports club or association facilities':'Sports clubs','Educational institution facilities':'School and uni facilities'}[datum.place]",
+      "as": "label"
+    },
+    {
+      "calculate": "datum.place == 'Public space' ? 'park' : datum.place == 'Educational institution facilities' ? 'school' : 'other'",
+      "as": "hl"
+    }
+  ],
+  "facet": {
+    "field": "label",
+    "type": "nominal",
+    "title": null,
+    "sort": [
+      "Parks, trails and beaches",
+      "School and uni facilities",
+      "Gyms and leisure centres",
+      "At home",
+      "Free community facilities",
+      "Sports clubs"
+    ],
+    "header": {
+      "labelFontSize": 14,
+      "labelFontWeight": 600,
+      "labelColor": "#1e2b24",
+      "labelAnchor": "start",
+      "labelPadding": 6
+    }
+  },
+  "columns": 3,
+  "spec": {
+    "width": 300,
+    "height": 130,
+    "layer": [
+      {
+        "mark": {
+          "type": "bar",
+          "cornerRadiusTopLeft": 3,
+          "cornerRadiusTopRight": 3,
+          "width": {
+            "band": 0.72
+          }
+        },
+        "encoding": {
+          "x": {
+            "field": "age",
+            "type": "ordinal",
+            "title": null,
+            "axis": {
+              "labelAngle": 0,
+              "labelFontSize": 10.5,
+              "domain": false,
+              "ticks": false
+            }
+          },
+          "y": {
+            "field": "rate",
+            "type": "quantitative",
+            "title": null,
+            "scale": {
+              "domain": [
+                0,
+                80
+              ]
+            },
+            "axis": {
+              "values": [
+                0,
+                25,
+                50,
+                75
+              ],
+              "labelFontSize": 10
+            }
+          },
+          "color": {
+            "field": "hl",
+            "legend": null,
+            "scale": {
+              "domain": [
+                "park",
+                "school",
+                "other"
+              ],
+              "range": [
+                "#2e7d4f",
+                "#d0901f",
+                "#b7c6b4"
+              ]
+            }
+          },
+          "tooltip": [
+            {
+              "field": "label",
+              "title": "Place"
+            },
+            {
+              "field": "age",
+              "title": "Age"
+            },
+            {
+              "field": "rate",
+              "title": "% active here"
+            }
+          ]
+        }
+      },
+      {
+        "transform": [
+          {
+            "filter": "datum.hl != 'other' && (datum.age == '15-17' || datum.age == '65+')"
+          }
+        ],
+        "mark": {
+          "type": "text",
+          "dy": -8,
+          "fontSize": 11,
+          "fontWeight": 700,
+          "color": "#1e2b24"
+        },
+        "encoding": {
+          "x": {
+            "field": "age",
+            "type": "ordinal"
+          },
+          "y": {
+            "field": "rate",
+            "type": "quantitative"
+          },
+          "text": {
+            "field": "rate",
+            "format": ".0f"
+          }
+        }
+      }
+    ]
+  },
+  "resolve": {
+    "axis": {
+      "x": "independent"
+    }
+  },
+  "spacing": {
+    "row": 28,
+    "column": 30
+  }
+}

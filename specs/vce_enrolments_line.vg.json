@@ -1,0 +1,289 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Annotated line chart of VCE Outdoor and Environmental Studies enrolments, 2014 to 2025 (VCAA). No data published for 2015 and 2016.",
+  "width": "container",
+  "height": 320,
+  "data": {
+    "url": "data/vce_oes_enrolments.csv",
+    "format": {
+      "type": "csv",
+      "parse": {
+        "year": "number",
+        "male": "number",
+        "female": "number",
+        "total": "number",
+        "pct_female": "number"
+      }
+    }
+  },
+  "transform": [
+    {
+      "calculate": "datum.unit == 'Unit 1' ? 'Year 11' : 'Year 12'",
+      "as": "level"
+    }
+  ],
+  "encoding": {
+    "x": {
+      "field": "year",
+      "type": "quantitative",
+      "title": null,
+      "scale": {
+        "domain": [
+          2014,
+          2025.6
+        ]
+      },
+      "axis": {
+        "format": "d",
+        "values": [
+          2014,
+          2016,
+          2018,
+          2020,
+          2022,
+          2024
+        ],
+        "grid": false
+      }
+    },
+    "y": {
+      "field": "total",
+      "type": "quantitative",
+      "title": "Students enrolled",
+      "scale": {
+        "domain": [
+          2400,
+          4100
+        ]
+      },
+      "axis": {
+        "tickCount": 5,
+        "format": ",.0f"
+      }
+    }
+  },
+  "layer": [
+    {
+      "data": {
+        "values": [
+          {
+            "x": 2015.5,
+            "y": 2500
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "fontSize": 11,
+        "color": "#4b5b51",
+        "fontStyle": "italic"
+      },
+      "encoding": {
+        "x": {
+          "field": "x",
+          "type": "quantitative"
+        },
+        "y": {
+          "field": "y",
+          "type": "quantitative"
+        },
+        "text": {
+          "value": "2015 and 2016: no data"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "line",
+        "strokeWidth": 3,
+        "point": {
+          "filled": true,
+          "size": 60
+        }
+      },
+      "encoding": {
+        "color": {
+          "field": "level",
+          "type": "nominal",
+          "title": "Click to focus",
+          "scale": {
+            "domain": [
+              "Year 11",
+              "Year 12"
+            ],
+            "range": [
+              "#7a8f2a",
+              "#2e7d4f"
+            ]
+          },
+          "legend": {
+            "orient": "top-left",
+            "direction": "horizontal",
+            "symbolStrokeWidth": 3
+          }
+        },
+        "opacity": {
+          "condition": {
+            "param": "pick",
+            "value": 1
+          },
+          "value": 0.2
+        },
+        "tooltip": [
+          {
+            "field": "year",
+            "title": "Year"
+          },
+          {
+            "field": "level",
+            "title": "Level"
+          },
+          {
+            "field": "total",
+            "title": "Students",
+            "format": ","
+          },
+          {
+            "field": "pct_female",
+            "title": "% girls"
+          }
+        ]
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.year == 2025"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 8,
+        "fontSize": 12,
+        "fontWeight": 700
+      },
+      "encoding": {
+        "text": {
+          "field": "level"
+        },
+        "color": {
+          "field": "level",
+          "type": "nominal",
+          "legend": null
+        }
+      },
+      "params": [
+        {
+          "name": "pick",
+          "select": {
+            "type": "point",
+            "fields": [
+              "level"
+            ]
+          },
+          "bind": "legend"
+        }
+      ]
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "year": 2021,
+            "total": 2656
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "dy": 22,
+        "fontSize": 12,
+        "fontStyle": "italic",
+        "color": "#4b5b51"
+      },
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "quantitative"
+        },
+        "y": {
+          "field": "total",
+          "type": "quantitative"
+        },
+        "text": {
+          "value": "2021: COVID lockdowns"
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "year": 2024,
+            "total": 3593
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "align": "right",
+        "dx": -10,
+        "dy": -4,
+        "fontSize": 12,
+        "fontStyle": "italic",
+        "color": "#4b5b51"
+      },
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "quantitative"
+        },
+        "y": {
+          "field": "total",
+          "type": "quantitative"
+        },
+        "text": {
+          "value": "Year 12 peak: 3,593"
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "year": 2014,
+            "total": 2825
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 6,
+        "dy": 18,
+        "fontSize": 12,
+        "fontStyle": "italic",
+        "color": "#4b5b51"
+      },
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "quantitative"
+        },
+        "y": {
+          "field": "total",
+          "type": "quantitative"
+        },
+        "text": {
+          "value": "2,825 in 2014"
+        }
+      }
+    }
+  ],
+  "config": {
+    "padding": {
+      "right": 64
+    }
+  }
+}

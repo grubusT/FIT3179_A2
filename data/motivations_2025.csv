@@ -1,0 +1,385 @@
+sex,age,motivation,share
+All,Total,Physical health or fitness,66.5
+All,Total,Fun/enjoyment,58.9
+All,Total,To lose weight/ keep weight off/tone,53.2
+All,Total,To be outdoors/to enjoy nature,51.1
+All,Total,Social reasons,44.2
+All,Total,Psychological/ mental health/ therapy,37.6
+All,Total,Sense of achievement,30.8
+All,Total,Hobby,28.8
+All,Total,Walk the dog,19.9
+All,Total,Training purposes,20.5
+All,Total,Learn a new skill,14.7
+All,Total,Performance or competition,14.0
+All,Total,Way of getting around,12.5
+All,Total,Physio/rehab/ physical therapy/post-op,12.4
+All,Total,To be a good role model,9.3
+All,Total,Professional/ part of my job,4.4
+All,15-17,Physical health or fitness,61.5
+All,15-17,Fun/enjoyment,71.7
+All,15-17,To lose weight/ keep weight off/tone,39.3
+All,15-17,To be outdoors/to enjoy nature,47.0
+All,15-17,Social reasons,56.6
+All,15-17,Psychological/ mental health/ therapy,27.1
+All,15-17,Sense of achievement,37.5
+All,15-17,Hobby,53.5
+All,15-17,Walk the dog,13.0
+All,15-17,Training purposes,34.6
+All,15-17,Learn a new skill,32.6
+All,15-17,Performance or competition,34.5
+All,15-17,Way of getting around,19.1
+All,15-17,Physio/rehab/ physical therapy/post-op,5.7
+All,15-17,To be a good role model,10.1
+All,15-17,Professional/ part of my job,6.0
+All,18-24,Physical health or fitness,62.1
+All,18-24,Fun/enjoyment,64.7
+All,18-24,To lose weight/ keep weight off/tone,50.5
+All,18-24,To be outdoors/to enjoy nature,46.7
+All,18-24,Social reasons,54.6
+All,18-24,Psychological/ mental health/ therapy,36.5
+All,18-24,Sense of achievement,37.3
+All,18-24,Hobby,47.4
+All,18-24,Walk the dog,16.1
+All,18-24,Training purposes,31.1
+All,18-24,Learn a new skill,26.2
+All,18-24,Performance or competition,24.1
+All,18-24,Way of getting around,16.0
+All,18-24,Physio/rehab/ physical therapy/post-op,10.5
+All,18-24,To be a good role model,9.1
+All,18-24,Professional/ part of my job,8.5
+All,25-34,Physical health or fitness,62.5
+All,25-34,Fun/enjoyment,61.6
+All,25-34,To lose weight/ keep weight off/tone,54.7
+All,25-34,To be outdoors/to enjoy nature,49.1
+All,25-34,Social reasons,49.2
+All,25-34,Psychological/ mental health/ therapy,42.4
+All,25-34,Sense of achievement,33.4
+All,25-34,Hobby,41.1
+All,25-34,Walk the dog,18.9
+All,25-34,Training purposes,27.3
+All,25-34,Learn a new skill,22.2
+All,25-34,Performance or competition,16.7
+All,25-34,Way of getting around,13.8
+All,25-34,Physio/rehab/ physical therapy/post-op,12.4
+All,25-34,To be a good role model,10.6
+All,25-34,Professional/ part of my job,6.5
+All,35-44,Physical health or fitness,63.1
+All,35-44,Fun/enjoyment,60.2
+All,35-44,To lose weight/ keep weight off/tone,55.3
+All,35-44,To be outdoors/to enjoy nature,49.6
+All,35-44,Social reasons,42.2
+All,35-44,Psychological/ mental health/ therapy,40.7
+All,35-44,Sense of achievement,28.9
+All,35-44,Hobby,30.9
+All,35-44,Walk the dog,18.7
+All,35-44,Training purposes,21.8
+All,35-44,Learn a new skill,14.2
+All,35-44,Performance or competition,12.6
+All,35-44,Way of getting around,13.4
+All,35-44,Physio/rehab/ physical therapy/post-op,11.0
+All,35-44,To be a good role model,13.5
+All,35-44,Professional/ part of my job,4.4
+All,45-54,Physical health or fitness,67.0
+All,45-54,Fun/enjoyment,57.2
+All,45-54,To lose weight/ keep weight off/tone,58.4
+All,45-54,To be outdoors/to enjoy nature,51.6
+All,45-54,Social reasons,38.6
+All,45-54,Psychological/ mental health/ therapy,40.8
+All,45-54,Sense of achievement,27.3
+All,45-54,Hobby,21.2
+All,45-54,Walk the dog,23.4
+All,45-54,Training purposes,18.8
+All,45-54,Learn a new skill,9.2
+All,45-54,Performance or competition,10.2
+All,45-54,Way of getting around,13.4
+All,45-54,Physio/rehab/ physical therapy/post-op,12.1
+All,45-54,To be a good role model,11.4
+All,45-54,Professional/ part of my job,3.8
+All,55-64,Physical health or fitness,70.6
+All,55-64,Fun/enjoyment,58.2
+All,55-64,To lose weight/ keep weight off/tone,59.8
+All,55-64,To be outdoors/to enjoy nature,57.5
+All,55-64,Social reasons,39.5
+All,55-64,Psychological/ mental health/ therapy,38.7
+All,55-64,Sense of achievement,29.5
+All,55-64,Hobby,17.3
+All,55-64,Walk the dog,26.2
+All,55-64,Training purposes,15.0
+All,55-64,Learn a new skill,7.5
+All,55-64,Performance or competition,8.8
+All,55-64,Way of getting around,11.7
+All,55-64,Physio/rehab/ physical therapy/post-op,14.0
+All,55-64,To be a good role model,6.2
+All,55-64,Professional/ part of my job,2.3
+All,65+,Physical health or fitness,74.4
+All,65+,Fun/enjoyment,50.0
+All,65+,To lose weight/ keep weight off/tone,45.5
+All,65+,To be outdoors/to enjoy nature,53.0
+All,65+,Social reasons,40.0
+All,65+,Psychological/ mental health/ therapy,29.7
+All,65+,Sense of achievement,28.4
+All,65+,Hobby,12.0
+All,65+,Walk the dog,18.7
+All,65+,Training purposes,8.0
+All,65+,Learn a new skill,6.0
+All,65+,Performance or competition,8.5
+All,65+,Way of getting around,6.2
+All,65+,Physio/rehab/ physical therapy/post-op,15.7
+All,65+,To be a good role model,4.6
+All,65+,Professional/ part of my job,1.2
+Males,Total,Physical health or fitness,63.8
+Males,Total,Fun/enjoyment,59.9
+Males,Total,To lose weight/ keep weight off/tone,50.6
+Males,Total,To be outdoors/to enjoy nature,48.0
+Males,Total,Social reasons,43.2
+Males,Total,Psychological/ mental health/ therapy,33.4
+Males,Total,Sense of achievement,30.5
+Males,Total,Hobby,32.3
+Males,Total,Walk the dog,15.8
+Males,Total,Training purposes,24.8
+Males,Total,Learn a new skill,14.1
+Males,Total,Performance or competition,18.4
+Males,Total,Way of getting around,11.7
+Males,Total,Physio/rehab/ physical therapy/post-op,11.5
+Males,Total,To be a good role model,9.9
+Males,Total,Professional/ part of my job,4.9
+Males,15-17,Physical health or fitness,60.1
+Males,15-17,Fun/enjoyment,71.0
+Males,15-17,To lose weight/ keep weight off/tone,37.0
+Males,15-17,To be outdoors/to enjoy nature,43.2
+Males,15-17,Social reasons,53.7
+Males,15-17,Psychological/ mental health/ therapy,22.3
+Males,15-17,Sense of achievement,36.4
+Males,15-17,Hobby,54.0
+Males,15-17,Walk the dog,8.8
+Males,15-17,Training purposes,40.6
+Males,15-17,Learn a new skill,32.4
+Males,15-17,Performance or competition,36.9
+Males,15-17,Way of getting around,15.0
+Males,15-17,Physio/rehab/ physical therapy/post-op,5.6
+Males,15-17,To be a good role model,12.1
+Males,15-17,Professional/ part of my job,6.8
+Males,18-24,Physical health or fitness,58.2
+Males,18-24,Fun/enjoyment,64.1
+Males,18-24,To lose weight/ keep weight off/tone,44.0
+Males,18-24,To be outdoors/to enjoy nature,41.3
+Males,18-24,Social reasons,54.0
+Males,18-24,Psychological/ mental health/ therapy,31.1
+Males,18-24,Sense of achievement,35.8
+Males,18-24,Hobby,50.3
+Males,18-24,Walk the dog,11.4
+Males,18-24,Training purposes,36.7
+Males,18-24,Learn a new skill,26.0
+Males,18-24,Performance or competition,29.5
+Males,18-24,Way of getting around,14.4
+Males,18-24,Physio/rehab/ physical therapy/post-op,11.6
+Males,18-24,To be a good role model,10.8
+Males,18-24,Professional/ part of my job,9.7
+Males,25-34,Physical health or fitness,58.5
+Males,25-34,Fun/enjoyment,61.2
+Males,25-34,To lose weight/ keep weight off/tone,48.6
+Males,25-34,To be outdoors/to enjoy nature,43.1
+Males,25-34,Social reasons,47.4
+Males,25-34,Psychological/ mental health/ therapy,35.8
+Males,25-34,Sense of achievement,32.3
+Males,25-34,Hobby,44.6
+Males,25-34,Walk the dog,13.4
+Males,25-34,Training purposes,31.5
+Males,25-34,Learn a new skill,21.7
+Males,25-34,Performance or competition,21.5
+Males,25-34,Way of getting around,12.9
+Males,25-34,Physio/rehab/ physical therapy/post-op,11.4
+Males,25-34,To be a good role model,11.7
+Males,25-34,Professional/ part of my job,7.6
+Males,35-44,Physical health or fitness,59.5
+Males,35-44,Fun/enjoyment,61.1
+Males,35-44,To lose weight/ keep weight off/tone,50.4
+Males,35-44,To be outdoors/to enjoy nature,46.0
+Males,35-44,Social reasons,42.5
+Males,35-44,Psychological/ mental health/ therapy,35.2
+Males,35-44,Sense of achievement,29.7
+Males,35-44,Hobby,35.1
+Males,35-44,Walk the dog,13.7
+Males,35-44,Training purposes,26.2
+Males,35-44,Learn a new skill,14.2
+Males,35-44,Performance or competition,16.5
+Males,35-44,Way of getting around,12.9
+Males,35-44,Physio/rehab/ physical therapy/post-op,9.9
+Males,35-44,To be a good role model,13.0
+Males,35-44,Professional/ part of my job,4.7
+Males,45-54,Physical health or fitness,62.9
+Males,45-54,Fun/enjoyment,58.3
+Males,45-54,To lose weight/ keep weight off/tone,55.7
+Males,45-54,To be outdoors/to enjoy nature,49.3
+Males,45-54,Social reasons,38.0
+Males,45-54,Psychological/ mental health/ therapy,37.0
+Males,45-54,Sense of achievement,27.6
+Males,45-54,Hobby,25.5
+Males,45-54,Walk the dog,18.5
+Males,45-54,Training purposes,22.6
+Males,45-54,Learn a new skill,8.4
+Males,45-54,Performance or competition,14.3
+Males,45-54,Way of getting around,12.5
+Males,45-54,Physio/rehab/ physical therapy/post-op,10.6
+Males,45-54,To be a good role model,11.6
+Males,45-54,Professional/ part of my job,4.1
+Males,55-64,Physical health or fitness,68.9
+Males,55-64,Fun/enjoyment,60.6
+Males,55-64,To lose weight/ keep weight off/tone,59.6
+Males,55-64,To be outdoors/to enjoy nature,56.4
+Males,55-64,Social reasons,38.3
+Males,55-64,Psychological/ mental health/ therapy,35.2
+Males,55-64,Sense of achievement,28.7
+Males,55-64,Hobby,19.7
+Males,55-64,Walk the dog,23.0
+Males,55-64,Training purposes,19.2
+Males,55-64,Learn a new skill,6.0
+Males,55-64,Performance or competition,13.0
+Males,55-64,Way of getting around,12.4
+Males,55-64,Physio/rehab/ physical therapy/post-op,11.4
+Males,55-64,To be a good role model,6.7
+Males,55-64,Professional/ part of my job,2.4
+Males,65+,Physical health or fitness,75.0
+Males,65+,Fun/enjoyment,52.8
+Males,65+,To lose weight/ keep weight off/tone,49.4
+Males,65+,To be outdoors/to enjoy nature,53.4
+Males,65+,Social reasons,37.9
+Males,65+,Psychological/ mental health/ therapy,28.8
+Males,65+,Sense of achievement,28.3
+Males,65+,Hobby,14.6
+Males,65+,Walk the dog,17.1
+Males,65+,Training purposes,10.9
+Males,65+,Learn a new skill,4.7
+Males,65+,Performance or competition,13.0
+Males,65+,Way of getting around,5.4
+Males,65+,Physio/rehab/ physical therapy/post-op,15.5
+Males,65+,To be a good role model,4.8
+Males,65+,Professional/ part of my job,1.1
+Females,Total,Physical health or fitness,69.3
+Females,Total,Fun/enjoyment,57.9
+Females,Total,To lose weight/ keep weight off/tone,55.8
+Females,Total,To be outdoors/to enjoy nature,54.2
+Females,Total,Social reasons,45.2
+Females,Total,Psychological/ mental health/ therapy,41.8
+Females,Total,Sense of achievement,31.1
+Females,Total,Hobby,25.4
+Females,Total,Walk the dog,24.1
+Females,Total,Training purposes,16.3
+Females,Total,Learn a new skill,15.3
+Females,Total,Performance or competition,9.6
+Females,Total,Way of getting around,13.2
+Females,Total,Physio/rehab/ physical therapy/post-op,13.3
+Females,Total,To be a good role model,8.8
+Females,Total,Professional/ part of my job,3.8
+Females,15-17,Physical health or fitness,63.7
+Females,15-17,Fun/enjoyment,72.3
+Females,15-17,To lose weight/ keep weight off/tone,41.9
+Females,15-17,To be outdoors/to enjoy nature,51.4
+Females,15-17,Social reasons,59.3
+Females,15-17,Psychological/ mental health/ therapy,32.0
+Females,15-17,Sense of achievement,38.6
+Females,15-17,Hobby,53.4
+Females,15-17,Walk the dog,17.4
+Females,15-17,Training purposes,29.1
+Females,15-17,Learn a new skill,33.2
+Females,15-17,Performance or competition,32.0
+Females,15-17,Way of getting around,23.7
+Females,15-17,Physio/rehab/ physical therapy/post-op,6.0
+Females,15-17,To be a good role model,8.3
+Females,15-17,Professional/ part of my job,5.0
+Females,18-24,Physical health or fitness,66.2
+Females,18-24,Fun/enjoyment,65.4
+Females,18-24,To lose weight/ keep weight off/tone,57.5
+Females,18-24,To be outdoors/to enjoy nature,52.3
+Females,18-24,Social reasons,55.1
+Females,18-24,Psychological/ mental health/ therapy,41.8
+Females,18-24,Sense of achievement,38.6
+Females,18-24,Hobby,44.4
+Females,18-24,Walk the dog,21.1
+Females,18-24,Training purposes,25.3
+Females,18-24,Learn a new skill,26.4
+Females,18-24,Performance or competition,18.5
+Females,18-24,Way of getting around,17.3
+Females,18-24,Physio/rehab/ physical therapy/post-op,9.4
+Females,18-24,To be a good role model,7.3
+Females,18-24,Professional/ part of my job,7.3
+Females,25-34,Physical health or fitness,66.6
+Females,25-34,Fun/enjoyment,62.2
+Females,25-34,To lose weight/ keep weight off/tone,60.8
+Females,25-34,To be outdoors/to enjoy nature,55.1
+Females,25-34,Social reasons,51.1
+Females,25-34,Psychological/ mental health/ therapy,49.0
+Females,25-34,Sense of achievement,34.5
+Females,25-34,Hobby,37.6
+Females,25-34,Walk the dog,24.7
+Females,25-34,Training purposes,23.1
+Females,25-34,Learn a new skill,22.8
+Females,25-34,Performance or competition,11.8
+Females,25-34,Way of getting around,14.7
+Females,25-34,Physio/rehab/ physical therapy/post-op,13.3
+Females,25-34,To be a good role model,9.6
+Females,25-34,Professional/ part of my job,5.4
+Females,35-44,Physical health or fitness,66.8
+Females,35-44,Fun/enjoyment,59.3
+Females,35-44,To lose weight/ keep weight off/tone,60.3
+Females,35-44,To be outdoors/to enjoy nature,53.4
+Females,35-44,Social reasons,42.0
+Females,35-44,Psychological/ mental health/ therapy,46.2
+Females,35-44,Sense of achievement,28.1
+Females,35-44,Hobby,26.6
+Females,35-44,Walk the dog,23.5
+Females,35-44,Training purposes,17.5
+Females,35-44,Learn a new skill,14.2
+Females,35-44,Performance or competition,8.7
+Females,35-44,Way of getting around,13.8
+Females,35-44,Physio/rehab/ physical therapy/post-op,11.9
+Females,35-44,To be a good role model,14.1
+Females,35-44,Professional/ part of my job,4.1
+Females,45-54,Physical health or fitness,71.1
+Females,45-54,Fun/enjoyment,56.2
+Females,45-54,To lose weight/ keep weight off/tone,61.1
+Females,45-54,To be outdoors/to enjoy nature,54.1
+Females,45-54,Social reasons,39.2
+Females,45-54,Psychological/ mental health/ therapy,44.6
+Females,45-54,Sense of achievement,27.0
+Females,45-54,Hobby,17.0
+Females,45-54,Walk the dog,28.3
+Females,45-54,Training purposes,15.1
+Females,45-54,Learn a new skill,10.1
+Females,45-54,Performance or competition,6.1
+Females,45-54,Way of getting around,14.3
+Females,45-54,Physio/rehab/ physical therapy/post-op,13.5
+Females,45-54,To be a good role model,11.1
+Females,45-54,Professional/ part of my job,3.4
+Females,55-64,Physical health or fitness,72.2
+Females,55-64,Fun/enjoyment,55.9
+Females,55-64,To lose weight/ keep weight off/tone,60.0
+Females,55-64,To be outdoors/to enjoy nature,58.6
+Females,55-64,Social reasons,40.6
+Females,55-64,Psychological/ mental health/ therapy,42.0
+Females,55-64,Sense of achievement,30.1
+Females,55-64,Hobby,14.9
+Females,55-64,Walk the dog,29.2
+Females,55-64,Training purposes,11.0
+Females,55-64,Learn a new skill,9.0
+Females,55-64,Performance or competition,4.8
+Females,55-64,Way of getting around,10.9
+Females,55-64,Physio/rehab/ physical therapy/post-op,16.5
+Females,55-64,To be a good role model,5.7
+Females,55-64,Professional/ part of my job,2.3
+Females,65+,Physical health or fitness,73.9
+Females,65+,Fun/enjoyment,47.5
+Females,65+,To lose weight/ keep weight off/tone,42.0
+Females,65+,To be outdoors/to enjoy nature,52.6
+Females,65+,Social reasons,41.9
+Females,65+,Psychological/ mental health/ therapy,30.5
+Females,65+,Sense of achievement,28.5
+Females,65+,Hobby,9.6
+Females,65+,Walk the dog,20.1
+Females,65+,Training purposes,5.4
+Females,65+,Learn a new skill,7.3
+Females,65+,Performance or competition,4.4
+Females,65+,Way of getting around,7.1
+Females,65+,Physio/rehab/ physical therapy/post-op,15.8
+Females,65+,To be a good role model,4.4
+Females,65+,Professional/ part of my job,1.2

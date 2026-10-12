@@ -1,0 +1,171 @@
+activity,group,rate,group_type
+Bush walking,Total,17.47,Total
+Canoeing/Kayaking,Total,1.0,Total
+Cycling,Total,8.29,Total
+Equestrian,Total,0.44,Total
+Fishing (recreational),Total,1.07,Total
+Guides,Total,0.0,Total
+Lifesaving surf,Total,0.13,Total
+Mountain biking,Total,0.73,Total
+Orienteering,Total,0.07,Total
+Paddle sports,Total,0.21,Total
+Rock climbing/Abseiling/Caving,Total,0.46,Total
+Rogaining,Total,0.02,Total
+Sailing,Total,0.33,Total
+Scouts,Total,0.02,Total
+Ski & snowboard,Total,0.81,Total
+Surfing,Total,1.38,Total
+Underwater sports,Total,0.84,Total
+Bush walking,Males,16.3,Sex
+Canoeing/Kayaking,Males,1.03,Sex
+Cycling,Males,10.43,Sex
+Equestrian,Males,0.14,Sex
+Fishing (recreational),Males,1.69,Sex
+Guides,Males,0.0,Sex
+Lifesaving surf,Males,0.2,Sex
+Mountain biking,Males,1.18,Sex
+Orienteering,Males,0.07,Sex
+Paddle sports,Males,0.21,Sex
+Rock climbing/Abseiling/Caving,Males,0.53,Sex
+Rogaining,Males,0.03,Sex
+Sailing,Males,0.46,Sex
+Scouts,Males,0.03,Sex
+Ski & snowboard,Males,0.96,Sex
+Surfing,Males,1.73,Sex
+Underwater sports,Males,0.84,Sex
+Bush walking,Females,18.6,Sex
+Canoeing/Kayaking,Females,0.96,Sex
+Cycling,Females,6.25,Sex
+Equestrian,Females,0.74,Sex
+Fishing (recreational),Females,0.47,Sex
+Guides,Females,0.01,Sex
+Lifesaving surf,Females,0.06,Sex
+Mountain biking,Females,0.28,Sex
+Orienteering,Females,0.07,Sex
+Paddle sports,Females,0.21,Sex
+Rock climbing/Abseiling/Caving,Females,0.36,Sex
+Rogaining,Females,0.02,Sex
+Sailing,Females,0.2,Sex
+Scouts,Females,0.01,Sex
+Ski & snowboard,Females,0.67,Sex
+Surfing,Females,1.06,Sex
+Underwater sports,Females,0.84,Sex
+Bush walking,15-17,14.6,Age
+Canoeing/Kayaking,15-17,0.66,Age
+Cycling,15-17,6.66,Age
+Equestrian,15-17,0.55,Age
+Fishing (recreational),15-17,1.07,Age
+Guides,15-17,0.0,Age
+Lifesaving surf,15-17,0.49,Age
+Mountain biking,15-17,1.72,Age
+Orienteering,15-17,0.35,Age
+Paddle sports,15-17,0.0,Age
+Rock climbing/Abseiling/Caving,15-17,1.79,Age
+Rogaining,15-17,0.0,Age
+Sailing,15-17,0.3,Age
+Scouts,15-17,0.25,Age
+Ski & snowboard,15-17,0.27,Age
+Surfing,15-17,2.22,Age
+Underwater sports,15-17,0.72,Age
+Bush walking,18-24,17.33,Age
+Canoeing/Kayaking,18-24,0.64,Age
+Cycling,18-24,5.59,Age
+Equestrian,18-24,0.68,Age
+Fishing (recreational),18-24,0.66,Age
+Guides,18-24,0.0,Age
+Lifesaving surf,18-24,0.11,Age
+Mountain biking,18-24,0.48,Age
+Orienteering,18-24,0.06,Age
+Paddle sports,18-24,0.11,Age
+Rock climbing/Abseiling/Caving,18-24,0.98,Age
+Rogaining,18-24,0.04,Age
+Sailing,18-24,0.14,Age
+Scouts,18-24,0.07,Age
+Ski & snowboard,18-24,0.68,Age
+Surfing,18-24,1.27,Age
+Underwater sports,18-24,0.68,Age
+Bush walking,25-34,20.3,Age
+Canoeing/Kayaking,25-34,0.97,Age
+Cycling,25-34,7.12,Age
+Equestrian,25-34,0.57,Age
+Fishing (recreational),25-34,0.93,Age
+Guides,25-34,0.01,Age
+Lifesaving surf,25-34,0.1,Age
+Mountain biking,25-34,0.61,Age
+Orienteering,25-34,0.01,Age
+Paddle sports,25-34,0.21,Age
+Rock climbing/Abseiling/Caving,25-34,0.6,Age
+Rogaining,25-34,0.02,Age
+Sailing,25-34,0.17,Age
+Scouts,25-34,0.0,Age
+Ski & snowboard,25-34,0.89,Age
+Surfing,25-34,1.57,Age
+Underwater sports,25-34,1.05,Age
+Bush walking,35-44,21.45,Age
+Canoeing/Kayaking,35-44,1.13,Age
+Cycling,35-44,9.26,Age
+Equestrian,35-44,0.44,Age
+Fishing (recreational),35-44,0.96,Age
+Guides,35-44,0.02,Age
+Lifesaving surf,35-44,0.15,Age
+Mountain biking,35-44,0.97,Age
+Orienteering,35-44,0.1,Age
+Paddle sports,35-44,0.21,Age
+Rock climbing/Abseiling/Caving,35-44,0.55,Age
+Rogaining,35-44,0.0,Age
+Sailing,35-44,0.22,Age
+Scouts,35-44,0.02,Age
+Ski & snowboard,35-44,0.82,Age
+Surfing,35-44,1.82,Age
+Underwater sports,35-44,1.09,Age
+Bush walking,45-54,19.69,Age
+Canoeing/Kayaking,45-54,1.25,Age
+Cycling,45-54,11.59,Age
+Equestrian,45-54,0.41,Age
+Fishing (recreational),45-54,1.44,Age
+Guides,45-54,0.0,Age
+Lifesaving surf,45-54,0.14,Age
+Mountain biking,45-54,1.21,Age
+Orienteering,45-54,0.09,Age
+Paddle sports,45-54,0.25,Age
+Rock climbing/Abseiling/Caving,45-54,0.25,Age
+Rogaining,45-54,0.05,Age
+Sailing,45-54,0.36,Age
+Scouts,45-54,0.0,Age
+Ski & snowboard,45-54,1.01,Age
+Surfing,45-54,1.77,Age
+Underwater sports,45-54,0.82,Age
+Bush walking,55-64,19.55,Age
+Canoeing/Kayaking,55-64,1.48,Age
+Cycling,55-64,11.95,Age
+Equestrian,55-64,0.59,Age
+Fishing (recreational),55-64,1.55,Age
+Guides,55-64,0.0,Age
+Lifesaving surf,55-64,0.17,Age
+Mountain biking,55-64,0.71,Age
+Orienteering,55-64,0.05,Age
+Paddle sports,55-64,0.35,Age
+Rock climbing/Abseiling/Caving,55-64,0.16,Age
+Rogaining,55-64,0.03,Age
+Sailing,55-64,0.69,Age
+Scouts,55-64,0.0,Age
+Ski & snowboard,55-64,1.4,Age
+Surfing,55-64,1.35,Age
+Underwater sports,55-64,1.14,Age
+Bush walking,65+,9.57,Age
+Canoeing/Kayaking,65+,0.68,Age
+Cycling,65+,5.58,Age
+Equestrian,65+,0.1,Age
+Fishing (recreational),65+,0.92,Age
+Guides,65+,0.0,Age
+Lifesaving surf,65+,0.04,Age
+Mountain biking,65+,0.21,Age
+Orienteering,65+,0.04,Age
+Paddle sports,65+,0.18,Age
+Rock climbing/Abseiling/Caving,65+,0.05,Age
+Rogaining,65+,0.02,Age
+Sailing,65+,0.4,Age
+Scouts,65+,0.0,Age
+Ski & snowboard,65+,0.4,Age
+Surfing,65+,0.51,Age
+Underwater sports,65+,0.37,Age

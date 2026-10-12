@@ -1,0 +1,178 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Radial bar chart of reasons Australians give for being active, with an age filter (AusPlay 2025).",
+  "width": 420,
+  "height": 420,
+  "data": {
+    "url": "data/motivations_2025.csv",
+    "format": {
+      "type": "csv",
+      "parse": {
+        "share": "number"
+      }
+    }
+  },
+  "params": [
+    {
+      "name": "Age",
+      "value": "Total",
+      "bind": {
+        "input": "select",
+        "options": [
+          "Total",
+          "15-17",
+          "18-24",
+          "25-34",
+          "35-44",
+          "45-54",
+          "55-64",
+          "65+"
+        ],
+        "labels": [
+          "All adults",
+          "15 to 17",
+          "18 to 24",
+          "25 to 34",
+          "35 to 44",
+          "45 to 54",
+          "55 to 64",
+          "65 and over"
+        ],
+        "name": "Show age group  "
+      }
+    }
+  ],
+  "transform": [
+    {
+      "filter": "datum.sex == 'All' && datum.age == Age"
+    },
+    {
+      "window": [
+        {
+          "op": "row_number",
+          "as": "r"
+        }
+      ],
+      "sort": [
+        {
+          "field": "share",
+          "order": "descending"
+        }
+      ]
+    },
+    {
+      "filter": "datum.r <= 10"
+    },
+    {
+      "calculate": "{'Physical health or fitness':'Fitness','Fun/enjoyment':'Fun','To lose weight/ keep weight off/tone':'Weight','To be outdoors/to enjoy nature':'Being outdoors','Social reasons':'Social','Psychological/ mental health/ therapy':'Mental health','Sense of achievement':'Achievement','Hobby':'Hobby','Walk the dog':'Walk the dog','Training purposes':'Training','Learn a new skill':'New skill','Performance or competition':'Competition','Way of getting around':'Getting around','Physio/rehab/ physical therapy/post-op':'Rehab','To be a good role model':'Role model','Professional/ part of my job':'For work'}[datum.motivation]",
+      "as": "label"
+    },
+    {
+      "calculate": "datum.label == 'Being outdoors'",
+      "as": "nature"
+    }
+  ],
+  "encoding": {
+    "theta": {
+      "field": "label",
+      "type": "nominal",
+      "sort": {
+        "field": "share",
+        "order": "descending"
+      },
+      "stack": true
+    },
+    "radius": {
+      "field": "share",
+      "type": "quantitative",
+      "scale": {
+        "type": "sqrt",
+        "zero": true,
+        "domain": [
+          0,
+          80
+        ],
+        "range": [
+          40,
+          150
+        ]
+      }
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "arc",
+        "innerRadius": 40,
+        "stroke": "#eef1ea",
+        "strokeWidth": 3,
+        "cornerRadius": 3,
+        "padAngle": 0.01
+      },
+      "encoding": {
+        "color": {
+          "field": "nature",
+          "type": "nominal",
+          "legend": null,
+          "scale": {
+            "domain": [
+              true,
+              false
+            ],
+            "range": [
+              "#2e7d4f",
+              "#b7c6b4"
+            ]
+          }
+        },
+        "tooltip": [
+          {
+            "field": "motivation",
+            "title": "Reason"
+          },
+          {
+            "field": "share",
+            "title": "% of active adults"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "radiusOffset": 34,
+        "fontSize": 12
+      },
+      "encoding": {
+        "text": {
+          "field": "label"
+        },
+        "color": {
+          "condition": {
+            "test": "datum.nature",
+            "value": "#2e7d4f"
+          },
+          "value": "#4b5b51"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "radiusOffset": -12,
+        "fontSize": 11,
+        "fontWeight": 700,
+        "color": "white"
+      },
+      "encoding": {
+        "text": {
+          "field": "share",
+          "format": ".0f"
+        }
+      }
+    }
+  ],
+  "view": {
+    "stroke": null
+  }
+}

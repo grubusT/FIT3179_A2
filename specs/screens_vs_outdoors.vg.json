@@ -1,0 +1,179 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Share of children doing each kind of play most days, by age group (RCH, 2022).",
+  "width": "container",
+  "height": 300,
+  "data": {
+    "url": "data/rch_outdoor_play_2022.csv",
+    "format": {
+      "type": "csv",
+      "parse": {
+        "age_order": "number",
+        "share": "number"
+      }
+    }
+  },
+  "transform": [
+    {
+      "filter": "datum.where != 'Outside at home'"
+    }
+  ],
+  "encoding": {
+    "x": {
+      "field": "age_group",
+      "type": "ordinal",
+      "sort": {
+        "field": "age_order"
+      },
+      "title": null,
+      "axis": {
+        "labelAngle": 0,
+        "labelFontSize": 12,
+        "domain": false,
+        "ticks": false
+      }
+    },
+    "y": {
+      "field": "share",
+      "type": "quantitative",
+      "title": "% of children, most days",
+      "scale": {
+        "domain": [
+          0,
+          80
+        ]
+      },
+      "axis": {
+        "tickCount": 4
+      }
+    },
+    "color": {
+      "field": "where",
+      "type": "nominal",
+      "legend": null,
+      "scale": {
+        "domain": [
+          "Inside on a screen",
+          "Outside away from home",
+          "Outside at home",
+          "Inside without a screen"
+        ],
+        "range": [
+          "#a8462e",
+          "#2e7d4f",
+          "#8fb59a",
+          "#c3ccbf"
+        ]
+      }
+    },
+    "detail": {
+      "field": "where"
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "line",
+        "strokeWidth": 2.5
+      },
+      "encoding": {
+        "strokeWidth": {
+          "condition": {
+            "test": "indexof(['Inside on a screen','Outside away from home'], datum.where) >= 0",
+            "value": 3.5
+          },
+          "value": 1.5
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "size": 70
+      },
+      "encoding": {
+        "tooltip": [
+          {
+            "field": "age_group",
+            "title": "Age"
+          },
+          {
+            "field": "where",
+            "title": "Activity"
+          },
+          {
+            "field": "share",
+            "title": "% most days"
+          }
+        ]
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.age_order == 3 && datum.where != 'Inside without a screen'"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 10,
+        "fontSize": 12,
+        "fontWeight": 600
+      },
+      "encoding": {
+        "text": {
+          "field": "where"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.age_order == 2 && datum.where == 'Inside without a screen'"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 8,
+        "dy": -10,
+        "fontSize": 12,
+        "fontWeight": 600
+      },
+      "encoding": {
+        "text": {
+          "value": "Inside, no screen"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.where == 'Inside on a screen' || datum.where == 'Outside away from home'"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "dy": -12,
+        "fontSize": 12,
+        "fontWeight": 700
+      },
+      "encoding": {
+        "text": {
+          "field": "share",
+          "format": ".0f"
+        },
+        "color": {
+          "value": "#1e2b24"
+        }
+      }
+    }
+  ],
+  "config": {
+    "padding": {
+      "right": 150
+    }
+  }
+}

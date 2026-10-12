@@ -1,0 +1,185 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Small multiples: share of adults active at least once a week, by income, education, disability and Indigenous status (AusPlay 2025).",
+  "data": {
+    "url": "data/participation_gaps_2025.csv",
+    "format": {
+      "type": "csv",
+      "parse": {
+        "yearly": "number",
+        "weekly": "number"
+      }
+    }
+  },
+  "transform": [
+    {
+      "filter": {
+        "field": "category",
+        "oneOf": [
+          "Annual household income~^",
+          "Highest education completed",
+          "Disability or physical condition that restricts life in some way^",
+          "Aboriginal or Torres Strait Islander origin^"
+        ]
+      }
+    },
+    {
+      "filter": "indexof(['Not stated','Other','Still at secondary school','Refused / don\\'t know'], datum.group) < 0"
+    },
+    {
+      "calculate": "{'Annual household income~^':'Household income','Highest education completed':'Highest education','Disability or physical condition that restricts life in some way^':'Disability','Aboriginal or Torres Strait Islander origin^':'First Nations'}[datum.category]",
+      "as": "panel"
+    },
+    {
+      "calculate": "{'University degree or higher (including postgraduate diploma)':'University degree','Undergraduate diploma or associate diploma':'Diploma','Certificate, trade qualification or apprenticeship':'Trade or certificate','Highest level of secondary school':'Finished Year 12','Did not complete highest level of school':'Left school early','Yes':'Yes','No':'No'}[datum.group] || datum.group",
+      "as": "label"
+    },
+    {
+      "joinaggregate": [
+        {
+          "op": "min",
+          "field": "weekly",
+          "as": "lo"
+        },
+        {
+          "op": "max",
+          "field": "weekly",
+          "as": "hi"
+        }
+      ],
+      "groupby": [
+        "panel"
+      ]
+    },
+    {
+      "calculate": "datum.weekly == datum.lo ? 'low' : datum.weekly == datum.hi ? 'high' : 'mid'",
+      "as": "tone"
+    }
+  ],
+  "facet": {
+    "field": "panel",
+    "type": "nominal",
+    "title": null,
+    "sort": [
+      "Household income",
+      "Highest education",
+      "Disability",
+      "First Nations"
+    ],
+    "header": {
+      "labelFontSize": 14,
+      "labelFontWeight": 600,
+      "labelColor": "#1e2b24",
+      "labelAnchor": "start"
+    }
+  },
+  "columns": 2,
+  "spec": {
+    "width": 330,
+    "height": {
+      "step": 26
+    },
+    "encoding": {
+      "y": {
+        "field": "label",
+        "type": "nominal",
+        "title": null,
+        "sort": null,
+        "axis": {
+          "domain": false,
+          "ticks": false,
+          "labelFontSize": 12
+        }
+      },
+      "x": {
+        "field": "weekly",
+        "type": "quantitative",
+        "title": "% active at least once a week",
+        "scale": {
+          "domain": [
+            0,
+            100
+          ]
+        },
+        "axis": {
+          "values": [
+            0,
+            25,
+            50,
+            75,
+            100
+          ],
+          "grid": true
+        }
+      }
+    },
+    "layer": [
+      {
+        "mark": {
+          "type": "bar",
+          "cornerRadiusEnd": 3,
+          "height": {
+            "band": 0.7
+          }
+        },
+        "encoding": {
+          "color": {
+            "field": "tone",
+            "legend": null,
+            "scale": {
+              "domain": [
+                "low",
+                "mid",
+                "high"
+              ],
+              "range": [
+                "#a8462e",
+                "#b7c6b4",
+                "#2e7d4f"
+              ]
+            }
+          },
+          "tooltip": [
+            {
+              "field": "panel",
+              "title": "Group"
+            },
+            {
+              "field": "label",
+              "title": " "
+            },
+            {
+              "field": "weekly",
+              "title": "% active weekly"
+            }
+          ]
+        }
+      },
+      {
+        "mark": {
+          "type": "text",
+          "align": "left",
+          "dx": 5,
+          "fontSize": 11.5,
+          "fontWeight": 600,
+          "color": "#1e2b24"
+        },
+        "encoding": {
+          "text": {
+            "field": "weekly",
+            "format": ".0f"
+          }
+        }
+      }
+    ]
+  },
+  "resolve": {
+    "scale": {
+      "y": "independent"
+    }
+  },
+  "spacing": {
+    "row": 30,
+    "column": 60
+  }
+}

@@ -1,0 +1,271 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Bump chart: rank of each activity by number of participants, across adult age groups (AusPlay 2025). Lines leaving the bottom fall out of the top 12.",
+  "width": "container",
+  "height": 380,
+  "data": {
+    "url": "data/activity_rank_by_age_2025.csv",
+    "format": {
+      "type": "csv",
+      "parse": {
+        "rank": "number",
+        "rate": "number"
+      }
+    }
+  },
+  "encoding": {
+    "x": {
+      "field": "age",
+      "type": "ordinal",
+      "title": "Age group",
+      "sort": [
+        "15-17",
+        "18-24",
+        "25-34",
+        "35-44",
+        "45-54",
+        "55-64",
+        "65+"
+      ],
+      "axis": {
+        "labelAngle": 0,
+        "domain": false,
+        "ticks": false,
+        "grid": false
+      }
+    },
+    "y": {
+      "field": "rank",
+      "type": "quantitative",
+      "title": "Rank",
+      "scale": {
+        "domain": [
+          12.5,
+          0.5
+        ],
+        "reverse": false,
+        "nice": false
+      },
+      "axis": {
+        "values": [
+          1,
+          3,
+          5,
+          7,
+          9,
+          11
+        ],
+        "grid": false
+      }
+    },
+    "color": {
+      "field": "group",
+      "type": "nominal",
+      "legend": null,
+      "scale": {
+        "domain": [
+          "Bush walking",
+          "Cycling",
+          "Golf",
+          "Team sport",
+          "Other"
+        ],
+        "range": [
+          "#2e7d4f",
+          "#7a8f2a",
+          "#d0901f",
+          "#a8462e",
+          "#c3ccbf"
+        ]
+      }
+    },
+    "detail": {
+      "field": "activity"
+    },
+    "opacity": {
+      "condition": [
+        {
+          "param": "focus",
+          "empty": true,
+          "value": 1
+        }
+      ],
+      "value": 0.25
+    }
+  },
+  "transform": [
+    {
+      "calculate": "indexof([\"Bush walking\", \"Cycling\", \"Golf\"], datum.activity) >= 0 ? datum.activity : indexof([\"Basketball\", \"Football/soccer\"], datum.activity) >= 0 ? 'Team sport' : 'Other'",
+      "as": "group"
+    },
+    {
+      "calculate": "datum.activity == 'Bush walking' ? 'Bushwalking' : datum.activity == 'Walking (Recreational)' ? 'Walking' : datum.activity",
+      "as": "label"
+    }
+  ],
+  "layer": [
+    {
+      "mark": {
+        "type": "line",
+        "clip": true,
+        "interpolate": "monotone"
+      },
+      "encoding": {
+        "strokeWidth": {
+          "condition": {
+            "test": "datum.group != 'Other'",
+            "value": 3.5
+          },
+          "value": 2
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "size": 90,
+        "clip": true,
+        "stroke": "#eef1ea",
+        "strokeWidth": 1.5
+      },
+      "encoding": {
+        "tooltip": [
+          {
+            "field": "label",
+            "title": "Activity"
+          },
+          {
+            "field": "age",
+            "title": "Age"
+          },
+          {
+            "field": "rank",
+            "title": "Rank"
+          },
+          {
+            "field": "rate",
+            "title": "% of age group taking part"
+          }
+        ]
+      },
+      "params": [
+        {
+          "name": "focus",
+          "select": {
+            "type": "point",
+            "fields": [
+              "activity"
+            ],
+            "on": "pointerover",
+            "clear": "pointerout"
+          }
+        }
+      ]
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.age == '65+' && datum.rank <= 12"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 10,
+        "fontSize": 12,
+        "fontWeight": 600
+      },
+      "encoding": {
+        "text": {
+          "field": "label"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.age == '15-17' && datum.rank <= 12 && datum.group == 'Team sport'"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 9,
+        "dy": -11,
+        "fontSize": 12,
+        "fontWeight": 600
+      },
+      "encoding": {
+        "text": {
+          "field": "label"
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "age": "35-44",
+            "rank": 3
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 6,
+        "dy": -26,
+        "lineBreak": "\n",
+        "fontSize": 12,
+        "fontStyle": "italic",
+        "color": "#4b5b51"
+      },
+      "encoding": {
+        "text": {
+          "value": "Bushwalking reaches 3rd\nfrom age 35"
+        },
+        "color": {
+          "value": "#4b5b51"
+        },
+        "opacity": {
+          "value": 1
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "age": "55-64",
+            "rank": 12.3
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "align": "center",
+        "dy": -6,
+        "fontSize": 12,
+        "fontStyle": "italic",
+        "color": "#4b5b51"
+      },
+      "encoding": {
+        "text": {
+          "value": "Team sports drop out of the top 12"
+        },
+        "color": {
+          "value": "#4b5b51"
+        },
+        "opacity": {
+          "value": 1
+        }
+      }
+    }
+  ],
+  "config": {
+    "padding": {
+      "right": 110
+    }
+  }
+}

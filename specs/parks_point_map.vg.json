@@ -1,0 +1,207 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Dot map: every protected area of 10 km² or more, placed at its centre and coloured by who manages it (CAPAD 2024).",
+  "width": "container",
+  "height": 500,
+  "projection": {
+    "type": "conicEqualArea",
+    "parallels": [
+      -18,
+      -36
+    ],
+    "rotate": [
+      -134,
+      0
+    ]
+  },
+  "layer": [
+    {
+      "data": {
+        "url": "data/aus_states.topojson",
+        "format": {
+          "type": "topojson",
+          "feature": "states"
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#dfe6da",
+        "stroke": "#eef1ea",
+        "strokeWidth": 1.5
+      }
+    },
+    {
+      "data": {
+        "url": "data/protected_areas_points_2024.csv",
+        "format": {
+          "type": "csv",
+          "parse": {
+            "area_km2": "number",
+            "lon": "number",
+            "lat": "number"
+          }
+        }
+      },
+      "transform": [
+        {
+          "calculate": "indexof([\"Private land\", \"Other public reserve\", \"National park\", \"Indigenous Protected Area\"], datum.manager)",
+          "as": "draw_order"
+        }
+      ],
+      "mark": {
+        "type": "circle",
+        "size": 34,
+        "stroke": "#ffffff",
+        "strokeWidth": 0.5
+      },
+      "encoding": {
+        "longitude": {
+          "field": "lon",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "lat",
+          "type": "quantitative"
+        },
+        "color": {
+          "field": "manager",
+          "type": "nominal",
+          "title": "Managed by (click to filter)",
+          "scale": {
+            "domain": [
+              "Indigenous Protected Area",
+              "National park",
+              "Other public reserve",
+              "Private land"
+            ],
+            "range": [
+              "#d0901f",
+              "#2e7d4f",
+              "#7a8f2a",
+              "#2a74a8"
+            ]
+          },
+          "legend": {
+            "symbolSize": 120,
+            "labelFontSize": 12.5
+          }
+        },
+        "opacity": {
+          "condition": {
+            "param": "who",
+            "value": 0.9
+          },
+          "value": 0.05
+        },
+        "order": {
+          "field": "draw_order"
+        },
+        "tooltip": [
+          {
+            "field": "name",
+            "title": "Name"
+          },
+          {
+            "field": "type",
+            "title": "Type"
+          },
+          {
+            "field": "manager",
+            "title": "Managed by"
+          },
+          {
+            "field": "state",
+            "title": "State"
+          },
+          {
+            "field": "area_km2",
+            "title": "Area (km²)",
+            "format": ",.0f"
+          }
+        ]
+      },
+      "params": [
+        {
+          "name": "who",
+          "select": {
+            "type": "point",
+            "fields": [
+              "manager"
+            ]
+          },
+          "bind": "legend"
+        }
+      ]
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "lon": 117.5,
+            "lat": -38.2,
+            "t": "The 92 orange dots are Indigenous Protected Areas.\nFew in number, they cover half of all protected land."
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "align": "center",
+        "lineBreak": "\n",
+        "fontSize": 12,
+        "fontStyle": "italic",
+        "color": "#4b5b51"
+      },
+      "encoding": {
+        "longitude": {
+          "field": "lon",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "lat",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "t"
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "lon": 156.0,
+            "lat": -38.5,
+            "t": "Hundreds of smaller reserves\ncrowd the south-east"
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "lineBreak": "\n",
+        "fontSize": 12,
+        "fontStyle": "italic",
+        "color": "#4b5b51"
+      },
+      "encoding": {
+        "longitude": {
+          "field": "lon",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "lat",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "t"
+        }
+      }
+    }
+  ],
+  "config": {
+    "legend": {
+      "orient": "right",
+      "symbolType": "circle"
+    }
+  }
+}

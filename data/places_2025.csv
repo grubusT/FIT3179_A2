@@ -1,0 +1,217 @@
+sex,age,place,rate
+All,Total,Public space,62.4
+All,Total,Home environment,29.8
+All,Total,Gym/fitness club/sports/ leisure centre,30.5
+All,Total,Free community facilities,21.0
+All,Total,Sports club or association facilities,18.4
+All,Total,Private or commercial premises,16.2
+All,Total,Recreation club or association facilities,9.3
+All,Total,Educational institution facilities,6.4
+All,Total,Workplace,6.5
+All,15-17,Public space,58.9
+All,15-17,Home environment,43.3
+All,15-17,Gym/fitness club/sports/ leisure centre,35.2
+All,15-17,Free community facilities,37.6
+All,15-17,Sports club or association facilities,33.4
+All,15-17,Private or commercial premises,17.4
+All,15-17,Recreation club or association facilities,15.5
+All,15-17,Educational institution facilities,36.4
+All,15-17,Workplace,6.4
+All,18-24,Public space,58.7
+All,18-24,Home environment,36.0
+All,18-24,Gym/fitness club/sports/ leisure centre,44.5
+All,18-24,Free community facilities,31.5
+All,18-24,Sports club or association facilities,28.5
+All,18-24,Private or commercial premises,21.6
+All,18-24,Recreation club or association facilities,15.1
+All,18-24,Educational institution facilities,17.2
+All,18-24,Workplace,9.2
+All,25-34,Public space,61.3
+All,25-34,Home environment,33.8
+All,25-34,Gym/fitness club/sports/ leisure centre,42.7
+All,25-34,Free community facilities,29.6
+All,25-34,Sports club or association facilities,23.4
+All,25-34,Private or commercial premises,21.6
+All,25-34,Recreation club or association facilities,13.0
+All,25-34,Educational institution facilities,7.7
+All,25-34,Workplace,10.3
+All,35-44,Public space,62.6
+All,35-44,Home environment,31.6
+All,35-44,Gym/fitness club/sports/ leisure centre,34.0
+All,35-44,Free community facilities,23.3
+All,35-44,Sports club or association facilities,18.9
+All,35-44,Private or commercial premises,18.5
+All,35-44,Recreation club or association facilities,8.3
+All,35-44,Educational institution facilities,4.3
+All,35-44,Workplace,7.7
+All,45-54,Public space,67.6
+All,45-54,Home environment,30.2
+All,45-54,Gym/fitness club/sports/ leisure centre,27.8
+All,45-54,Free community facilities,18.3
+All,45-54,Sports club or association facilities,15.3
+All,45-54,Private or commercial premises,15.7
+All,45-54,Recreation club or association facilities,7.3
+All,45-54,Educational institution facilities,2.8
+All,45-54,Workplace,7.2
+All,55-64,Public space,71.5
+All,55-64,Home environment,27.9
+All,55-64,Gym/fitness club/sports/ leisure centre,23.0
+All,55-64,Free community facilities,14.2
+All,55-64,Sports club or association facilities,13.6
+All,55-64,Private or commercial premises,13.5
+All,55-64,Recreation club or association facilities,5.5
+All,55-64,Educational institution facilities,1.3
+All,55-64,Workplace,5.1
+All,65+,Public space,56.2
+All,65+,Home environment,19.6
+All,65+,Gym/fitness club/sports/ leisure centre,15.9
+All,65+,Free community facilities,8.9
+All,65+,Sports club or association facilities,10.8
+All,65+,Private or commercial premises,8.9
+All,65+,Recreation club or association facilities,6.6
+All,65+,Educational institution facilities,0.7
+All,65+,Workplace,1.3
+Males,Total,Public space,61.0
+Males,Total,Home environment,27.7
+Males,Total,Gym/fitness club/sports/ leisure centre,29.9
+Males,Total,Free community facilities,21.6
+Males,Total,Sports club or association facilities,24.3
+Males,Total,Private or commercial premises,13.6
+Males,Total,Recreation club or association facilities,11.0
+Males,Total,Educational institution facilities,7.5
+Males,Total,Workplace,7.4
+Males,15-17,Public space,52.6
+Males,15-17,Home environment,43.5
+Males,15-17,Gym/fitness club/sports/ leisure centre,34.7
+Males,15-17,Free community facilities,36.4
+Males,15-17,Sports club or association facilities,36.3
+Males,15-17,Private or commercial premises,16.4
+Males,15-17,Recreation club or association facilities,18.0
+Males,15-17,Educational institution facilities,37.9
+Males,15-17,Workplace,6.3
+Males,18-24,Public space,55.6
+Males,18-24,Home environment,34.5
+Males,18-24,Gym/fitness club/sports/ leisure centre,42.3
+Males,18-24,Free community facilities,32.4
+Males,18-24,Sports club or association facilities,34.1
+Males,18-24,Private or commercial premises,18.8
+Males,18-24,Recreation club or association facilities,18.8
+Males,18-24,Educational institution facilities,20.2
+Males,18-24,Workplace,9.7
+Males,25-34,Public space,57.4
+Males,25-34,Home environment,30.0
+Males,25-34,Gym/fitness club/sports/ leisure centre,41.7
+Males,25-34,Free community facilities,30.5
+Males,25-34,Sports club or association facilities,29.9
+Males,25-34,Private or commercial premises,17.6
+Males,25-34,Recreation club or association facilities,16.4
+Males,25-34,Educational institution facilities,9.3
+Males,25-34,Workplace,11.7
+Males,35-44,Public space,59.8
+Males,35-44,Home environment,28.6
+Males,35-44,Gym/fitness club/sports/ leisure centre,33.9
+Males,35-44,Free community facilities,24.1
+Males,35-44,Sports club or association facilities,25.0
+Males,35-44,Private or commercial premises,15.1
+Males,35-44,Recreation club or association facilities,10.3
+Males,35-44,Educational institution facilities,5.1
+Males,35-44,Workplace,9.5
+Males,45-54,Public space,66.6
+Males,45-54,Home environment,27.2
+Males,45-54,Gym/fitness club/sports/ leisure centre,27.8
+Males,45-54,Free community facilities,18.4
+Males,45-54,Sports club or association facilities,21.1
+Males,45-54,Private or commercial premises,13.4
+Males,45-54,Recreation club or association facilities,9.2
+Males,45-54,Educational institution facilities,3.3
+Males,45-54,Workplace,7.9
+Males,55-64,Public space,72.2
+Males,55-64,Home environment,25.8
+Males,55-64,Gym/fitness club/sports/ leisure centre,21.4
+Males,55-64,Free community facilities,14.1
+Males,55-64,Sports club or association facilities,18.7
+Males,55-64,Private or commercial premises,9.9
+Males,55-64,Recreation club or association facilities,5.6
+Males,55-64,Educational institution facilities,1.5
+Males,55-64,Workplace,5.7
+Males,65+,Public space,58.7
+Males,65+,Home environment,19.1
+Males,65+,Gym/fitness club/sports/ leisure centre,14.4
+Males,65+,Free community facilities,9.3
+Males,65+,Sports club or association facilities,16.5
+Males,65+,Private or commercial premises,7.8
+Males,65+,Recreation club or association facilities,5.5
+Males,65+,Educational institution facilities,0.8
+Males,65+,Workplace,1.3
+Females,Total,Public space,63.8
+Females,Total,Home environment,31.7
+Females,Total,Gym/fitness club/sports/ leisure centre,31.2
+Females,Total,Free community facilities,20.3
+Females,Total,Sports club or association facilities,12.8
+Females,Total,Private or commercial premises,18.8
+Females,Total,Recreation club or association facilities,7.8
+Females,Total,Educational institution facilities,5.3
+Females,Total,Workplace,5.7
+Females,15-17,Public space,66.3
+Females,15-17,Home environment,42.9
+Females,15-17,Gym/fitness club/sports/ leisure centre,36.4
+Females,15-17,Free community facilities,39.5
+Females,15-17,Sports club or association facilities,30.7
+Females,15-17,Private or commercial premises,18.9
+Females,15-17,Recreation club or association facilities,13.3
+Females,15-17,Educational institution facilities,35.8
+Females,15-17,Workplace,6.4
+Females,18-24,Public space,62.0
+Females,18-24,Home environment,37.5
+Females,18-24,Gym/fitness club/sports/ leisure centre,47.0
+Females,18-24,Free community facilities,30.7
+Females,18-24,Sports club or association facilities,22.9
+Females,18-24,Private or commercial premises,24.7
+Females,18-24,Recreation club or association facilities,11.4
+Females,18-24,Educational institution facilities,14.1
+Females,18-24,Workplace,8.8
+Females,25-34,Public space,65.3
+Females,25-34,Home environment,37.7
+Females,25-34,Gym/fitness club/sports/ leisure centre,43.7
+Females,25-34,Free community facilities,28.8
+Females,25-34,Sports club or association facilities,17.0
+Females,25-34,Private or commercial premises,25.7
+Females,25-34,Recreation club or association facilities,9.8
+Females,25-34,Educational institution facilities,6.1
+Females,25-34,Workplace,8.9
+Females,35-44,Public space,65.4
+Females,35-44,Home environment,34.6
+Females,35-44,Gym/fitness club/sports/ leisure centre,34.1
+Females,35-44,Free community facilities,22.5
+Females,35-44,Sports club or association facilities,13.0
+Females,35-44,Private or commercial premises,21.7
+Females,35-44,Recreation club or association facilities,6.5
+Females,35-44,Educational institution facilities,3.5
+Females,35-44,Workplace,6.1
+Females,45-54,Public space,68.5
+Females,45-54,Home environment,33.1
+Females,45-54,Gym/fitness club/sports/ leisure centre,27.8
+Females,45-54,Free community facilities,18.3
+Females,45-54,Sports club or association facilities,9.8
+Females,45-54,Private or commercial premises,18.0
+Females,45-54,Recreation club or association facilities,5.5
+Females,45-54,Educational institution facilities,2.4
+Females,45-54,Workplace,6.5
+Females,55-64,Public space,70.9
+Females,55-64,Home environment,29.9
+Females,55-64,Gym/fitness club/sports/ leisure centre,24.6
+Females,55-64,Free community facilities,14.2
+Females,55-64,Sports club or association facilities,8.7
+Females,55-64,Private or commercial premises,16.9
+Females,55-64,Recreation club or association facilities,5.5
+Females,55-64,Educational institution facilities,1.1
+Females,55-64,Workplace,4.6
+Females,65+,Public space,54.2
+Females,65+,Home environment,20.2
+Females,65+,Gym/fitness club/sports/ leisure centre,17.3
+Females,65+,Free community facilities,8.7
+Females,65+,Sports club or association facilities,5.9
+Females,65+,Private or commercial premises,9.9
+Females,65+,Recreation club or association facilities,7.6
+Females,65+,Educational institution facilities,0.6
+Females,65+,Workplace,1.2

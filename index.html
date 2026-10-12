@@ -1,0 +1,699 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Learning Outside | Outdoor education in Australia</title>
+  <meta name="description" content="A data story about outdoor education and learning in nature across Australia.">
+  <meta name="author" content="Ryan Nguyen">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Zilla+Slab:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/vega@5.33.1"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.23.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.29.0"></script>
+</head>
+<body>
+
+<!-- ============================== HERO ============================== -->
+<header class="hero">
+  <div class="hero-copy">
+    <h1 class="hero-title">Learning<br>outside</h1>
+    <p class="hero-lede">Australia has one of the largest natural classrooms on Earth. This is a look at who gets to learn in it, and who misses out.</p>
+    <p class="byline">By Ryan Nguyen <span class="sep" aria-hidden="true">/</span> October 2026</p>
+  </div>
+<svg class="hero-scene" viewBox="0 0 1600 700" preserveAspectRatio="xMidYMax slice" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+<defs><radialGradient id="glow"><stop offset="0" stop-color="#fff4d6" stop-opacity=".9"/><stop offset="1" stop-color="#fff4d6" stop-opacity="0"/></radialGradient></defs>
+<g class="sun"><circle cx="1130" cy="330" r="230" fill="url(#glow)"/><circle cx="1130" cy="330" r="70" fill="var(--sun)"/></g>
+<path class="layer layer-1" d="M0,700 L0.0,420.8 L13.3,418.0 L26.7,415.8 L40.0,413.3 L53.3,409.3 L66.7,405.6 L80.0,402.5 L93.3,396.8 L106.7,391.6 L120.0,384.6 L133.3,379.6 L146.7,375.1 L160.0,370.5 L173.3,369.0 L186.7,367.7 L200.0,366.3 L213.3,367.0 L226.7,369.0 L240.0,371.0 L253.3,371.6 L266.7,372.6 L280.0,374.1 L293.3,374.9 L306.7,377.1 L320.0,380.0 L333.3,383.5 L346.7,387.3 L360.0,391.9 L373.3,396.8 L386.7,401.8 L400.0,405.6 L413.3,408.4 L426.7,411.9 L440.0,413.0 L453.3,414.1 L466.7,414.3 L480.0,416.7 L493.3,418.3 L506.7,419.7 L520.0,423.1 L533.3,427.4 L546.7,431.3 L560.0,435.3 L573.3,437.9 L586.7,441.4 L600.0,443.5 L613.3,445.0 L626.7,447.3 L640.0,450.0 L653.3,452.7 L666.7,455.4 L680.0,459.3 L693.3,462.4 L706.7,466.5 L720.0,470.5 L733.3,472.1 L746.7,472.7 L760.0,473.0 L773.3,471.9 L786.7,469.7 L800.0,466.6 L813.3,464.1 L826.7,461.9 L840.0,460.4 L853.3,458.4 L866.7,456.9 L880.0,455.6 L893.3,453.3 L906.7,451.2 L920.0,449.7 L933.3,447.5 L946.7,444.3 L960.0,442.0 L973.3,440.4 L986.7,440.9 L1000.0,442.8 L1013.3,444.8 L1026.7,447.7 L1040.0,451.9 L1053.3,454.7 L1066.7,458.4 L1080.0,461.8 L1093.3,463.3 L1106.7,464.6 L1120.0,465.3 L1133.3,466.7 L1146.7,468.3 L1160.0,468.1 L1173.3,470.7 L1186.7,472.1 L1200.0,473.3 L1213.3,473.5 L1226.7,473.0 L1240.0,470.9 L1253.3,468.2 L1266.7,464.3 L1280.0,459.5 L1293.3,456.4 L1306.7,452.0 L1320.0,448.0 L1333.3,445.8 L1346.7,443.8 L1360.0,442.0 L1373.3,440.7 L1386.7,439.4 L1400.0,437.5 L1413.3,434.9 L1426.7,431.5 L1440.0,427.4 L1453.3,424.2 L1466.7,420.8 L1480.0,418.6 L1493.3,416.8 L1506.7,414.9 L1520.0,413.4 L1533.3,411.8 L1546.7,408.9 L1560.0,406.9 L1573.3,402.9 L1586.7,397.5 L1600.0,392.3 L1600,700 Z" fill="var(--l1)"/>
+<path class="layer layer-2" d="M0,700 L0.0,491.1 L13.3,485.1 L26.7,479.8 L40.0,475.0 L53.3,471.8 L66.7,468.9 L80.0,466.4 L93.3,463.6 L106.7,461.7 L120.0,459.2 L133.3,457.0 L146.7,454.8 L160.0,452.4 L173.3,450.1 L186.7,448.9 L200.0,448.4 L213.3,448.5 L226.7,449.4 L240.0,451.0 L253.3,451.7 L266.7,452.2 L280.0,452.6 L293.3,451.2 L306.7,449.7 L320.0,447.5 L333.3,445.5 L346.7,444.5 L360.0,443.5 L373.3,443.9 L386.7,445.1 L400.0,445.7 L413.3,446.3 L426.7,448.3 L440.0,449.1 L453.3,449.6 L466.7,450.2 L480.0,450.4 L493.3,451.0 L506.7,451.5 L520.0,454.1 L533.3,456.5 L546.7,458.6 L560.0,462.7 L573.3,466.0 L586.7,468.6 L600.0,470.9 L613.3,472.1 L626.7,473.0 L640.0,472.0 L653.3,471.4 L666.7,469.5 L680.0,468.9 L693.3,467.9 L706.7,466.6 L720.0,466.2 L733.3,466.1 L746.7,465.1 L760.0,463.6 L773.3,461.7 L786.7,459.8 L800.0,458.1 L813.3,455.3 L826.7,454.7 L840.0,453.2 L853.3,454.3 L866.7,455.1 L880.0,458.5 L893.3,461.6 L906.7,465.3 L920.0,469.4 L933.3,473.5 L946.7,477.0 L960.0,480.0 L973.3,482.9 L986.7,486.4 L1000.0,490.2 L1013.3,493.5 L1026.7,496.8 L1040.0,502.1 L1053.3,506.3 L1066.7,510.7 L1080.0,513.4 L1093.3,516.8 L1106.7,517.7 L1120.0,519.3 L1133.3,519.0 L1146.7,518.6 L1160.0,519.0 L1173.3,517.8 L1186.7,518.6 L1200.0,519.9 L1213.3,520.3 L1226.7,521.8 L1240.0,524.0 L1253.3,524.5 L1266.7,525.4 L1280.0,524.5 L1293.3,524.3 L1306.7,523.2 L1320.0,522.8 L1333.3,521.3 L1346.7,521.9 L1360.0,520.6 L1373.3,521.6 L1386.7,520.7 L1400.0,520.8 L1413.3,520.5 L1426.7,517.8 L1440.0,514.9 L1453.3,511.7 L1466.7,506.7 L1480.0,501.2 L1493.3,497.4 L1506.7,491.6 L1520.0,487.2 L1533.3,484.0 L1546.7,481.2 L1560.0,478.6 L1573.3,475.1 L1586.7,472.7 L1600.0,469.4 L1600,700 Z" fill="var(--l2)"/>
+<path class="layer layer-3" d="M0,700 L0.0,508.8 L13.3,511.5 L26.7,514.4 L40.0,518.0 L53.3,519.4 L66.7,521.2 L80.0,523.8 L93.3,524.9 L106.7,527.3 L120.0,529.0 L133.3,531.4 L146.7,532.9 L160.0,535.1 L173.3,536.3 L186.7,536.0 L200.0,535.4 L213.3,533.6 L226.7,530.6 L240.0,528.8 L253.3,526.2 L266.7,523.7 L280.0,522.0 L293.3,522.1 L306.7,521.5 L320.0,522.0 L333.3,522.6 L346.7,522.8 L360.0,523.3 L373.3,522.8 L386.7,523.3 L400.0,523.2 L413.3,524.5 L426.7,525.8 L440.0,527.0 L453.3,530.0 L466.7,533.5 L480.0,538.1 L493.3,541.2 L506.7,544.7 L520.0,547.0 L533.3,549.3 L546.7,550.5 L560.0,551.4 L573.3,552.4 L586.7,553.2 L600.0,554.8 L613.3,556.1 L626.7,558.4 L640.0,560.6 L653.3,563.2 L666.7,565.0 L680.0,566.2 L693.3,568.4 L706.7,569.4 L720.0,570.1 L733.3,570.5 L746.7,571.7 L760.0,572.7 L773.3,575.5 L786.7,577.9 L800.0,580.6 L813.3,583.4 L826.7,587.1 L840.0,589.4 L853.3,589.6 L866.7,590.7 L880.0,589.6 L893.3,588.0 L906.7,586.4 L920.0,584.9 L933.3,583.0 L946.7,580.1 L960.0,578.7 L973.3,575.8 L986.7,573.9 L1000.0,570.2 L1013.3,566.9 L1026.7,562.4 L1040.0,556.7 L1053.3,551.9 L1066.7,545.8 L1080.0,540.8 L1093.3,537.4 L1106.7,533.6 L1120.0,531.7 L1133.3,530.6 L1146.7,530.0 L1160.0,529.0 L1173.3,528.3 L1186.7,528.7 L1200.0,527.2 L1213.3,527.1 L1226.7,526.3 L1240.0,525.2 L1253.3,525.3 L1266.7,526.0 L1280.0,527.2 L1293.3,528.5 L1306.7,529.9 L1320.0,531.2 L1333.3,532.2 L1346.7,531.5 L1360.0,530.6 L1373.3,529.3 L1386.7,526.8 L1400.0,524.8 L1413.3,523.7 L1426.7,521.7 L1440.0,520.8 L1453.3,519.9 L1466.7,520.4 L1480.0,520.7 L1493.3,520.2 L1506.7,520.7 L1520.0,520.1 L1533.3,518.6 L1546.7,518.2 L1560.0,517.1 L1573.3,516.7 L1586.7,516.2 L1600.0,517.1 L1600,700 Z" fill="var(--l3)"/>
+<g class="layer layer-3 trees far" fill="var(--l3)" color="var(--l3)">
+<path d="M138.6,551.2380728561571 C138.9,529.2 139.9,517.1 140.2,503.9 L141.3,503.9 C141.4,518.2 141.2,530.3 141.7,551.2380728561571 Z"/>
+<path d="M139.2,512.3 Q138.9,509.0 138.7,489.5" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" fill="none"/>
+<path d="M139.1,507.6 Q139.4,504.3 139.6,493.0" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" fill="none"/>
+<path d="M142.2,510.1 Q134.7,506.8 127.1,494.0" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" fill="none"/>
+<path d="M140.3,511.5 Q142.2,508.2 144.1,496.1" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" fill="none"/>
+<ellipse cx="140.2" cy="490.8" rx="2.1" ry="1.1" transform="rotate(15 138.7 489.5)"/>
+<ellipse cx="139.9" cy="490.5" rx="2.6" ry="1.8" transform="rotate(-12 138.7 489.5)"/>
+<ellipse cx="135.5" cy="487.8" rx="1.9" ry="1.2" transform="rotate(6 138.7 489.5)"/>
+<ellipse cx="137.6" cy="489.2" rx="4.0" ry="1.2" transform="rotate(-10 138.7 489.5)"/>
+<ellipse cx="141.8" cy="489.0" rx="2.0" ry="1.7" transform="rotate(-16 138.7 489.5)"/>
+<ellipse cx="134.0" cy="487.8" rx="2.1" ry="1.1" transform="rotate(7 138.7 489.5)"/>
+<ellipse cx="136.1" cy="494.7" rx="3.0" ry="2.2" transform="rotate(-4 139.6 493.0)"/>
+<ellipse cx="134.5" cy="493.1" rx="3.6" ry="1.4" transform="rotate(-17 139.6 493.0)"/>
+<ellipse cx="137.6" cy="495.0" rx="3.6" ry="1.2" transform="rotate(-10 139.6 493.0)"/>
+<ellipse cx="134.8" cy="490.0" rx="3.7" ry="1.3" transform="rotate(2 139.6 493.0)"/>
+<ellipse cx="139.0" cy="490.7" rx="3.5" ry="1.2" transform="rotate(6 139.6 493.0)"/>
+<ellipse cx="135.0" cy="492.0" rx="2.4" ry="1.4" transform="rotate(19 139.6 493.0)"/>
+<ellipse cx="133.2" cy="490.8" rx="2.3" ry="2.2" transform="rotate(4 127.1 494.0)"/>
+<ellipse cx="128.1" cy="491.0" rx="2.2" ry="1.6" transform="rotate(-20 127.1 494.0)"/>
+<ellipse cx="128.5" cy="495.3" rx="2.8" ry="1.2" transform="rotate(-12 127.1 494.0)"/>
+<ellipse cx="128.8" cy="490.8" rx="2.7" ry="1.8" transform="rotate(-15 127.1 494.0)"/>
+<ellipse cx="128.2" cy="495.3" rx="2.2" ry="1.5" transform="rotate(5 127.1 494.0)"/>
+<ellipse cx="124.8" cy="492.0" rx="3.3" ry="1.9" transform="rotate(-14 127.1 494.0)"/>
+<ellipse cx="128.7" cy="493.8" rx="3.4" ry="1.5" transform="rotate(-1 127.1 494.0)"/>
+<ellipse cx="143.1" cy="493.3" rx="2.0" ry="2.2" transform="rotate(-10 144.1 496.1)"/>
+<ellipse cx="146.6" cy="494.2" rx="3.7" ry="1.8" transform="rotate(-8 144.1 496.1)"/>
+<ellipse cx="140.2" cy="496.7" rx="2.1" ry="1.4" transform="rotate(2 144.1 496.1)"/>
+<ellipse cx="148.4" cy="496.2" rx="2.5" ry="2.1" transform="rotate(-12 144.1 496.1)"/>
+<ellipse cx="138.2" cy="494.3" rx="2.9" ry="1.2" transform="rotate(-13 144.1 496.1)"/>
+<path d="M188.6,549.9005659259562 C188.9,527.9 190.0,515.8 190.3,502.6 L191.4,502.6 C191.5,516.9 191.2,529.0 191.7,549.9005659259562 Z"/>
+<path d="M190.4,504.8 Q182.9,501.5 175.4,498.4" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" fill="none"/>
+<path d="M192.6,508.2 Q196.0,504.9 199.3,492.9" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" fill="none"/>
+<path d="M190.0,504.5 Q198.2,501.2 206.5,493.6" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" fill="none"/>
+<ellipse cx="169.6" cy="498.6" rx="3.0" ry="1.9" transform="rotate(-7 175.4 498.4)"/>
+<ellipse cx="181.4" cy="495.5" rx="3.1" ry="1.9" transform="rotate(16 175.4 498.4)"/>
+<ellipse cx="178.3" cy="499.0" rx="3.7" ry="2.1" transform="rotate(-6 175.4 498.4)"/>
+<ellipse cx="177.6" cy="500.1" rx="3.8" ry="1.6" transform="rotate(12 175.4 498.4)"/>
+<ellipse cx="179.8" cy="498.3" rx="3.3" ry="1.5" transform="rotate(3 175.4 498.4)"/>
+<ellipse cx="194.3" cy="493.2" rx="4.1" ry="2.1" transform="rotate(9 199.3 492.9)"/>
+<ellipse cx="198.0" cy="493.7" rx="3.2" ry="1.6" transform="rotate(14 199.3 492.9)"/>
+<ellipse cx="194.3" cy="493.8" rx="2.0" ry="1.8" transform="rotate(-1 199.3 492.9)"/>
+<ellipse cx="196.1" cy="493.5" rx="3.0" ry="1.8" transform="rotate(17 199.3 492.9)"/>
+<ellipse cx="196.4" cy="489.7" rx="2.6" ry="1.8" transform="rotate(-12 199.3 492.9)"/>
+<ellipse cx="209.5" cy="492.2" rx="4.0" ry="1.6" transform="rotate(-10 206.5 493.6)"/>
+<ellipse cx="205.3" cy="491.7" rx="3.3" ry="2.0" transform="rotate(10 206.5 493.6)"/>
+<ellipse cx="202.9" cy="491.5" rx="2.4" ry="2.1" transform="rotate(-12 206.5 493.6)"/>
+<ellipse cx="202.1" cy="492.2" rx="3.9" ry="1.1" transform="rotate(-17 206.5 493.6)"/>
+<ellipse cx="212.3" cy="494.8" rx="2.2" ry="1.6" transform="rotate(17 206.5 493.6)"/>
+<ellipse cx="210.5" cy="492.4" rx="3.1" ry="1.8" transform="rotate(9 206.5 493.6)"/>
+<path d="M858.6,557.4704327561899 C858.9,535.5 860.4,523.4 860.8,510.2 L861.9,510.2 C862.0,524.5 861.2,536.6 861.6,557.4704327561899 Z"/>
+<path d="M862.7,508.5 Q854.0,505.2 845.2,507.5" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" fill="none"/>
+<path d="M860.3,518.4 Q864.6,515.1 868.9,499.8" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" fill="none"/>
+<path d="M860.9,508.3 Q852.0,505.0 843.1,506.0" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" fill="none"/>
+<path d="M859.5,508.6 Q866.5,505.3 873.4,504.6" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" fill="none"/>
+<ellipse cx="844.5" cy="507.7" rx="3.4" ry="2.0" transform="rotate(18 845.2 507.5)"/>
+<ellipse cx="847.4" cy="505.3" rx="3.0" ry="1.3" transform="rotate(-20 845.2 507.5)"/>
+<ellipse cx="844.9" cy="508.1" rx="2.3" ry="1.4" transform="rotate(-6 845.2 507.5)"/>
+<ellipse cx="847.6" cy="507.1" rx="3.3" ry="1.9" transform="rotate(-4 845.2 507.5)"/>
+<ellipse cx="848.7" cy="509.2" rx="2.1" ry="2.1" transform="rotate(9 845.2 507.5)"/>
+<ellipse cx="868.3" cy="497.6" rx="3.9" ry="1.1" transform="rotate(2 868.9 499.8)"/>
+<ellipse cx="870.7" cy="499.3" rx="3.7" ry="1.5" transform="rotate(-7 868.9 499.8)"/>
+<ellipse cx="874.7" cy="497.1" rx="3.8" ry="2.0" transform="rotate(17 868.9 499.8)"/>
+<ellipse cx="864.3" cy="497.8" rx="2.8" ry="1.2" transform="rotate(-8 868.9 499.8)"/>
+<ellipse cx="874.7" cy="501.6" rx="2.5" ry="1.9" transform="rotate(-19 868.9 499.8)"/>
+<ellipse cx="869.0" cy="496.7" rx="2.7" ry="1.6" transform="rotate(-9 868.9 499.8)"/>
+<ellipse cx="839.7" cy="507.5" rx="2.9" ry="1.1" transform="rotate(1 843.1 506.0)"/>
+<ellipse cx="845.4" cy="507.8" rx="3.0" ry="2.2" transform="rotate(16 843.1 506.0)"/>
+<ellipse cx="843.3" cy="506.5" rx="2.9" ry="2.1" transform="rotate(3 843.1 506.0)"/>
+<ellipse cx="845.4" cy="506.9" rx="2.9" ry="1.7" transform="rotate(13 843.1 506.0)"/>
+<ellipse cx="843.9" cy="503.6" rx="3.1" ry="2.1" transform="rotate(-10 843.1 506.0)"/>
+<ellipse cx="878.9" cy="506.1" rx="3.3" ry="1.4" transform="rotate(-14 873.4 504.6)"/>
+<ellipse cx="874.0" cy="502.8" rx="3.0" ry="1.6" transform="rotate(-15 873.4 504.6)"/>
+<ellipse cx="867.4" cy="503.3" rx="3.1" ry="1.1" transform="rotate(17 873.4 504.6)"/>
+<ellipse cx="874.0" cy="506.7" rx="2.2" ry="1.2" transform="rotate(-13 873.4 504.6)"/>
+<ellipse cx="878.6" cy="503.8" rx="4.0" ry="2.0" transform="rotate(-4 873.4 504.6)"/>
+<ellipse cx="870.4" cy="504.0" rx="2.7" ry="2.1" transform="rotate(17 873.4 504.6)"/>
+<ellipse cx="878.5" cy="504.2" rx="2.2" ry="1.6" transform="rotate(-19 873.4 504.6)"/>
+<ellipse cx="870.5" cy="505.1" rx="4.1" ry="1.1" transform="rotate(-14 873.4 504.6)"/>
+<path d="M903.6,544.1893237456123 C903.9,522.2 902.4,510.1 902.8,496.9 L903.9,496.9 C904.0,511.2 906.2,523.3 906.6,544.1893237456123 Z"/>
+<path d="M901.4,504.3 Q899.5,501.0 897.7,485.8" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" fill="none"/>
+<path d="M902.0,497.3 Q895.5,494.0 889.0,487.4" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" fill="none"/>
+<path d="M902.6,500.1 Q903.4,496.8 904.2,488.4" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" fill="none"/>
+<path d="M901.8,503.0 Q903.0,499.7 904.2,492.4" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" fill="none"/>
+<path d="M904.6,502.8 Q906.5,499.5 908.3,487.1" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" fill="none"/>
+<ellipse cx="894.5" cy="486.6" rx="3.7" ry="2.1" transform="rotate(-7 897.7 485.8)"/>
+<ellipse cx="895.5" cy="487.6" rx="2.4" ry="2.2" transform="rotate(16 897.7 485.8)"/>
+<ellipse cx="893.3" cy="483.8" rx="3.5" ry="1.4" transform="rotate(-16 897.7 485.8)"/>
+<ellipse cx="901.7" cy="484.8" rx="3.7" ry="1.2" transform="rotate(-4 897.7 485.8)"/>
+<ellipse cx="899.9" cy="482.6" rx="2.4" ry="1.9" transform="rotate(16 897.7 485.8)"/>
+<ellipse cx="903.4" cy="483.2" rx="3.0" ry="1.9" transform="rotate(0 897.7 485.8)"/>
+<ellipse cx="892.7" cy="486.7" rx="2.0" ry="1.9" transform="rotate(5 889.0 487.4)"/>
+<ellipse cx="893.9" cy="486.7" rx="2.3" ry="1.2" transform="rotate(-13 889.0 487.4)"/>
+<ellipse cx="884.9" cy="485.6" rx="3.4" ry="1.7" transform="rotate(-15 889.0 487.4)"/>
+<ellipse cx="891.2" cy="484.5" rx="2.1" ry="1.5" transform="rotate(-3 889.0 487.4)"/>
+<ellipse cx="887.2" cy="485.2" rx="2.7" ry="1.8" transform="rotate(-18 889.0 487.4)"/>
+<ellipse cx="885.4" cy="486.3" rx="2.7" ry="1.5" transform="rotate(17 889.0 487.4)"/>
+<ellipse cx="899.3" cy="489.5" rx="2.6" ry="1.2" transform="rotate(14 904.2 488.4)"/>
+<ellipse cx="908.8" cy="490.1" rx="4.0" ry="1.7" transform="rotate(-12 904.2 488.4)"/>
+<ellipse cx="905.3" cy="487.0" rx="3.6" ry="1.4" transform="rotate(-15 904.2 488.4)"/>
+<ellipse cx="907.2" cy="486.0" rx="4.0" ry="1.2" transform="rotate(-7 904.2 488.4)"/>
+<ellipse cx="904.7" cy="487.2" rx="2.9" ry="1.3" transform="rotate(-12 904.2 488.4)"/>
+<ellipse cx="900.4" cy="489.5" rx="2.6" ry="1.2" transform="rotate(16 904.2 488.4)"/>
+<ellipse cx="901.0" cy="494.3" rx="3.4" ry="1.5" transform="rotate(6 904.2 492.4)"/>
+<ellipse cx="905.0" cy="492.0" rx="2.8" ry="2.2" transform="rotate(6 904.2 492.4)"/>
+<ellipse cx="906.6" cy="493.3" rx="4.1" ry="1.1" transform="rotate(5 904.2 492.4)"/>
+<ellipse cx="907.1" cy="490.5" rx="2.8" ry="1.2" transform="rotate(-12 904.2 492.4)"/>
+<ellipse cx="902.7" cy="489.6" rx="2.5" ry="2.1" transform="rotate(2 904.2 492.4)"/>
+<ellipse cx="913.9" cy="486.9" rx="4.1" ry="1.8" transform="rotate(12 908.3 487.1)"/>
+<ellipse cx="903.2" cy="487.1" rx="3.6" ry="1.1" transform="rotate(17 908.3 487.1)"/>
+<ellipse cx="904.2" cy="486.4" rx="2.3" ry="1.6" transform="rotate(4 908.3 487.1)"/>
+<ellipse cx="902.9" cy="489.0" rx="2.9" ry="1.7" transform="rotate(4 908.3 487.1)"/>
+<ellipse cx="906.7" cy="485.4" rx="3.4" ry="1.7" transform="rotate(-9 908.3 487.1)"/>
+<ellipse cx="910.9" cy="485.4" rx="2.0" ry="1.4" transform="rotate(-18 908.3 487.1)"/>
+<ellipse cx="904.1" cy="488.0" rx="2.8" ry="2.1" transform="rotate(10 908.3 487.1)"/>
+<ellipse cx="902.8" cy="489.3" rx="4.0" ry="1.2" transform="rotate(16 908.3 487.1)"/>
+<path d="M1378.6,550.872251834765 C1378.9,528.9 1379.1,516.8 1379.5,503.6 L1380.6,503.6 C1380.7,517.9 1381.2,530.0 1381.7,550.872251834765 Z"/>
+<path d="M1381.2,513.4 Q1372.0,510.1 1362.8,500.0" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" fill="none"/>
+<path d="M1378.7,510.7 Q1372.6,507.4 1366.5,487.6" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" fill="none"/>
+<path d="M1378.1,512.7 Q1370.6,509.4 1363.0,495.4" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" fill="none"/>
+<ellipse cx="1363.1" cy="497.3" rx="2.9" ry="1.8" transform="rotate(-2 1362.8 500.0)"/>
+<ellipse cx="1359.9" cy="499.9" rx="2.8" ry="2.0" transform="rotate(1 1362.8 500.0)"/>
+<ellipse cx="1368.8" cy="501.9" rx="3.5" ry="1.4" transform="rotate(-15 1362.8 500.0)"/>
+<ellipse cx="1367.6" cy="501.0" rx="3.3" ry="1.5" transform="rotate(-9 1362.8 500.0)"/>
+<ellipse cx="1365.0" cy="499.8" rx="3.2" ry="1.8" transform="rotate(10 1362.8 500.0)"/>
+<ellipse cx="1359.0" cy="498.0" rx="4.1" ry="2.1" transform="rotate(15 1362.8 500.0)"/>
+<ellipse cx="1357.2" cy="497.0" rx="2.5" ry="1.6" transform="rotate(5 1362.8 500.0)"/>
+<ellipse cx="1363.1" cy="485.9" rx="3.6" ry="2.1" transform="rotate(-14 1366.5 487.6)"/>
+<ellipse cx="1363.3" cy="489.7" rx="3.0" ry="1.5" transform="rotate(-6 1366.5 487.6)"/>
+<ellipse cx="1366.4" cy="485.1" rx="3.8" ry="2.0" transform="rotate(-2 1366.5 487.6)"/>
+<ellipse cx="1370.4" cy="489.0" rx="3.6" ry="1.6" transform="rotate(10 1366.5 487.6)"/>
+<ellipse cx="1365.2" cy="485.2" rx="2.3" ry="2.0" transform="rotate(4 1366.5 487.6)"/>
+<ellipse cx="1363.6" cy="496.2" rx="4.0" ry="1.6" transform="rotate(-5 1363.0 495.4)"/>
+<ellipse cx="1358.1" cy="496.9" rx="2.1" ry="1.2" transform="rotate(3 1363.0 495.4)"/>
+<ellipse cx="1362.8" cy="495.9" rx="2.6" ry="2.0" transform="rotate(-17 1363.0 495.4)"/>
+<ellipse cx="1359.5" cy="495.7" rx="2.1" ry="1.4" transform="rotate(9 1363.0 495.4)"/>
+<ellipse cx="1365.3" cy="493.7" rx="2.2" ry="1.5" transform="rotate(9 1363.0 495.4)"/>
+<ellipse cx="1361.4" cy="492.8" rx="3.5" ry="1.7" transform="rotate(17 1363.0 495.4)"/>
+<ellipse cx="1368.3" cy="497.1" rx="2.9" ry="2.0" transform="rotate(-8 1363.0 495.4)"/>
+<path d="M1418.6,549.081907894756 C1418.9,527.1 1418.5,515.0 1418.8,501.8 L1419.9,501.8 C1420.0,516.1 1421.2,528.2 1421.7,549.081907894756 Z"/>
+<path d="M1418.5,504.4 Q1426.2,501.1 1433.9,496.0" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" fill="none"/>
+<path d="M1418.6,502.2 Q1416.3,498.9 1414.0,493.9" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" fill="none"/>
+<path d="M1419.3,510.6 Q1420.4,507.3 1421.5,488.2" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" fill="none"/>
+<path d="M1420.3,511.2 Q1420.9,507.9 1421.5,497.1" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" fill="none"/>
+<path d="M1419.2,506.8 Q1415.1,503.5 1410.9,499.3" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" fill="none"/>
+<ellipse cx="1439.5" cy="496.3" rx="3.7" ry="1.2" transform="rotate(2 1433.9 496.0)"/>
+<ellipse cx="1437.4" cy="493.2" rx="2.1" ry="1.9" transform="rotate(16 1433.9 496.0)"/>
+<ellipse cx="1428.9" cy="496.2" rx="2.2" ry="1.9" transform="rotate(6 1433.9 496.0)"/>
+<ellipse cx="1430.8" cy="493.9" rx="3.6" ry="1.7" transform="rotate(11 1433.9 496.0)"/>
+<ellipse cx="1432.6" cy="494.6" rx="4.1" ry="1.8" transform="rotate(-0 1433.9 496.0)"/>
+<ellipse cx="1434.3" cy="496.7" rx="3.5" ry="2.1" transform="rotate(-4 1433.9 496.0)"/>
+<ellipse cx="1437.8" cy="496.4" rx="3.8" ry="2.0" transform="rotate(13 1433.9 496.0)"/>
+<ellipse cx="1419.5" cy="494.1" rx="3.1" ry="1.9" transform="rotate(12 1414.0 493.9)"/>
+<ellipse cx="1413.1" cy="492.9" rx="2.2" ry="1.9" transform="rotate(20 1414.0 493.9)"/>
+<ellipse cx="1412.5" cy="491.5" rx="2.4" ry="1.6" transform="rotate(-8 1414.0 493.9)"/>
+<ellipse cx="1419.7" cy="491.0" rx="2.6" ry="1.2" transform="rotate(6 1414.0 493.9)"/>
+<ellipse cx="1417.3" cy="491.6" rx="2.1" ry="1.6" transform="rotate(3 1414.0 493.9)"/>
+<ellipse cx="1419.0" cy="490.8" rx="2.2" ry="1.3" transform="rotate(-11 1414.0 493.9)"/>
+<ellipse cx="1410.8" cy="494.6" rx="3.2" ry="1.3" transform="rotate(-13 1414.0 493.9)"/>
+<ellipse cx="1411.4" cy="491.6" rx="3.6" ry="1.4" transform="rotate(2 1414.0 493.9)"/>
+<ellipse cx="1425.8" cy="487.5" rx="2.8" ry="2.2" transform="rotate(6 1421.5 488.2)"/>
+<ellipse cx="1424.8" cy="485.4" rx="3.8" ry="1.5" transform="rotate(-11 1421.5 488.2)"/>
+<ellipse cx="1417.1" cy="489.3" rx="4.1" ry="2.0" transform="rotate(11 1421.5 488.2)"/>
+<ellipse cx="1425.0" cy="485.2" rx="4.0" ry="2.1" transform="rotate(15 1421.5 488.2)"/>
+<ellipse cx="1426.4" cy="487.4" rx="2.5" ry="1.6" transform="rotate(15 1421.5 488.2)"/>
+<ellipse cx="1420.5" cy="489.1" rx="2.2" ry="2.1" transform="rotate(12 1421.5 488.2)"/>
+<ellipse cx="1417.0" cy="489.0" rx="3.3" ry="1.7" transform="rotate(-18 1421.5 488.2)"/>
+<ellipse cx="1422.4" cy="485.9" rx="2.4" ry="2.1" transform="rotate(-14 1421.5 488.2)"/>
+<ellipse cx="1416.4" cy="495.2" rx="3.5" ry="1.2" transform="rotate(-1 1421.5 497.1)"/>
+<ellipse cx="1421.1" cy="499.0" rx="3.2" ry="2.0" transform="rotate(-8 1421.5 497.1)"/>
+<ellipse cx="1425.0" cy="496.0" rx="3.9" ry="1.2" transform="rotate(13 1421.5 497.1)"/>
+<ellipse cx="1417.9" cy="496.7" rx="3.1" ry="1.3" transform="rotate(13 1421.5 497.1)"/>
+<ellipse cx="1419.2" cy="495.5" rx="2.1" ry="1.4" transform="rotate(-1 1421.5 497.1)"/>
+<ellipse cx="1424.1" cy="495.7" rx="3.4" ry="1.2" transform="rotate(-4 1421.5 497.1)"/>
+<ellipse cx="1413.9" cy="500.3" rx="2.2" ry="1.6" transform="rotate(15 1410.9 499.3)"/>
+<ellipse cx="1413.5" cy="498.6" rx="2.6" ry="1.2" transform="rotate(11 1410.9 499.3)"/>
+<ellipse cx="1415.3" cy="500.6" rx="3.5" ry="2.1" transform="rotate(-14 1410.9 499.3)"/>
+<ellipse cx="1412.5" cy="501.1" rx="3.6" ry="2.1" transform="rotate(10 1410.9 499.3)"/>
+<ellipse cx="1411.6" cy="496.4" rx="2.3" ry="1.5" transform="rotate(-16 1410.9 499.3)"/>
+<ellipse cx="1408.6" cy="497.5" rx="3.0" ry="1.8" transform="rotate(-2 1410.9 499.3)"/>
+<ellipse cx="1409.5" cy="496.5" rx="3.3" ry="1.2" transform="rotate(5 1410.9 499.3)"/>
+<ellipse cx="1407.1" cy="497.0" rx="2.0" ry="1.6" transform="rotate(8 1410.9 499.3)"/>
+<path d="M1458.6,545.6069144280651 C1458.9,523.6 1455.2,511.5 1455.6,498.3 L1456.7,498.3 C1456.8,512.6 1461.2,524.7 1461.7,545.6069144280651 Z"/>
+<path d="M1455.2,507.0 Q1454.3,503.7 1453.4,485.1" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" fill="none"/>
+<path d="M1454.6,498.1 Q1463.2,494.8 1471.9,494.1" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" fill="none"/>
+<path d="M1457.7,504.3 Q1460.4,501.0 1463.0,489.2" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" fill="none"/>
+<ellipse cx="1454.8" cy="483.5" rx="3.7" ry="1.4" transform="rotate(19 1453.4 485.1)"/>
+<ellipse cx="1453.8" cy="483.2" rx="2.3" ry="1.4" transform="rotate(-2 1453.4 485.1)"/>
+<ellipse cx="1454.1" cy="482.9" rx="2.7" ry="1.4" transform="rotate(-16 1453.4 485.1)"/>
+<ellipse cx="1456.0" cy="483.2" rx="3.1" ry="1.4" transform="rotate(-11 1453.4 485.1)"/>
+<ellipse cx="1454.8" cy="484.6" rx="3.2" ry="1.3" transform="rotate(17 1453.4 485.1)"/>
+<ellipse cx="1459.4" cy="485.7" rx="4.0" ry="1.7" transform="rotate(-19 1453.4 485.1)"/>
+<ellipse cx="1455.3" cy="486.1" rx="2.2" ry="1.6" transform="rotate(-3 1453.4 485.1)"/>
+<ellipse cx="1451.4" cy="482.3" rx="3.8" ry="1.4" transform="rotate(15 1453.4 485.1)"/>
+<ellipse cx="1477.6" cy="491.6" rx="3.9" ry="1.7" transform="rotate(2 1471.9 494.1)"/>
+<ellipse cx="1472.6" cy="492.3" rx="3.9" ry="2.2" transform="rotate(13 1471.9 494.1)"/>
+<ellipse cx="1473.1" cy="491.5" rx="3.7" ry="1.4" transform="rotate(16 1471.9 494.1)"/>
+<ellipse cx="1468.7" cy="494.0" rx="3.8" ry="1.3" transform="rotate(2 1471.9 494.1)"/>
+<ellipse cx="1466.7" cy="491.0" rx="2.3" ry="2.2" transform="rotate(18 1471.9 494.1)"/>
+<ellipse cx="1473.8" cy="492.5" rx="3.4" ry="1.9" transform="rotate(-5 1471.9 494.1)"/>
+<ellipse cx="1473.0" cy="495.2" rx="2.0" ry="1.3" transform="rotate(-1 1471.9 494.1)"/>
+<ellipse cx="1467.5" cy="492.9" rx="3.2" ry="1.3" transform="rotate(1 1471.9 494.1)"/>
+<ellipse cx="1459.9" cy="491.0" rx="2.0" ry="2.0" transform="rotate(9 1463.0 489.2)"/>
+<ellipse cx="1466.5" cy="488.1" rx="3.0" ry="1.2" transform="rotate(-6 1463.0 489.2)"/>
+<ellipse cx="1467.8" cy="490.9" rx="3.2" ry="1.5" transform="rotate(-9 1463.0 489.2)"/>
+<ellipse cx="1467.7" cy="488.5" rx="3.9" ry="1.9" transform="rotate(13 1463.0 489.2)"/>
+<ellipse cx="1458.4" cy="486.5" rx="4.0" ry="1.5" transform="rotate(1 1463.0 489.2)"/>
+<ellipse cx="1462.1" cy="486.0" rx="3.9" ry="1.4" transform="rotate(5 1463.0 489.2)"/>
+<ellipse cx="1462.2" cy="488.0" rx="2.6" ry="2.0" transform="rotate(15 1463.0 489.2)"/>
+</g>
+<path class="layer layer-4" d="M0,700 L0.0,576.1 L13.3,576.0 L26.7,576.7 L40.0,577.5 L53.3,578.9 L66.7,579.9 L80.0,581.7 L93.3,582.8 L106.7,583.6 L120.0,584.1 L133.3,584.4 L146.7,585.1 L160.0,585.2 L173.3,585.6 L186.7,586.4 L200.0,587.1 L213.3,588.7 L226.7,590.7 L240.0,592.5 L253.3,594.1 L266.7,595.4 L280.0,595.8 L293.3,597.1 L306.7,598.1 L320.0,599.1 L333.3,600.5 L346.7,602.8 L360.0,605.2 L373.3,609.1 L386.7,612.5 L400.0,615.7 L413.3,618.7 L426.7,622.1 L440.0,624.1 L453.3,626.1 L466.7,627.4 L480.0,628.1 L493.3,628.8 L506.7,629.7 L520.0,630.4 L533.3,631.0 L546.7,631.8 L560.0,632.6 L573.3,632.0 L586.7,631.4 L600.0,630.7 L613.3,628.6 L626.7,626.7 L640.0,624.3 L653.3,622.0 L666.7,620.7 L680.0,618.8 L693.3,618.2 L706.7,617.9 L720.0,618.5 L733.3,618.7 L746.7,619.3 L760.0,620.2 L773.3,620.1 L786.7,620.6 L800.0,621.2 L813.3,620.9 L826.7,621.7 L840.0,623.0 L853.3,625.1 L866.7,626.8 L880.0,628.6 L893.3,630.6 L906.7,632.0 L920.0,633.3 L933.3,633.3 L946.7,633.7 L960.0,633.2 L973.3,632.3 L986.7,631.1 L1000.0,630.4 L1013.3,628.9 L1026.7,628.8 L1040.0,629.2 L1053.3,628.9 L1066.7,628.4 L1080.0,628.4 L1093.3,627.3 L1106.7,626.3 L1120.0,624.4 L1133.3,622.8 L1146.7,621.7 L1160.0,620.3 L1173.3,619.8 L1186.7,620.0 L1200.0,619.4 L1213.3,619.2 L1226.7,619.0 L1240.0,618.6 L1253.3,618.1 L1266.7,616.0 L1280.0,613.6 L1293.3,610.7 L1306.7,608.5 L1320.0,604.9 L1333.3,601.8 L1346.7,599.0 L1360.0,596.6 L1373.3,594.4 L1386.7,592.6 L1400.0,589.9 L1413.3,587.2 L1426.7,584.9 L1440.0,581.8 L1453.3,579.5 L1466.7,576.2 L1480.0,574.4 L1493.3,573.3 L1506.7,572.4 L1520.0,573.1 L1533.3,573.7 L1546.7,575.0 L1560.0,577.0 L1573.3,578.6 L1586.7,580.7 L1600.0,582.1 L1600,700 Z" fill="var(--l4)"/>
+<g class="layer layer-4 trees near" fill="var(--l4)" color="var(--l4)">
+<path d="M53.0,700 C54.6,592.0 45.4,532.6 47.1,467.8 L52.5,467.8 C53.0,538.0 65.9,597.4 68.1,700 Z"/>
+<path d="M48.1,494.6 Q14.5,478.4 -19.2,392.7" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+<path d="M48.0,492.7 Q58.0,476.5 68.1,393.2" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+<path d="M49.6,492.6 Q20.8,476.4 -7.9,406.7" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+<path d="M42.9,466.8 Q36.3,450.6 29.8,396.6" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+<path d="M38.2,507.4 Q82.5,491.2 126.9,429.6" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+<ellipse cx="-3.8" cy="392.5" rx="12.7" ry="5.6" transform="rotate(15 -19.2 392.7)"/>
+<ellipse cx="-20.8" cy="395.9" rx="18.9" ry="9.3" transform="rotate(17 -19.2 392.7)"/>
+<ellipse cx="-25.4" cy="398.1" rx="14.3" ry="10.5" transform="rotate(15 -19.2 392.7)"/>
+<ellipse cx="-43.1" cy="380.2" rx="11.8" ry="10.6" transform="rotate(-3 -19.2 392.7)"/>
+<ellipse cx="-11.7" cy="384.6" rx="14.9" ry="7.5" transform="rotate(-6 -19.2 392.7)"/>
+<ellipse cx="-14.1" cy="392.3" rx="19.2" ry="9.1" transform="rotate(17 -19.2 392.7)"/>
+<ellipse cx="97.2" cy="395.1" rx="11.2" ry="10.0" transform="rotate(19 68.1 393.2)"/>
+<ellipse cx="92.1" cy="392.4" rx="17.2" ry="6.5" transform="rotate(13 68.1 393.2)"/>
+<ellipse cx="72.4" cy="384.7" rx="10.1" ry="10.0" transform="rotate(20 68.1 393.2)"/>
+<ellipse cx="43.6" cy="398.6" rx="13.9" ry="6.2" transform="rotate(-8 68.1 393.2)"/>
+<ellipse cx="84.0" cy="400.6" rx="9.9" ry="8.7" transform="rotate(-18 68.1 393.2)"/>
+<ellipse cx="81.0" cy="385.9" rx="19.0" ry="10.7" transform="rotate(0 68.1 393.2)"/>
+<ellipse cx="97.7" cy="385.4" rx="10.3" ry="8.6" transform="rotate(-19 68.1 393.2)"/>
+<ellipse cx="20.1" cy="398.3" rx="12.3" ry="9.1" transform="rotate(19 -7.9 406.7)"/>
+<ellipse cx="-17.4" cy="400.2" rx="10.9" ry="10.1" transform="rotate(-5 -7.9 406.7)"/>
+<ellipse cx="14.1" cy="400.9" rx="18.8" ry="9.1" transform="rotate(-16 -7.9 406.7)"/>
+<ellipse cx="20.2" cy="412.4" rx="12.4" ry="8.8" transform="rotate(9 -7.9 406.7)"/>
+<ellipse cx="18.0" cy="402.3" rx="12.2" ry="7.0" transform="rotate(-6 -7.9 406.7)"/>
+<ellipse cx="9.2" cy="417.1" rx="12.9" ry="7.4" transform="rotate(4 -7.9 406.7)"/>
+<ellipse cx="3.7" cy="397.3" rx="14.5" ry="9.1" transform="rotate(-6 29.8 396.6)"/>
+<ellipse cx="42.1" cy="400.3" rx="9.7" ry="5.7" transform="rotate(7 29.8 396.6)"/>
+<ellipse cx="57.3" cy="387.1" rx="14.4" ry="8.6" transform="rotate(-7 29.8 396.6)"/>
+<ellipse cx="21.7" cy="388.8" rx="13.4" ry="8.6" transform="rotate(-8 29.8 396.6)"/>
+<ellipse cx="22.5" cy="401.2" rx="9.7" ry="8.5" transform="rotate(9 29.8 396.6)"/>
+<ellipse cx="18.5" cy="386.4" rx="18.1" ry="6.7" transform="rotate(-13 29.8 396.6)"/>
+<ellipse cx="135.7" cy="416.0" rx="15.9" ry="10.5" transform="rotate(7 126.9 429.6)"/>
+<ellipse cx="110.5" cy="435.3" rx="19.8" ry="5.8" transform="rotate(10 126.9 429.6)"/>
+<ellipse cx="110.1" cy="428.8" rx="12.4" ry="9.6" transform="rotate(-19 126.9 429.6)"/>
+<ellipse cx="154.0" cy="421.9" rx="18.5" ry="8.5" transform="rotate(15 126.9 429.6)"/>
+<ellipse cx="117.4" cy="435.8" rx="10.4" ry="8.7" transform="rotate(4 126.9 429.6)"/>
+<ellipse cx="122.2" cy="427.4" rx="18.6" ry="7.9" transform="rotate(5 126.9 429.6)"/>
+<ellipse cx="114.4" cy="428.8" rx="9.8" ry="7.6" transform="rotate(-12 126.9 429.6)"/>
+<ellipse cx="125.5" cy="435.9" rx="16.2" ry="8.2" transform="rotate(2 126.9 429.6)"/>
+<path d="M244.6,700 C245.9,617.2 263.6,571.7 264.8,522.0 L269.0,522.0 C269.4,575.8 254.6,621.3 256.2,700 Z"/>
+<path d="M271.7,546.6 Q249.3,534.2 227.0,473.6" stroke="currentColor" stroke-width="2.7" stroke-linecap="round" fill="none"/>
+<path d="M263.5,525.0 Q266.1,512.6 268.8,498.1" stroke="currentColor" stroke-width="2.7" stroke-linecap="round" fill="none"/>
+<path d="M262.6,554.0 Q233.9,541.5 205.3,482.0" stroke="currentColor" stroke-width="2.7" stroke-linecap="round" fill="none"/>
+<path d="M269.3,559.6 Q235.7,547.2 202.1,465.1" stroke="currentColor" stroke-width="2.7" stroke-linecap="round" fill="none"/>
+<path d="M267.4,514.4 Q294.6,501.9 321.9,465.3" stroke="currentColor" stroke-width="2.7" stroke-linecap="round" fill="none"/>
+<ellipse cx="212.0" cy="467.4" rx="12.7" ry="6.3" transform="rotate(-3 227.0 473.6)"/>
+<ellipse cx="247.0" cy="473.8" rx="10.1" ry="5.2" transform="rotate(14 227.0 473.6)"/>
+<ellipse cx="225.9" cy="477.4" rx="10.2" ry="5.0" transform="rotate(1 227.0 473.6)"/>
+<ellipse cx="241.4" cy="464.7" rx="13.8" ry="8.0" transform="rotate(12 227.0 473.6)"/>
+<ellipse cx="241.7" cy="461.3" rx="12.4" ry="7.7" transform="rotate(-18 227.0 473.6)"/>
+<ellipse cx="257.3" cy="498.5" rx="11.5" ry="4.4" transform="rotate(-7 268.8 498.1)"/>
+<ellipse cx="283.3" cy="503.5" rx="13.7" ry="4.3" transform="rotate(-18 268.8 498.1)"/>
+<ellipse cx="268.0" cy="486.4" rx="13.1" ry="6.3" transform="rotate(-0 268.8 498.1)"/>
+<ellipse cx="253.1" cy="487.2" rx="10.4" ry="5.8" transform="rotate(-8 268.8 498.1)"/>
+<ellipse cx="258.1" cy="506.2" rx="10.8" ry="4.7" transform="rotate(-20 268.8 498.1)"/>
+<ellipse cx="278.9" cy="502.2" rx="11.9" ry="4.3" transform="rotate(-2 268.8 498.1)"/>
+<ellipse cx="275.6" cy="496.9" rx="12.5" ry="4.3" transform="rotate(15 268.8 498.1)"/>
+<ellipse cx="199.5" cy="479.9" rx="13.1" ry="5.9" transform="rotate(8 205.3 482.0)"/>
+<ellipse cx="203.5" cy="474.7" rx="11.7" ry="7.0" transform="rotate(-17 205.3 482.0)"/>
+<ellipse cx="201.9" cy="478.4" rx="14.5" ry="8.0" transform="rotate(-5 205.3 482.0)"/>
+<ellipse cx="223.4" cy="486.0" rx="9.4" ry="6.1" transform="rotate(-15 205.3 482.0)"/>
+<ellipse cx="219.6" cy="483.3" rx="14.6" ry="7.4" transform="rotate(7 205.3 482.0)"/>
+<ellipse cx="205.0" cy="454.8" rx="12.1" ry="4.2" transform="rotate(-14 202.1 465.1)"/>
+<ellipse cx="214.5" cy="453.6" rx="8.0" ry="4.6" transform="rotate(15 202.1 465.1)"/>
+<ellipse cx="187.4" cy="453.1" rx="14.2" ry="4.6" transform="rotate(14 202.1 465.1)"/>
+<ellipse cx="210.0" cy="470.0" rx="15.1" ry="6.5" transform="rotate(12 202.1 465.1)"/>
+<ellipse cx="180.9" cy="468.5" rx="11.5" ry="7.1" transform="rotate(-16 202.1 465.1)"/>
+<ellipse cx="213.4" cy="472.0" rx="7.8" ry="5.5" transform="rotate(3 202.1 465.1)"/>
+<ellipse cx="217.0" cy="457.7" rx="8.7" ry="5.2" transform="rotate(5 202.1 465.1)"/>
+<ellipse cx="310.7" cy="465.3" rx="15.0" ry="6.4" transform="rotate(19 321.9 465.3)"/>
+<ellipse cx="316.2" cy="457.7" rx="14.9" ry="7.6" transform="rotate(19 321.9 465.3)"/>
+<ellipse cx="318.1" cy="464.6" rx="12.0" ry="8.0" transform="rotate(7 321.9 465.3)"/>
+<ellipse cx="306.3" cy="461.2" rx="14.6" ry="4.8" transform="rotate(-0 321.9 465.3)"/>
+<ellipse cx="321.2" cy="467.3" rx="15.1" ry="6.6" transform="rotate(14 321.9 465.3)"/>
+<ellipse cx="305.3" cy="468.4" rx="8.5" ry="6.3" transform="rotate(17 321.9 465.3)"/>
+<ellipse cx="337.9" cy="464.0" rx="13.7" ry="6.9" transform="rotate(14 321.9 465.3)"/>
+<ellipse cx="326.2" cy="465.0" rx="15.4" ry="7.8" transform="rotate(-8 321.9 465.3)"/>
+<path d="M1284.2,700 C1285.5,610.0 1279.0,560.5 1280.3,506.5 L1284.8,506.5 C1285.3,565.0 1295.0,614.5 1296.8,700 Z"/>
+<path d="M1277.0,523.6 Q1256.4,510.1 1235.8,464.2" stroke="currentColor" stroke-width="2.9" stroke-linecap="round" fill="none"/>
+<path d="M1285.2,535.4 Q1311.3,521.9 1337.3,473.0" stroke="currentColor" stroke-width="2.9" stroke-linecap="round" fill="none"/>
+<path d="M1288.9,532.7 Q1262.8,519.2 1236.6,463.5" stroke="currentColor" stroke-width="2.9" stroke-linecap="round" fill="none"/>
+<path d="M1274.0,548.7 Q1241.7,535.2 1209.4,439.4" stroke="currentColor" stroke-width="2.9" stroke-linecap="round" fill="none"/>
+<ellipse cx="1234.2" cy="455.8" rx="10.0" ry="7.7" transform="rotate(7 1235.8 464.2)"/>
+<ellipse cx="1258.6" cy="469.9" rx="10.1" ry="5.4" transform="rotate(-10 1235.8 464.2)"/>
+<ellipse cx="1220.4" cy="466.5" rx="15.6" ry="8.5" transform="rotate(-10 1235.8 464.2)"/>
+<ellipse cx="1253.9" cy="457.7" rx="11.7" ry="7.8" transform="rotate(-17 1235.8 464.2)"/>
+<ellipse cx="1215.7" cy="469.4" rx="10.5" ry="6.1" transform="rotate(3 1235.8 464.2)"/>
+<ellipse cx="1312.9" cy="467.1" rx="11.8" ry="6.7" transform="rotate(-12 1337.3 473.0)"/>
+<ellipse cx="1341.5" cy="481.0" rx="11.4" ry="6.9" transform="rotate(-15 1337.3 473.0)"/>
+<ellipse cx="1326.2" cy="474.5" rx="8.9" ry="8.5" transform="rotate(16 1337.3 473.0)"/>
+<ellipse cx="1317.4" cy="480.7" rx="11.2" ry="8.0" transform="rotate(10 1337.3 473.0)"/>
+<ellipse cx="1327.2" cy="474.7" rx="13.8" ry="8.1" transform="rotate(-9 1337.3 473.0)"/>
+<ellipse cx="1349.9" cy="481.2" rx="13.9" ry="6.9" transform="rotate(-15 1337.3 473.0)"/>
+<ellipse cx="1337.0" cy="467.4" rx="14.3" ry="7.6" transform="rotate(3 1337.3 473.0)"/>
+<ellipse cx="1243.9" cy="466.5" rx="9.2" ry="6.2" transform="rotate(17 1236.6 463.5)"/>
+<ellipse cx="1234.4" cy="452.5" rx="12.9" ry="8.6" transform="rotate(6 1236.6 463.5)"/>
+<ellipse cx="1244.0" cy="459.5" rx="10.6" ry="5.3" transform="rotate(-1 1236.6 463.5)"/>
+<ellipse cx="1250.6" cy="465.9" rx="8.8" ry="5.3" transform="rotate(2 1236.6 463.5)"/>
+<ellipse cx="1240.4" cy="458.9" rx="8.8" ry="5.7" transform="rotate(-18 1236.6 463.5)"/>
+<ellipse cx="1218.6" cy="460.8" rx="10.3" ry="7.6" transform="rotate(1 1236.6 463.5)"/>
+<ellipse cx="1231.4" cy="436.0" rx="15.2" ry="4.8" transform="rotate(-0 1209.4 439.4)"/>
+<ellipse cx="1233.9" cy="429.3" rx="13.2" ry="7.6" transform="rotate(3 1209.4 439.4)"/>
+<ellipse cx="1229.7" cy="428.4" rx="14.2" ry="7.1" transform="rotate(7 1209.4 439.4)"/>
+<ellipse cx="1204.0" cy="448.0" rx="9.0" ry="7.2" transform="rotate(14 1209.4 439.4)"/>
+<ellipse cx="1224.2" cy="438.2" rx="9.4" ry="5.3" transform="rotate(15 1209.4 439.4)"/>
+<ellipse cx="1202.9" cy="432.5" rx="15.5" ry="6.5" transform="rotate(-4 1209.4 439.4)"/>
+<ellipse cx="1225.0" cy="433.0" rx="16.0" ry="5.9" transform="rotate(-0 1209.4 439.4)"/>
+<path d="M1512.0,700 C1513.9,577.6 1517.8,510.3 1519.6,436.8 L1525.7,436.8 C1526.3,516.4 1526.7,583.7 1529.2,700 Z"/>
+<path d="M1521.0,468.8 Q1500.4,450.4 1479.7,356.2" stroke="currentColor" stroke-width="4.0" stroke-linecap="round" fill="none"/>
+<path d="M1528.0,473.2 Q1548.3,454.9 1568.6,424.4" stroke="currentColor" stroke-width="4.0" stroke-linecap="round" fill="none"/>
+<path d="M1520.5,438.8 Q1520.1,420.4 1519.7,382.9" stroke="currentColor" stroke-width="4.0" stroke-linecap="round" fill="none"/>
+<path d="M1521.4,472.0 Q1524.5,453.7 1527.6,421.7" stroke="currentColor" stroke-width="4.0" stroke-linecap="round" fill="none"/>
+<path d="M1532.7,490.1 Q1521.2,471.8 1509.8,379.6" stroke="currentColor" stroke-width="4.0" stroke-linecap="round" fill="none"/>
+<ellipse cx="1477.5" cy="340.5" rx="22.0" ry="6.3" transform="rotate(5 1479.7 356.2)"/>
+<ellipse cx="1480.1" cy="353.1" rx="10.9" ry="8.2" transform="rotate(-7 1479.7 356.2)"/>
+<ellipse cx="1469.2" cy="359.0" rx="11.7" ry="11.3" transform="rotate(11 1479.7 356.2)"/>
+<ellipse cx="1448.3" cy="340.3" rx="22.9" ry="12.2" transform="rotate(-12 1479.7 356.2)"/>
+<ellipse cx="1450.3" cy="343.9" rx="19.3" ry="7.5" transform="rotate(-7 1479.7 356.2)"/>
+<ellipse cx="1499.0" cy="350.3" rx="21.1" ry="10.4" transform="rotate(-4 1479.7 356.2)"/>
+<ellipse cx="1582.0" cy="422.5" rx="15.9" ry="10.1" transform="rotate(-8 1568.6 424.4)"/>
+<ellipse cx="1566.2" cy="429.2" rx="15.6" ry="7.2" transform="rotate(16 1568.6 424.4)"/>
+<ellipse cx="1583.4" cy="417.3" rx="15.3" ry="9.4" transform="rotate(4 1568.6 424.4)"/>
+<ellipse cx="1550.0" cy="406.1" rx="13.3" ry="10.9" transform="rotate(-14 1568.6 424.4)"/>
+<ellipse cx="1565.9" cy="412.0" rx="13.3" ry="7.2" transform="rotate(-4 1568.6 424.4)"/>
+<ellipse cx="1546.3" cy="406.9" rx="12.1" ry="7.1" transform="rotate(-0 1568.6 424.4)"/>
+<ellipse cx="1539.0" cy="406.7" rx="16.2" ry="8.6" transform="rotate(8 1568.6 424.4)"/>
+<ellipse cx="1538.4" cy="418.4" rx="15.6" ry="6.3" transform="rotate(19 1568.6 424.4)"/>
+<ellipse cx="1502.3" cy="376.5" rx="13.0" ry="8.2" transform="rotate(-15 1519.7 382.9)"/>
+<ellipse cx="1547.5" cy="382.8" rx="20.6" ry="7.9" transform="rotate(19 1519.7 382.9)"/>
+<ellipse cx="1549.5" cy="388.7" rx="22.5" ry="9.1" transform="rotate(2 1519.7 382.9)"/>
+<ellipse cx="1488.1" cy="374.9" rx="22.9" ry="8.1" transform="rotate(-18 1519.7 382.9)"/>
+<ellipse cx="1515.4" cy="367.3" rx="18.3" ry="6.8" transform="rotate(7 1519.7 382.9)"/>
+<ellipse cx="1487.4" cy="380.0" rx="16.6" ry="7.3" transform="rotate(0 1519.7 382.9)"/>
+<ellipse cx="1507.4" cy="433.1" rx="16.5" ry="11.0" transform="rotate(17 1527.6 421.7)"/>
+<ellipse cx="1557.2" cy="404.3" rx="14.4" ry="9.8" transform="rotate(18 1527.6 421.7)"/>
+<ellipse cx="1499.8" cy="412.3" rx="21.1" ry="6.8" transform="rotate(-4 1527.6 421.7)"/>
+<ellipse cx="1516.4" cy="424.1" rx="22.1" ry="7.2" transform="rotate(10 1527.6 421.7)"/>
+<ellipse cx="1543.3" cy="428.9" rx="17.5" ry="11.8" transform="rotate(-5 1527.6 421.7)"/>
+<ellipse cx="1521.8" cy="410.3" rx="20.3" ry="9.1" transform="rotate(-9 1527.6 421.7)"/>
+<ellipse cx="1505.3" cy="425.3" rx="18.1" ry="10.5" transform="rotate(-5 1527.6 421.7)"/>
+<ellipse cx="1479.0" cy="366.5" rx="19.9" ry="11.2" transform="rotate(-16 1509.8 379.6)"/>
+<ellipse cx="1522.7" cy="381.4" rx="14.6" ry="9.8" transform="rotate(12 1509.8 379.6)"/>
+<ellipse cx="1480.0" cy="379.9" rx="11.3" ry="9.0" transform="rotate(15 1509.8 379.6)"/>
+<ellipse cx="1519.7" cy="391.7" rx="10.7" ry="7.3" transform="rotate(11 1509.8 379.6)"/>
+<ellipse cx="1537.8" cy="371.6" rx="14.5" ry="8.9" transform="rotate(13 1509.8 379.6)"/>
+<ellipse cx="1490.3" cy="382.3" rx="22.7" ry="11.8" transform="rotate(-14 1509.8 379.6)"/>
+<ellipse cx="1542.5" cy="364.6" rx="14.2" ry="7.4" transform="rotate(14 1509.8 379.6)"/>
+<ellipse cx="1510.9" cy="376.7" rx="21.8" ry="8.1" transform="rotate(15 1509.8 379.6)"/>
+<path d="M1445.3,700 C1446.4,628.0 1456.0,588.4 1457.0,545.2 L1460.6,545.2 C1461.0,592.0 1454.0,631.6 1455.4,700 Z"/>
+<path d="M1462.8,542.9 Q1440.7,532.1 1418.7,534.3" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" fill="none"/>
+<path d="M1453.8,576.6 Q1426.8,565.8 1399.9,492.8" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" fill="none"/>
+<path d="M1454.1,573.8 Q1430.8,563.0 1407.4,516.2" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" fill="none"/>
+<path d="M1461.9,575.7 Q1467.1,564.9 1472.3,508.0" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" fill="none"/>
+<ellipse cx="1414.8" cy="535.4" rx="11.9" ry="4.7" transform="rotate(18 1418.7 534.3)"/>
+<ellipse cx="1416.4" cy="530.3" rx="7.1" ry="3.6" transform="rotate(-8 1418.7 534.3)"/>
+<ellipse cx="1424.3" cy="529.6" rx="7.7" ry="6.3" transform="rotate(17 1418.7 534.3)"/>
+<ellipse cx="1426.0" cy="530.1" rx="11.9" ry="3.8" transform="rotate(1 1418.7 534.3)"/>
+<ellipse cx="1408.8" cy="538.6" rx="6.7" ry="4.5" transform="rotate(-2 1418.7 534.3)"/>
+<ellipse cx="1408.8" cy="529.3" rx="11.7" ry="4.3" transform="rotate(-11 1418.7 534.3)"/>
+<ellipse cx="1433.5" cy="536.7" rx="9.6" ry="6.2" transform="rotate(14 1418.7 534.3)"/>
+<ellipse cx="1417.6" cy="498.2" rx="13.1" ry="5.3" transform="rotate(11 1399.9 492.8)"/>
+<ellipse cx="1396.2" cy="499.9" rx="12.9" ry="4.7" transform="rotate(17 1399.9 492.8)"/>
+<ellipse cx="1387.4" cy="483.7" rx="11.5" ry="4.7" transform="rotate(1 1399.9 492.8)"/>
+<ellipse cx="1405.4" cy="482.7" rx="11.7" ry="4.6" transform="rotate(-3 1399.9 492.8)"/>
+<ellipse cx="1393.7" cy="495.3" rx="11.7" ry="4.6" transform="rotate(-16 1399.9 492.8)"/>
+<ellipse cx="1391.9" cy="489.4" rx="6.9" ry="4.2" transform="rotate(11 1399.9 492.8)"/>
+<ellipse cx="1407.8" cy="499.5" rx="13.4" ry="6.8" transform="rotate(-5 1399.9 492.8)"/>
+<ellipse cx="1404.7" cy="522.3" rx="9.7" ry="7.2" transform="rotate(-11 1407.4 516.2)"/>
+<ellipse cx="1425.5" cy="510.6" rx="6.5" ry="4.9" transform="rotate(-6 1407.4 516.2)"/>
+<ellipse cx="1420.5" cy="518.9" rx="13.0" ry="5.5" transform="rotate(-19 1407.4 516.2)"/>
+<ellipse cx="1412.5" cy="508.1" rx="6.5" ry="7.0" transform="rotate(-20 1407.4 516.2)"/>
+<ellipse cx="1426.6" cy="519.7" rx="8.9" ry="7.1" transform="rotate(-5 1407.4 516.2)"/>
+<ellipse cx="1409.5" cy="514.3" rx="8.0" ry="4.6" transform="rotate(16 1407.4 516.2)"/>
+<ellipse cx="1476.4" cy="511.8" rx="9.5" ry="4.5" transform="rotate(7 1472.3 508.0)"/>
+<ellipse cx="1472.2" cy="510.2" rx="8.7" ry="3.7" transform="rotate(-19 1472.3 508.0)"/>
+<ellipse cx="1491.9" cy="500.1" rx="11.8" ry="5.6" transform="rotate(18 1472.3 508.0)"/>
+<ellipse cx="1481.9" cy="512.3" rx="9.3" ry="6.3" transform="rotate(-7 1472.3 508.0)"/>
+<ellipse cx="1457.7" cy="497.5" rx="6.6" ry="5.3" transform="rotate(-18 1472.3 508.0)"/>
+</g></svg>
+</header>
+
+<main>
+
+<!-- ============================== INTRO ============================== -->
+<section class="intro">
+  <div class="wrap">
+    <div class="story split">
+      <div class="story-text">
+        <p class="opening">Ask an Australian adult about their childhood and many will describe long afternoons outside: climbing trees, riding to the creek, coming home when the streetlights came on. Ask about their own kids and the story changes.</p>
+        <p>Outdoor education tries to win some of that back. School camps, bushwalks and subjects like Outdoor and Environmental Studies teach young people to read a map, look after a place and look after each other.</p>
+      </div>
+      <figure class="viz" id="viz-waffle">
+        <h3 class="viz-title">Fewer than half of Australian children play outdoors most days</h3>
+        <p class="viz-sub">Each figure is one child in 100. Green figures play outside, at home or away, on at least four days a week.</p>
+        <div class="viz-slot" style="--ratio: 3 / 1"></div>
+        <figcaption>Source: Royal Children's Hospital National Child Health Poll, survey of 2,036 parents, 2022</figcaption>
+      </figure>
+    </div>
+
+    <article class="story split flip">
+      <div class="story-text">
+        <h3>By the teenage years, screens have won</h3>
+        <p>Toddlers split their days between the backyard and the park. By 13, the balance has flipped: 70% of teenagers spend most days inside on a device, while only 21% play outside away from home.</p>
+        <p>That makes school one of the few places where many young people still get regular time in nature.</p>
+        <p class="hint">Hover over a point to see the exact share.</p>
+      </div>
+      <figure class="viz" id="viz-screens">
+        <div class="viz-slot" style="--ratio: 16 / 9"></div>
+        <figcaption>Share of children doing each activity most days. Source: RCH National Child Health Poll, 2022</figcaption>
+      </figure>
+    </article>
+  </div>
+</section>
+
+<div class="chapters">
+
+<!-- ============================== CHAPTER 1 ============================== -->
+<section class="chapter" id="classroom" style="--marker: var(--ochre)">
+  <div class="wrap">
+    <header class="chapter-head">
+      <span class="marker" aria-hidden="true"></span>
+      <h2>The classroom</h2>
+      <p class="chapter-intro">Before asking who learns outdoors, it helps to see how much "outdoors" there is. About 22% of Australia's land is set aside as a protected area, such as a national park or nature reserve. That share changes a lot from state to state.</p>
+    </header>
+
+    <article class="story split">
+      <div class="story-text">
+        <h3>Tasmania protects 43% of its land. Queensland and New South Wales protect less than 10%.</h3>
+        <p>Each state is shaded by the share of its land that is protected. The ACT is the standout at 56%, as much of the territory is national park and nature reserve.</p>
+        <p>A protected area is land managed mainly to conserve nature. Most are open to visitors, which makes them Australia's largest outdoor classroom.</p>
+        <p class="hint">Hover over a state for its area and number of reserves.</p>
+      </div>
+      <figure class="viz" id="viz-choropleth">
+        <div class="viz-slot" style="--ratio: 4 / 3"></div>
+        <figcaption>Source: DCCEEW, Collaborative Australian Protected Areas Database (CAPAD) 2024; land area from Geoscience Australia. Overlapping areas are counted once.</figcaption>
+      </figure>
+    </article>
+
+    <article class="story full">
+      <div class="story-text">
+        <h3>Most protected areas crowd the south-east, but the biggest are cared for by Traditional Owners</h3>
+        <p>Every dot is a protected area of 10 km² or more, coloured by who manages it. Small state reserves and national parks crowd the south-east, close to where most people live. Across the desert and the tropical north, much of the protected land sits in Indigenous Protected Areas, which Aboriginal and Torres Strait Islander groups manage under agreements with the government.</p>
+        <p>There are fewer than 150 Indigenous Protected Areas, but many are vast. Together they cover about half of all protected land, twice the area of every national park combined.</p>
+        <p class="hint">Click a category in the legend to show only that kind of area. Click again to show everything.</p>
+      </div>
+      <figure class="viz" id="viz-parks">
+        <div class="viz-slot" style="--ratio: 16 / 8"></div>
+        <figcaption>Each dot marks the centre of a protected area. Areas under 10 km² are not shown. Source: DCCEEW, CAPAD 2024 (terrestrial)</figcaption>
+      </figure>
+    </article>
+  </div>
+</section>
+
+<!-- ============================== PULL QUOTE BAND ============================== -->
+<aside class="band band-gum" aria-label="Key figure">
+  <div class="wrap">
+    <p class="pull">About one in six Australian adults went bushwalking in 2025. It is now the third most popular way Australians stay active, behind only walking and the gym.</p>
+    <p class="pull-source">AusPlay, Australian Sports Commission, January to December 2025</p>
+  </div>
+</aside>
+
+<!-- ============================== CHAPTER 2 ============================== -->
+<section class="chapter" id="who" style="--marker: var(--gum)">
+  <div class="wrap">
+    <header class="chapter-head">
+      <span class="marker" aria-hidden="true"></span>
+      <h2>Who heads outdoors</h2>
+      <p class="chapter-intro">Australians love the bush, but they don't all get out into it equally. Where you live, how old you are and your gender all shape how often you go.</p>
+    </header>
+
+    <article class="story split flip">
+      <div class="story-text">
+        <h3>The places with the most bush have the keenest bushwalkers</h3>
+        <p>Circle size shows how many adults in each state went bushwalking in 2025. Darker circles mean a larger share of the state's adults.</p>
+        <p>New South Wales has the most bushwalkers, but Tasmania (28%) and the ACT (27%) have the highest share. They are also the two places with the most protected land.</p>
+        <p class="hint">Click a state to highlight it in the chart below.</p>
+      </div>
+      <figure class="viz" id="viz-symbol">
+        <div class="viz-slot" style="--ratio: 4 / 3"></div>
+        <figcaption>Source: AusPlay state and territory data tables, January to December 2025</figcaption>
+      </figure>
+    </article>
+
+    <article class="story full">
+      <div class="story-text">
+        <h3>Every state has its own outdoor personality</h3>
+        <p>Each line is a state and each upright axis is an activity. On every axis, the state with the lowest share of adults taking part sits at the bottom and the highest at the top. Tasmania leads in three of the six activities. The ACT cycles the most, Western Australia surfs the most, and the Northern Territory fishes the most.</p>
+      </div>
+      <figure class="viz" id="viz-parallel">
+        <div class="viz-slot" style="--ratio: 16 / 6"></div>
+        <figcaption>Share of adults taking part in 2025. Estimates for the smaller states have wider margins of error. Source: AusPlay state and territory data tables</figcaption>
+      </figure>
+    </article>
+
+    <article class="story full">
+      <div class="story-text">
+        <h3>As we grow up, team sports fade and the bush takes their place</h3>
+        <p>The chart ranks Australians' favourite activities in each age group. Basketball and soccer are top-six activities for 15 to 17 year olds but drop out of the top 12 by the time people reach their late 50s. Bushwalking climbs from 7th to 3rd.</p>
+        <p class="hint">Hover over a line to follow one activity.</p>
+      </div>
+      <figure class="viz" id="viz-bump">
+        <div class="viz-slot" style="--ratio: 16 / 6"></div>
+        <figcaption>Ranked by the share of each age group taking part at least once in 2025. Source: AusPlay national data tables</figcaption>
+      </figure>
+    </article>
+
+    <article class="story full">
+      <div class="story-text">
+        <h3>Bushwalking is the one outdoor activity every age group shares</h3>
+        <p>Each square shows the share of an age group that did an activity at least once in 2025. Bushwalking peaks among 35 to 44 year olds at 21%, and still reaches nearly one in ten Australians over 65. Climbing and mountain biking skew young, while sailing and fishing skew older.</p>
+      </div>
+      <figure class="viz" id="viz-heatmap">
+        <div class="viz-slot" style="--ratio: 16 / 7"></div>
+        <figcaption>Source: AusPlay national data tables, January to December 2025</figcaption>
+      </figure>
+    </article>
+
+    <div class="pair">
+      <article class="story stacked">
+        <div class="story-text">
+          <h3>Women lead on the trail. Men lead on the bike and in the boat.</h3>
+          <p>Women are more likely than men to bushwalk and ride horses. Men are three to four times as likely to mountain bike or fish. The scale is stretched so the rarer activities stay visible.</p>
+        </div>
+        <figure class="viz" id="viz-dumbbell">
+          <div class="viz-slot" style="--ratio: 1 / 1"></div>
+          <figcaption>Share of adults taking part in 2025. Source: AusPlay</figcaption>
+        </figure>
+      </article>
+      <article class="story stacked">
+        <div class="story-text">
+          <h3>Half of active adults say they do it to be in nature</h3>
+          <p>Being outdoors is the fourth most common reason Australians give for exercising, named by 51% of active adults. Among 55 to 64 year olds it rises to 58%.</p>
+          <p class="hint">Use the menu to compare age groups.</p>
+        </div>
+        <figure class="viz" id="viz-radial">
+          <div class="viz-slot" style="--ratio: 1 / 1"></div>
+          <figcaption>Top 10 reasons, % of active adults. Source: AusPlay 2025</figcaption>
+        </figure>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== CHAPTER 3 ============================== -->
+<section class="chapter" id="schools" style="--marker: var(--bark)">
+  <div class="wrap">
+    <header class="chapter-head">
+      <span class="marker" aria-hidden="true"></span>
+      <h2>Outdoor education at school</h2>
+      <p class="chapter-intro">For many teenagers, school is where activity happens. National surveys only count children's activities organised outside school hours, so camps and outdoor classes go unrecorded. Victoria is one of the few places where outdoor education is a full senior subject, which gives us a rare look inside.</p>
+    </header>
+
+    <article class="story full">
+      <div class="story-text">
+        <h3>After school ends, parks and trails become the classroom</h3>
+        <p>36% of 15 to 17 year olds are active at school or uni facilities. That falls to 17% at 18 to 24 and almost nothing after that. Parks, trails and beaches are the most popular place to be active at every age.</p>
+      </div>
+      <figure class="viz" id="viz-places">
+        <div class="viz-slot" style="--ratio: 16 / 7"></div>
+        <figcaption>% of adults in each age group who were active in each kind of place in 2025. Source: AusPlay national data tables</figcaption>
+      </figure>
+    </article>
+
+    <article class="story split">
+      <div class="story-text">
+        <h3>More Victorian students study outdoor education than a decade ago</h3>
+        <p>In 2014, 2,825 students took Year 12 Outdoor and Environmental Studies. By 2024 that had grown to 3,593, a rise of 27%, before falling back in 2025. The subject runs as Units 1 and 2 in Year 11 and Units 3 and 4 in Year 12.</p>
+        <p class="hint">Click a year level in the legend to focus on it.</p>
+      </div>
+      <figure class="viz" id="viz-vce">
+        <div class="viz-slot" style="--ratio: 16 / 10"></div>
+        <figcaption>Enrolments in Unit 1 (Year 11) and Unit 3 (Year 12). Source: VCAA, VCE Unit Completion Outcomes 2014 to 2025</figcaption>
+      </figure>
+    </article>
+
+    <article class="story split flip">
+      <div class="story-text">
+        <h3>Boys still outnumber girls in the outdoor classroom</h3>
+        <p>Girls have made up between 39% and 48% of the class every year since 2014. The gap is widest in Year 11, where boys outnumber girls by roughly three to two.</p>
+        <p class="hint">The number beside each bar is the percentage of girls.</p>
+      </div>
+      <figure class="viz" id="viz-gender">
+        <div class="viz-slot" style="--ratio: 16 / 10"></div>
+        <figcaption>Source: VCAA, VCE Unit Completion Outcomes 2014 to 2025 (2015 and 2016 not published)</figcaption>
+      </figure>
+    </article>
+  </div>
+</section>
+
+<!-- ============================== CHAPTER 4 ============================== -->
+<section class="chapter" id="gap" style="--marker: var(--sky-deep)">
+  <div class="wrap">
+    <header class="chapter-head">
+      <span class="marker" aria-hidden="true"></span>
+      <h2>Who misses out</h2>
+      <p class="chapter-intro">Being close to the bush does not guarantee getting into it. Cost, time, transport and health decide who goes on the camp, and the same pattern runs through adult life.</p>
+    </header>
+
+    <article class="story full">
+      <div class="story-text">
+        <h3>The Australians with the least are the least active</h3>
+        <p>Only 53% of adults in households earning under $40,000 a year are active every week, compared with 81% in households earning $200,000 or more. Adults who left school early, people with disability and First Nations Australians all face similar gaps. These figures cover all physical activity, not just time outdoors, but they show who is most likely to be left out.</p>
+      </div>
+      <figure class="viz" id="viz-gaps">
+        <div class="viz-slot" style="--ratio: 16 / 7"></div>
+        <figcaption>% of adults active at least once a week in 2025. Source: AusPlay national data tables</figcaption>
+      </figure>
+    </article>
+  </div>
+</section>
+
+</div><!-- /.chapters -->
+
+<!-- ============================== TAKEAWAY ============================== -->
+<section class="takeaway">
+  <div class="wrap">
+    <h2>Opening the classroom to everyone</h2>
+    <div class="takeaway-cols">
+      <p>Australians already value time in nature. Bushwalking is one of the country's favourite activities, half of active adults exercise to be outdoors, and more Victorian students are choosing to study the outdoors at school.</p>
+      <p>But fewer than half of children play outside most days, and the people with the least money, education and health are the least likely to be active. School may be the one place every child can be taken into the bush, which is why outdoor education matters.</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============================== FOOTER ============================== -->
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <h2 class="footer-title">Learning outside</h2>
+        <p>Created by Ryan Nguyen for FIT3179 Data Visualisation, Monash University.<br>Published October 2026.</p>
+        <p class="small">All charts and maps were built with Vega-Lite. Illustrations were drawn in code for this page. Generative AI (Claude, Anthropic) was used to help with data cleaning, page layout, CSS and drafting chart specifications. All analysis, chart design and writing decisions are the author's own.</p>
+      </div>
+      <div>
+        <h3>Data sources</h3>
+        <ul class="sources">
+          <li>Australian Sports Commission. <a href="https://www.ausport.gov.au/clearinghouse/research/ausplay/results">AusPlay results</a>, national and state and territory data tables, January to December 2025 (released 30 April 2026).</li>
+          <li>Department of Climate Change, Energy, the Environment and Water. <a href="https://fed.dcceew.gov.au/datasets/erin::collaborative-australian-protected-areas-database-capad-2024-terrestrial-">Collaborative Australian Protected Areas Database (CAPAD) 2024, terrestrial</a>.</li>
+          <li>Victorian Curriculum and Assessment Authority. <a href="https://www.vcaa.vic.edu.au/administration/research-and-statistics">VCE Unit Completion Outcomes</a>, Outdoor and Environmental Studies, 2014 to 2025.</li>
+          <li>Royal Children's Hospital. <a href="https://www.rch.org.au/uploadedFiles/Main/Content/rch/NCHP28%20Poll%20report%20A4_FA.pdf">National Child Health Poll 28: Australian families, how we play</a>, 2022.</li>
+          <li>Geoscience Australia. <a href="https://www.ga.gov.au/scientific-topics/national-location-information/dimensions/area-of-australia-states-and-territories">Area of Australia: states and territories</a>.</li>
+          <li>Natural Earth. <a href="https://www.naturalearthdata.com/downloads/50m-cultural-vectors/">Admin 1 states and provinces, 1:50m</a> (public domain), simplified with mapshaper.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

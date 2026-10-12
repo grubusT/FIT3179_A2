@@ -1,0 +1,258 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Proportional symbol map: number of adult bushwalkers in each state (circle size) and share of adults who bushwalk (colour), 2025 (AusPlay state tables). Click a state to highlight it in the next chart.",
+  "width": "container",
+  "height": 430,
+  "projection": {
+    "type": "conicEqualArea",
+    "parallels": [
+      -18,
+      -36
+    ],
+    "rotate": [
+      -134,
+      0
+    ]
+  },
+  "layer": [
+    {
+      "data": {
+        "url": "data/aus_states.topojson",
+        "format": {
+          "type": "topojson",
+          "feature": "states"
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#dfe6da",
+        "stroke": "#eef1ea",
+        "strokeWidth": 1.5
+      }
+    },
+    {
+      "data": {
+        "url": "data/state_outdoor_activity_2025.csv",
+        "format": {
+          "type": "csv",
+          "parse": {
+            "rate": "number",
+            "participants": "number"
+          }
+        }
+      },
+      "transform": [
+        {
+          "filter": "datum.activity == 'Bush walking'"
+        },
+        {
+          "lookup": "state",
+          "from": {
+            "data": {
+              "url": "data/state_points.csv",
+              "format": {
+                "type": "csv",
+                "parse": {
+                  "lon": "number",
+                  "lat": "number",
+                  "label_lon": "number",
+                  "label_lat": "number"
+                }
+              }
+            },
+            "key": "state",
+            "fields": [
+              "lon",
+              "lat",
+              "label_lon",
+              "label_lat"
+            ]
+          }
+        }
+      ],
+      "layer": [
+        {
+          "mark": {
+            "type": "circle",
+            "stroke": "white",
+            "strokeWidth": 1.5,
+            "opacity": 0.92,
+            "cursor": "pointer"
+          },
+          "encoding": {
+            "longitude": {
+              "field": "lon",
+              "type": "quantitative"
+            },
+            "latitude": {
+              "field": "lat",
+              "type": "quantitative"
+            },
+            "size": {
+              "field": "participants",
+              "type": "quantitative",
+              "title": "Adult bushwalkers",
+              "scale": {
+                "type": "sqrt",
+                "range": [
+                  60,
+                  5200
+                ],
+                "domain": [
+                  0,
+                  1300000
+                ]
+              },
+              "legend": {
+                "values": [
+                  100000,
+                  500000,
+                  1000000
+                ],
+                "format": ".2s",
+                "symbolFillColor": "#9aa79a",
+                "symbolStrokeWidth": 0
+              }
+            },
+            "color": {
+              "field": "rate",
+              "type": "quantitative",
+              "title": "% of adults who bushwalk",
+              "scale": {
+                "domain": [
+                  14,
+                  28
+                ],
+                "range": [
+                  "#a9c8a6",
+                  "#1f5a36"
+                ]
+              },
+              "legend": {
+                "values": [
+                  15,
+                  20,
+                  25
+                ],
+                "gradientLength": 120
+              }
+            },
+            "strokeWidth": {
+              "condition": {
+                "param": "pickState",
+                "empty": false,
+                "value": 4
+              },
+              "value": 1.5
+            },
+            "stroke": {
+              "condition": {
+                "param": "pickState",
+                "empty": false,
+                "value": "#d0901f"
+              },
+              "value": "white"
+            },
+            "tooltip": [
+              {
+                "field": "state_name",
+                "title": "State"
+              },
+              {
+                "field": "participants",
+                "title": "Adult bushwalkers",
+                "format": ","
+              },
+              {
+                "field": "rate",
+                "title": "% of adults"
+              }
+            ]
+          },
+          "params": [
+            {
+              "name": "pickState",
+              "select": {
+                "type": "point",
+                "fields": [
+                  "state"
+                ],
+                "on": "click"
+              },
+              "value": [
+                {
+                  "state": "TAS"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "mark": {
+            "type": "text",
+            "fontSize": 12,
+            "fontWeight": 700,
+            "dy": 1
+          },
+          "encoding": {
+            "longitude": {
+              "field": "label_lon",
+              "type": "quantitative"
+            },
+            "latitude": {
+              "field": "label_lat",
+              "type": "quantitative"
+            },
+            "text": {
+              "field": "state"
+            },
+            "color": {
+              "condition": {
+                "test": "datum.state == 'ACT' || datum.state == 'TAS'",
+                "value": "#1e2b24"
+              },
+              "value": "white"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "lon": 149.5,
+            "lat": -45.6,
+            "t": "Tasmanians (28%) and Canberrans (27%)\nare the most likely to bushwalk"
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "lineBreak": "\n",
+        "fontSize": 12,
+        "fontStyle": "italic",
+        "color": "#4b5b51"
+      },
+      "encoding": {
+        "longitude": {
+          "field": "lon",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "lat",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "t"
+        }
+      }
+    }
+  ],
+  "config": {
+    "legend": {
+      "orient": "right"
+    }
+  }
+}

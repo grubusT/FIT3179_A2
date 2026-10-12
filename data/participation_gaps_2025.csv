@@ -1,0 +1,50 @@
+category,group,yearly,weekly
+Age group,15-17,87.4,71.0
+Age group,18-24,88.7,69.6
+Age group,25-34,89.4,70.3
+Age group,35-44,88.7,68.4
+Age group,45-54,89.3,71.5
+Age group,55-64,87.4,73.4
+Age group,65+,75.4,61.8
+Remoteness,Major cities,86.5,69.6
+Remoteness,Inner regional,84.5,67.0
+Remoteness,Outer regional,84.0,65.8
+Remoteness,Remote or very remote,86.1,65.8
+Employment status,Employed full-time,90.8,72.4
+Employment status,Employed part-time,87.8,69.4
+Employment status,Employed casual,89.8,73.9
+Employment status,Total employed,90.1,71.9
+Employment status,Full-time student,91.5,73.8
+Employment status,Engaged in home duties,78.9,59.8
+Employment status,Unemployed,76.1,56.8
+Employment status,Retired or on a pension,76.1,63.2
+Highest education completed,University degree or higher (including postgraduate diploma),92.3,76.6
+Highest education completed,Undergraduate diploma or associate diploma,87.4,69.1
+Highest education completed,"Certificate, trade qualification or apprenticeship",82.9,64.1
+Highest education completed,Highest level of secondary school,82.4,64.5
+Highest education completed,Did not complete highest level of school,65.5,48.9
+Highest education completed,Still at secondary school,87.5,70.4
+Highest education completed,Other,72.2,16.5
+Household structure,Younger family (most children under 15 years),90.5,67.3
+Household structure,Mature family (most children 15 years or over),88.1,71.5
+Household structure,Mid family (equal number of children 15 years and over and under 15 years),88.7,70.2
+Household structure,Adult shared house,83.5,66.0
+Household structure,Single/couple - no children,83.8,69.1
+Aboriginal or Torres Strait Islander origin^,Yes,80.0,53.7
+Aboriginal or Torres Strait Islander origin^,No,86.4,69.7
+Aboriginal or Torres Strait Islander origin^,Refused / don't know,71.6,51.0
+Language spoken at home^,Speaks only English at home,85.8,69.1
+Language spoken at home^,Speaks language other than English at home,87.1,67.7
+Disability or physical condition that restricts life in some way^,Yes,70.2,53.1
+Disability or physical condition that restricts life in some way^,No,89.4,72.3
+Disability or physical condition that restricts life in some way^,Refused / don't know,68.2,48.7
+Annual household income~^,"<$40,000",71.1,52.9
+Annual household income~^,"$40,000 - $69,999",80.6,62.1
+Annual household income~^,"$70,000 - $99,999",86.8,67.8
+Annual household income~^,"$100,000 - $149,999",90.1,71.9
+Annual household income~^,"$150,000 - $199,999",92.9,76.9
+Annual household income~^,"$200,000+",94.5,80.8
+Annual household income~^,Not stated,83.8,67.8
+Sexual orientation^,Straight (heterosexual),86.1,69.0
+Sexual orientation^,Gay or Lesbian,86.7,70.9
+Sexual orientation^,Bisexual,87.6,68.6

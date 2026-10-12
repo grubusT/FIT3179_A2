@@ -1,0 +1,142 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Heatmap of outdoor activity participation by age group, Australian adults 2025 (AusPlay).",
+  "width": "container",
+  "height": 330,
+  "data": {
+    "url": "data/outdoor_activity_adults_2025.csv",
+    "format": {
+      "type": "csv",
+      "parse": {
+        "rate": "number"
+      }
+    }
+  },
+  "transform": [
+    {
+      "filter": "datum.group_type === 'Age'"
+    },
+    {
+      "filter": {
+        "field": "activity",
+        "oneOf": [
+          "Bush walking",
+          "Cycling",
+          "Surfing",
+          "Fishing (recreational)",
+          "Canoeing/Kayaking",
+          "Underwater sports",
+          "Ski & snowboard",
+          "Mountain biking",
+          "Rock climbing/Abseiling/Caving",
+          "Sailing"
+        ]
+      }
+    },
+    {
+      "calculate": "replace(replace(replace(datum.activity, 'Bush walking', 'Bushwalking'), 'Rock climbing/Abseiling/Caving', 'Climbing & caving'), 'Fishing (recreational)', 'Fishing')",
+      "as": "label"
+    }
+  ],
+  "encoding": {
+    "x": {
+      "field": "group",
+      "type": "ordinal",
+      "title": "Age group",
+      "axis": {
+        "labelAngle": 0,
+        "orient": "top",
+        "domain": false,
+        "ticks": false
+      }
+    },
+    "y": {
+      "field": "label",
+      "type": "nominal",
+      "title": null,
+      "sort": {
+        "field": "rate",
+        "op": "mean",
+        "order": "descending"
+      },
+      "axis": {
+        "domain": false,
+        "ticks": false,
+        "labelFontSize": 12.5
+      }
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "rect",
+        "cornerRadius": 3,
+        "stroke": "#eef1ea",
+        "strokeWidth": 2
+      },
+      "encoding": {
+        "color": {
+          "field": "rate",
+          "type": "quantitative",
+          "title": "% taking part",
+          "scale": {
+            "type": "pow",
+            "exponent": 0.5,
+            "range": [
+              "#e7efe3",
+              "#a9c8a6",
+              "#4f8f5c",
+              "#1f5a36"
+            ]
+          },
+          "legend": {
+            "orient": "bottom",
+            "direction": "horizontal",
+            "gradientLength": 220,
+            "values": [
+              1,
+              5,
+              10,
+              20
+            ]
+          }
+        },
+        "tooltip": [
+          {
+            "field": "label",
+            "title": "Activity"
+          },
+          {
+            "field": "group",
+            "title": "Age"
+          },
+          {
+            "field": "rate",
+            "title": "% of age group",
+            "format": ".1f"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "fontSize": 11.5
+      },
+      "encoding": {
+        "text": {
+          "field": "rate",
+          "type": "quantitative",
+          "format": ".1f"
+        },
+        "color": {
+          "condition": {
+            "test": "datum.rate > 6",
+            "value": "white"
+          },
+          "value": "#1e2b24"
+        }
+      }
+    }
+  ]
+}

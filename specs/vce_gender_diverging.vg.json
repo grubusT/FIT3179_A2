@@ -1,0 +1,178 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Diverging bar chart of boys and girls enrolled in VCE Outdoor and Environmental Studies, Year 11 and Year 12 (VCAA).",
+  "data": {
+    "url": "data/vce_oes_enrolments.csv",
+    "format": {
+      "type": "csv",
+      "parse": {
+        "year": "number",
+        "male": "number",
+        "female": "number",
+        "total": "number",
+        "pct_female": "number"
+      }
+    }
+  },
+  "transform": [
+    {
+      "calculate": "datum.unit == 'Unit 1' ? 'Year 11' : 'Year 12'",
+      "as": "level"
+    },
+    {
+      "fold": [
+        "male",
+        "female"
+      ],
+      "as": [
+        "sex",
+        "n"
+      ]
+    },
+    {
+      "calculate": "datum.sex == 'male' ? -datum.n : datum.n",
+      "as": "signed"
+    },
+    {
+      "calculate": "datum.sex == 'male' ? 'Boys' : 'Girls'",
+      "as": "who"
+    }
+  ],
+  "facet": {
+    "column": {
+      "field": "level",
+      "type": "nominal",
+      "title": null,
+      "header": {
+        "labelFontSize": 14,
+        "labelFontWeight": 600,
+        "labelColor": "#1e2b24"
+      }
+    }
+  },
+  "spec": {
+    "width": 230,
+    "height": 260,
+    "layer": [
+      {
+        "mark": {
+          "type": "bar",
+          "cornerRadiusEnd": 3,
+          "height": {
+            "band": 0.75
+          }
+        },
+        "encoding": {
+          "y": {
+            "field": "year",
+            "type": "ordinal",
+            "title": null,
+            "sort": "descending",
+            "axis": {
+              "domain": false,
+              "ticks": false
+            }
+          },
+          "x": {
+            "field": "signed",
+            "type": "quantitative",
+            "title": "← Boys    Girls →",
+            "scale": {
+              "domain": [
+                -2300,
+                2300
+              ]
+            },
+            "axis": {
+              "labelExpr": "format(abs(datum.value), ',')",
+              "values": [
+                -2000,
+                -1000,
+                0,
+                1000,
+                2000
+              ]
+            }
+          },
+          "color": {
+            "field": "who",
+            "type": "nominal",
+            "title": null,
+            "scale": {
+              "domain": [
+                "Girls",
+                "Boys"
+              ],
+              "range": [
+                "#a8462e",
+                "#2a74a8"
+              ]
+            },
+            "legend": {
+              "orient": "top",
+              "direction": "horizontal"
+            }
+          },
+          "tooltip": [
+            {
+              "field": "year",
+              "title": "Year"
+            },
+            {
+              "field": "level",
+              "title": "Level"
+            },
+            {
+              "field": "who",
+              "title": "Group"
+            },
+            {
+              "field": "n",
+              "title": "Students",
+              "format": ","
+            },
+            {
+              "field": "pct_female",
+              "title": "% girls"
+            }
+          ]
+        }
+      },
+      {
+        "transform": [
+          {
+            "filter": "datum.sex == 'female'"
+          }
+        ],
+        "mark": {
+          "type": "text",
+          "align": "left",
+          "dx": 5,
+          "fontSize": 10.5,
+          "color": "#4b5b51"
+        },
+        "encoding": {
+          "y": {
+            "field": "year",
+            "type": "ordinal",
+            "sort": "descending"
+          },
+          "x": {
+            "field": "signed",
+            "type": "quantitative"
+          },
+          "text": {
+            "field": "pct_female",
+            "type": "quantitative",
+            "format": ".0f"
+          }
+        }
+      }
+    ]
+  },
+  "resolve": {
+    "scale": {
+      "y": "shared"
+    }
+  }
+}

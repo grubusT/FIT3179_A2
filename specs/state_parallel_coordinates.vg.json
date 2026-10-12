@@ -1,0 +1,295 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Parallel coordinates: each line is a state, each axis an outdoor activity. Axes run from the lowest to the highest state (AusPlay 2025).",
+  "width": "container",
+  "height": 330,
+  "data": {
+    "url": "data/state_outdoor_activity_2025.csv",
+    "format": {
+      "type": "csv",
+      "parse": {
+        "rate": "number",
+        "participants": "number"
+      }
+    }
+  },
+  "params": [
+    {
+      "name": "hl",
+      "value": "TAS",
+      "bind": {
+        "input": "select",
+        "options": [
+          "TAS",
+          "ACT",
+          "NSW",
+          "VIC",
+          "QLD",
+          "SA",
+          "WA",
+          "NT"
+        ],
+        "labels": [
+          "Tasmania",
+          "ACT",
+          "New South Wales",
+          "Victoria",
+          "Queensland",
+          "South Australia",
+          "Western Australia",
+          "Northern Territory"
+        ],
+        "name": "Highlight a state  "
+      }
+    }
+  ],
+  "transform": [
+    {
+      "filter": {
+        "field": "activity",
+        "oneOf": [
+          "Bush walking",
+          "Cycling",
+          "Mountain biking",
+          "Canoeing/Kayaking",
+          "Surfing",
+          "Fishing (recreational)"
+        ]
+      }
+    },
+    {
+      "calculate": "replace(replace(replace(datum.activity, 'Bush walking', 'Bushwalking'), 'Fishing (recreational)', 'Fishing'), 'Canoeing/Kayaking', 'Canoe & kayak')",
+      "as": "axis"
+    },
+    {
+      "joinaggregate": [
+        {
+          "op": "min",
+          "field": "rate",
+          "as": "lo"
+        },
+        {
+          "op": "max",
+          "field": "rate",
+          "as": "hi"
+        }
+      ],
+      "groupby": [
+        "activity"
+      ]
+    },
+    {
+      "calculate": "(datum.rate - datum.lo) / (datum.hi - datum.lo)",
+      "as": "norm"
+    },
+    {
+      "calculate": "datum.state == hl",
+      "as": "on"
+    }
+  ],
+  "encoding": {
+    "x": {
+      "field": "axis",
+      "type": "nominal",
+      "title": null,
+      "sort": [
+        "Bushwalking",
+        "Cycling",
+        "Mountain biking",
+        "Canoe & kayak",
+        "Surfing",
+        "Fishing"
+      ],
+      "axis": {
+        "orient": "top",
+        "domain": false,
+        "ticks": false,
+        "labelAngle": 0,
+        "labelPadding": 16,
+        "labelFontSize": 13,
+        "labelFontWeight": 600,
+        "labelColor": "#1e2b24",
+        "grid": true,
+        "gridColor": "#9aa79a",
+        "gridWidth": 1.5
+      }
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "line",
+        "interpolate": "linear"
+      },
+      "encoding": {
+        "y": {
+          "field": "norm",
+          "type": "quantitative",
+          "axis": null,
+          "scale": {
+            "domain": [
+              0,
+              1
+            ]
+          }
+        },
+        "detail": {
+          "field": "state"
+        },
+        "color": {
+          "condition": {
+            "test": "datum.on",
+            "value": "#d0901f"
+          },
+          "value": "#a7b5a5"
+        },
+        "strokeWidth": {
+          "condition": {
+            "test": "datum.on",
+            "value": 4
+          },
+          "value": 1.6
+        },
+        "opacity": {
+          "condition": {
+            "test": "datum.on",
+            "value": 1
+          },
+          "value": 0.7
+        },
+        "order": {
+          "field": "on"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "size": 50
+      },
+      "encoding": {
+        "y": {
+          "field": "norm",
+          "type": "quantitative"
+        },
+        "color": {
+          "condition": {
+            "test": "datum.on",
+            "value": "#d0901f"
+          },
+          "value": "#a7b5a5"
+        },
+        "size": {
+          "condition": {
+            "test": "datum.on",
+            "value": 90
+          },
+          "value": 30
+        },
+        "tooltip": [
+          {
+            "field": "state_name",
+            "title": "State"
+          },
+          {
+            "field": "axis",
+            "title": "Activity"
+          },
+          {
+            "field": "rate",
+            "title": "% of adults"
+          }
+        ]
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.on"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 9,
+        "fontSize": 12.5,
+        "fontWeight": 700,
+        "color": "#1e2b24"
+      },
+      "encoding": {
+        "y": {
+          "field": "norm",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "rate",
+          "format": ".1f"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "aggregate": [
+            {
+              "op": "min",
+              "field": "lo",
+              "as": "lo"
+            },
+            {
+              "op": "max",
+              "field": "hi",
+              "as": "hi"
+            }
+          ],
+          "groupby": [
+            "axis"
+          ]
+        },
+        {
+          "fold": [
+            "lo",
+            "hi"
+          ],
+          "as": [
+            "end",
+            "v"
+          ]
+        },
+        {
+          "calculate": "datum.end == 'hi' ? 1 : 0",
+          "as": "pos"
+        },
+        {
+          "calculate": "format(datum.v, '.1f') + '%'",
+          "as": "lab"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "right",
+        "dx": -8,
+        "fontSize": 10.5,
+        "color": "#4b5b51"
+      },
+      "encoding": {
+        "y": {
+          "field": "pos",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "lab"
+        }
+      }
+    }
+  ],
+  "config": {
+    "padding": {
+      "left": 20,
+      "right": 40,
+      "top": 10,
+      "bottom": 10
+    }
+  }
+}

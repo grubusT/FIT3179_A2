@@ -1,0 +1,210 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Choropleth map: share of each state's land in protected areas, 30 June 2024 (CAPAD 2024; overlapping areas counted once).",
+  "width": "container",
+  "height": 430,
+  "projection": {
+    "type": "conicEqualArea",
+    "parallels": [
+      -18,
+      -36
+    ],
+    "rotate": [
+      -134,
+      0
+    ]
+  },
+  "layer": [
+    {
+      "data": {
+        "url": "data/aus_states.topojson",
+        "format": {
+          "type": "topojson",
+          "feature": "states"
+        }
+      },
+      "transform": [
+        {
+          "lookup": "properties.state",
+          "from": {
+            "data": {
+              "url": "data/state_protected_2024.csv",
+              "format": {
+                "type": "csv",
+                "parse": {
+                  "protected_km2": "number",
+                  "land_km2": "number",
+                  "pct_protected": "number",
+                  "n_areas": "number"
+                }
+              }
+            },
+            "key": "state",
+            "fields": [
+              "state_name",
+              "pct_protected",
+              "protected_km2",
+              "n_areas"
+            ]
+          }
+        }
+      ],
+      "mark": {
+        "type": "geoshape",
+        "stroke": "#eef1ea",
+        "strokeWidth": 1.5
+      },
+      "encoding": {
+        "color": {
+          "field": "pct_protected",
+          "type": "quantitative",
+          "title": "% of land protected",
+          "scale": {
+            "domain": [
+              0,
+              60
+            ],
+            "range": [
+              "#e7efe3",
+              "#1f5a36"
+            ]
+          },
+          "legend": {
+            "orient": "bottom-left",
+            "direction": "horizontal",
+            "gradientLength": 180,
+            "values": [
+              0,
+              20,
+              40,
+              60
+            ]
+          }
+        },
+        "tooltip": [
+          {
+            "field": "state_name",
+            "title": "State"
+          },
+          {
+            "field": "pct_protected",
+            "title": "% of land protected"
+          },
+          {
+            "field": "protected_km2",
+            "title": "Protected area (km²)",
+            "format": ","
+          },
+          {
+            "field": "n_areas",
+            "title": "Number of protected areas",
+            "format": ","
+          }
+        ]
+      }
+    },
+    {
+      "data": {
+        "url": "data/state_points.csv",
+        "format": {
+          "type": "csv",
+          "parse": {
+            "lon": "number",
+            "lat": "number",
+            "label_lon": "number",
+            "label_lat": "number"
+          }
+        }
+      },
+      "transform": [
+        {
+          "lookup": "state",
+          "from": {
+            "data": {
+              "url": "data/state_protected_2024.csv",
+              "format": {
+                "type": "csv",
+                "parse": {
+                  "protected_km2": "number",
+                  "land_km2": "number",
+                  "pct_protected": "number",
+                  "n_areas": "number"
+                }
+              }
+            },
+            "key": "state",
+            "fields": [
+              "pct_protected"
+            ]
+          }
+        },
+        {
+          "calculate": "datum.state + '  ' + format(datum.pct_protected, '.0f') + '%'",
+          "as": "lab"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "fontSize": 13,
+        "fontWeight": 700
+      },
+      "encoding": {
+        "longitude": {
+          "field": "label_lon",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "label_lat",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "lab"
+        },
+        "color": {
+          "condition": {
+            "test": "datum.pct_protected > 25 && datum.state != 'ACT' && datum.state != 'TAS'",
+            "value": "white"
+          },
+          "value": "#1e2b24"
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "lon": 147.0,
+            "lat": -46.3,
+            "t": "Tasmania protects more than\ntwo-fifths of its land"
+          },
+          {
+            "lon": 151.2,
+            "lat": -19.5,
+            "t": "QLD and NSW\nprotect under 10%"
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "lineBreak": "\n",
+        "fontSize": 12,
+        "fontStyle": "italic",
+        "color": "#4b5b51"
+      },
+      "encoding": {
+        "longitude": {
+          "field": "lon",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "lat",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "t"
+        }
+      }
+    }
+  ]
+}
