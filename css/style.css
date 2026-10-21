@@ -47,6 +47,14 @@
   --gutter: clamp(16px, 4vw, 40px);
   --measure: 34em;
   --gap: clamp(24px, 3vw, 48px);
+
+  /* Spacing scale: one set of distances used everywhere */
+  --space-xs: 8px;     /* chart to caption */
+  --space-s: 12px;     /* heading to its text */
+  --space-m: 24px;     /* text block to its chart */
+  --space-l: 48px;     /* chapter heading to first story */
+  --space-story: clamp(64px, 7vw, 88px);  /* between stories in a chapter */
+  --wide: 1200px;      /* maps and complex charts */
   --section-space: clamp(64px, 9vw, 128px);
 }
 
@@ -172,6 +180,7 @@ a:hover { color: var(--forest); }
    Story blocks
    ========================================================================== */
 .intro { padding: var(--section-space) 0 0; }
+.opening-block { margin-bottom: var(--space-story); }
 
 .opening {
   font-family: var(--font-display);
@@ -190,7 +199,7 @@ a:hover { color: var(--forest); }
 
 .chapter-head {
   position: relative;
-  margin-bottom: clamp(32px, 5vw, 64px);
+  margin-bottom: var(--space-l);
 }
 .chapter-head h2 {
   font-size: var(--step-4);
@@ -199,6 +208,7 @@ a:hover { color: var(--forest); }
   margin-bottom: 0.45em;
 }
 .chapter-intro {
+  margin-bottom: 0;
   font-size: var(--step-1);
   line-height: 1.5;
   color: var(--ink-soft);
@@ -235,42 +245,76 @@ a:hover { color: var(--forest); }
 }
 
 /* A story = insight headline + context + figure */
-.story { margin-bottom: clamp(56px, 7vw, 96px); }
+.story { margin-bottom: var(--space-story); }
 .story h3 {
   font-size: var(--step-2);
   font-weight: 600;
-  margin-bottom: 0.5em;
+  margin-bottom: var(--space-s);
   max-width: 20em;
 }
 .story-text p:last-child { margin-bottom: 0; }
 
-.hint {
+/* Interaction cue: one consistent, visible style for "you can click or hover here" */
+.interact {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+  padding: 6px 12px 6px 10px;
   font-size: var(--step--1);
-  color: var(--ink-soft);
-  font-style: italic;
+  font-weight: 600;
+  color: var(--forest);
+  background: #dfe8da;
+  border-radius: 999px;
+}
+.interact::before {
+  content: "";
+  flex: none;
+  width: 16px;
+  height: 16px;
+  background: var(--gum);
+  -webkit-mask: url("../assets/pointer.svg") center / contain no-repeat;
+          mask: url("../assets/pointer.svg") center / contain no-repeat;
 }
 
 /* Full width: text above, figure across the whole column */
-.story.full .story-text { margin-bottom: 28px; }
+.story.full .story-text { margin-bottom: var(--space-m); }
 
-/* Split: 5 / 7 columns, text vertically centred against the chart */
+/* Maps and complex charts get more room than the text column */
+@media (min-width: 1100px) {
+  /* only the chart widens; the caption stays on the text column's left edge */
+  .viz.wide .viz-slot {
+    width: min(var(--wide), 100vw - 2 * var(--gutter) - 24px);
+    margin-left: calc((100% - min(var(--wide), 100vw - 2 * var(--gutter) - 24px)) / 2);
+  }
+}
+
+/* Split: 5 / 7 columns. Headline and chart share a top edge (one sightline) */
 .story.split {
   display: grid;
   grid-template-columns: 5fr 7fr;
   gap: var(--gap);
-  align-items: center;
+  align-items: start;
 }
 .story.split.flip { grid-template-columns: 7fr 5fr; }
 .story.split.flip .story-text { order: 2; }
 
-/* Pair: two stacked stories side by side */
+/* Pair: two stacked stories side by side. Subgrid lines the two charts up
+   on the same top edge however long each text block is. */
 .pair {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: var(--gap);
-  align-items: start;
+  grid-template-rows: auto auto;
+  column-gap: var(--gap);
+  margin-bottom: var(--space-story);
 }
-.story.stacked .story-text { margin-bottom: 24px; min-height: 9.5em; }
+.pair .story.stacked {
+  display: grid;
+  grid-row: span 2;
+  grid-template-rows: subgrid;
+  row-gap: var(--space-m);
+  margin-bottom: 0;
+}
 
 /* ==========================================================================
    Figures and placeholders
@@ -328,7 +372,7 @@ a:hover { color: var(--forest); }
 .viz-slot.is-live::before { display: none; }
 
 .viz figcaption {
-  margin-top: 10px;
+  margin-top: var(--space-xs);
   font-size: var(--step--1);
   color: var(--ink-soft);
 }
@@ -455,8 +499,9 @@ a:hover { color: var(--forest); }
   .story.split.flip { grid-template-columns: 1fr; }
   .story.split.flip .story-text { order: 0; }
   .story.split .story-text { margin-bottom: 4px; }
-  .story.stacked .story-text { min-height: 0; }
-  .pair { gap: 0; }
+  .pair { display: block; }
+  .pair .story.stacked { display: block; margin-bottom: var(--space-story); }
+  .pair .story.stacked .story-text { margin-bottom: var(--space-m); }
 }
 
 @media (max-width: 520px) {
@@ -489,9 +534,12 @@ a:hover { color: var(--forest); }
 .viz-slot.is-live .vega-embed svg { display: block; max-width: none; }
 .viz-slot.is-error { font-size: var(--step--1); color: var(--ink-soft); }
 
-/* Dropdowns that Vega-Lite binds to chart parameters */
+/* Dropdowns that Vega-Lite binds to chart parameters: shown above the chart,
+   left-aligned, so the control is seen before the chart it changes */
+.viz-slot.is-live.vega-embed { display: flex; flex-direction: column; align-items: flex-start; }
 .vega-bindings {
-  margin-top: 12px;
+  order: -1;
+  margin: 0 0 var(--space-s);
   font-size: var(--step--1);
   color: var(--ink-soft);
 }
@@ -506,6 +554,7 @@ a:hover { color: var(--forest); }
   margin-left: 6px;
   cursor: pointer;
 }
+.vega-bindings select:hover { border-color: var(--gum); }
 .vega-bindings select:focus-visible { outline: 3px solid var(--ochre); outline-offset: 2px; }
 
 /* Tooltips */
@@ -521,3 +570,9 @@ a:hover { color: var(--forest); }
 }
 #vg-tooltip-element.vg-tooltip td.key { color: var(--ink-soft); font-weight: 500; }
 #vg-tooltip-element.vg-tooltip td.value { font-weight: 600; }
+
+/* Legends that filter the chart look and feel clickable */
+.legend-filter .role-legend-symbol path,
+.legend-filter .role-legend-label text,
+.legend-filter .role-legend-entry { cursor: pointer; }
+.viz figcaption + .legend-note { margin-top: 0; }

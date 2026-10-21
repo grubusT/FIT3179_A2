@@ -430,25 +430,28 @@
 <!-- ============================== INTRO ============================== -->
 <section class="intro">
   <div class="wrap">
-    <div class="story split">
+    <div class="opening-block">
+      <p class="opening">Ask an Australian adult about their childhood and many will describe long afternoons outside: climbing trees, riding to the creek, coming home when the streetlights came on. Ask about their own kids and the story changes.</p>
+      <p>Outdoor education tries to win some of that back. School camps, bushwalks and subjects like Outdoor and Environmental Studies teach young people to read a map, look after a place and look after each other.</p>
+    </div>
+
+    <article class="story split">
       <div class="story-text">
-        <p class="opening">Ask an Australian adult about their childhood and many will describe long afternoons outside: climbing trees, riding to the creek, coming home when the streetlights came on. Ask about their own kids and the story changes.</p>
-        <p>Outdoor education tries to win some of that back. School camps, bushwalks and subjects like Outdoor and Environmental Studies teach young people to read a map, look after a place and look after each other.</p>
+        <h3>Fewer than half of Australian children play outdoors most days</h3>
+        <p>Each figure is one child in 100. Only 45 of them play outside, at home or away, on at least four days a week. Eight in ten parents say they want their children outdoors more.</p>
       </div>
       <figure class="viz" id="viz-waffle">
-        <h3 class="viz-title">Fewer than half of Australian children play outdoors most days</h3>
-        <p class="viz-sub">Each figure is one child in 100. Green figures play outside, at home or away, on at least four days a week.</p>
         <div class="viz-slot" style="--ratio: 3 / 1"></div>
         <figcaption>Source: Royal Children's Hospital National Child Health Poll, survey of 2,036 parents, 2022</figcaption>
       </figure>
-    </div>
+    </article>
 
     <article class="story split flip">
       <div class="story-text">
         <h3>By the teenage years, screens have won</h3>
         <p>Toddlers split their days between the backyard and the park. By 13, the balance has flipped: 70% of teenagers spend most days inside on a device, while only 21% play outside away from home.</p>
         <p>That makes school one of the few places where many young people still get regular time in nature.</p>
-        <p class="hint">Hover over a point to see the exact share.</p>
+        <p class="interact">Hover over a point to see the exact share.</p>
       </div>
       <figure class="viz" id="viz-screens">
         <div class="viz-slot" style="--ratio: 16 / 9"></div>
@@ -474,7 +477,7 @@
         <h3>Tasmania protects 43% of its land. Queensland and New South Wales protect less than 10%.</h3>
         <p>Each state is shaded by the share of its land that is protected. The ACT is the standout at 56%, as much of the territory is national park and nature reserve.</p>
         <p>A protected area is land managed mainly to conserve nature. Most are open to visitors, which makes them Australia's largest outdoor classroom.</p>
-        <p class="hint">Hover over a state for its area and number of reserves.</p>
+        <p class="interact">Hover over a state for its area and number of reserves.</p>
       </div>
       <figure class="viz" id="viz-choropleth">
         <div class="viz-slot" style="--ratio: 4 / 3"></div>
@@ -487,9 +490,9 @@
         <h3>Most protected areas crowd the south-east, but the biggest are cared for by Traditional Owners</h3>
         <p>Every dot is a protected area of 10 km² or more, coloured by who manages it. Small state reserves and national parks crowd the south-east, close to where most people live. Across the desert and the tropical north, much of the protected land sits in Indigenous Protected Areas, which Aboriginal and Torres Strait Islander groups manage under agreements with the government.</p>
         <p>There are fewer than 150 Indigenous Protected Areas, but many are vast. Together they cover about half of all protected land, twice the area of every national park combined.</p>
-        <p class="hint">Click a category in the legend to show only that kind of area. Click again to show everything.</p>
+        <p class="interact">Click a category in the legend to show only that kind of area. Click again to show everything.</p>
       </div>
-      <figure class="viz" id="viz-parks">
+      <figure class="viz wide legend-filter" id="viz-parks">
         <div class="viz-slot" style="--ratio: 16 / 8"></div>
         <figcaption>Each dot marks the centre of a protected area. Areas under 10 km² are not shown. Source: DCCEEW, CAPAD 2024 (terrestrial)</figcaption>
       </figure>
@@ -519,7 +522,7 @@
         <h3>The places with the most bush have the keenest bushwalkers</h3>
         <p>Circle size shows how many adults in each state went bushwalking in 2025. Darker circles mean a larger share of the state's adults.</p>
         <p>New South Wales has the most bushwalkers, but Tasmania (28%) and the ACT (27%) have the highest share. They are also the two places with the most protected land.</p>
-        <p class="hint">Click a state to highlight it in the chart below.</p>
+        <p class="interact">Click a state to highlight it in the chart below.</p>
       </div>
       <figure class="viz" id="viz-symbol">
         <div class="viz-slot" style="--ratio: 4 / 3"></div>
@@ -530,7 +533,7 @@
     <article class="story full">
       <div class="story-text">
         <h3>Every state has its own outdoor personality</h3>
-        <p>Each line is a state and each upright axis is an activity. On every axis, the state with the lowest share of adults taking part sits at the bottom and the highest at the top. Tasmania leads in three of the six activities. The ACT cycles the most, Western Australia surfs the most, and the Northern Territory fishes the most.</p>
+        <p>Each line is a state and each upright axis is an activity. Every axis starts at 0% at the bottom and tops out at the leading state, so the higher a line sits, the closer that state is to the top. Tasmania leads in three of the six activities. The ACT cycles the most, Western Australia surfs the most, and the Northern Territory fishes the most.</p>
       </div>
       <figure class="viz" id="viz-parallel">
         <div class="viz-slot" style="--ratio: 16 / 6"></div>
@@ -542,7 +545,7 @@
       <div class="story-text">
         <h3>As we grow up, team sports fade and the bush takes their place</h3>
         <p>The chart ranks Australians' favourite activities in each age group. Basketball and soccer are top-six activities for 15 to 17 year olds but drop out of the top 12 by the time people reach their late 50s. Bushwalking climbs from 7th to 3rd.</p>
-        <p class="hint">Hover over a line to follow one activity.</p>
+        <p class="interact">Hover over a line to follow one activity.</p>
       </div>
       <figure class="viz" id="viz-bump">
         <div class="viz-slot" style="--ratio: 16 / 6"></div>
@@ -565,7 +568,7 @@
       <article class="story stacked">
         <div class="story-text">
           <h3>Women lead on the trail. Men lead on the bike and in the boat.</h3>
-          <p>Women are more likely than men to bushwalk and ride horses. Men are three to four times as likely to mountain bike or fish. The scale is stretched so the rarer activities stay visible.</p>
+          <p>Women are more likely than men to bushwalk and ride horses. Men are three to four times as likely to mountain bike or fish. The smaller activities sit in their own panel on a shorter scale, so their gaps stay visible.</p>
         </div>
         <figure class="viz" id="viz-dumbbell">
           <div class="viz-slot" style="--ratio: 1 / 1"></div>
@@ -576,11 +579,11 @@
         <div class="story-text">
           <h3>Half of active adults say they do it to be in nature</h3>
           <p>Being outdoors is the fourth most common reason Australians give for exercising, named by 51% of active adults. Among 55 to 64 year olds it rises to 58%.</p>
-          <p class="hint">Use the menu to compare age groups.</p>
+          <p class="interact">Use the menu to compare age groups.</p>
         </div>
-        <figure class="viz" id="viz-radial">
+        <figure class="viz" id="viz-motives">
           <div class="viz-slot" style="--ratio: 1 / 1"></div>
-          <figcaption>Top 10 reasons, % of active adults. Source: AusPlay 2025</figcaption>
+          <figcaption>Top 10 reasons, % of active adults. Source: AusPlay national data tables, 2025</figcaption>
         </figure>
       </article>
     </div>
@@ -611,9 +614,9 @@
       <div class="story-text">
         <h3>More Victorian students study outdoor education than a decade ago</h3>
         <p>In 2014, 2,825 students took Year 12 Outdoor and Environmental Studies. By 2024 that had grown to 3,593, a rise of 27%, before falling back in 2025. The subject runs as Units 1 and 2 in Year 11 and Units 3 and 4 in Year 12.</p>
-        <p class="hint">Click a year level in the legend to focus on it.</p>
+        <p class="interact">Click a year level in the legend to focus on it.</p>
       </div>
-      <figure class="viz" id="viz-vce">
+      <figure class="viz legend-filter" id="viz-vce">
         <div class="viz-slot" style="--ratio: 16 / 10"></div>
         <figcaption>Enrolments in Unit 1 (Year 11) and Unit 3 (Year 12). Source: VCAA, VCE Unit Completion Outcomes 2014 to 2025</figcaption>
       </figure>
@@ -623,7 +626,7 @@
       <div class="story-text">
         <h3>Boys still outnumber girls in the outdoor classroom</h3>
         <p>Girls have made up between 39% and 48% of the class every year since 2014. The gap is widest in Year 11, where boys outnumber girls by roughly three to two.</p>
-        <p class="hint">The number beside each bar is the percentage of girls.</p>
+        <p>The number beside each bar is the percentage of girls in that year.</p>
       </div>
       <figure class="viz" id="viz-gender">
         <div class="viz-slot" style="--ratio: 16 / 10"></div>
@@ -677,7 +680,6 @@
       <div>
         <h2 class="footer-title">Learning outside</h2>
         <p>Created by Ryan Nguyen for FIT3179 Data Visualisation, Monash University.<br>Published October 2026.</p>
-        <p class="small">All charts and maps were built with Vega-Lite. Illustrations were drawn in code for this page. Generative AI (Claude, Anthropic) was used to help with data cleaning, page layout, CSS and drafting chart specifications. All analysis, chart design and writing decisions are the author's own.</p>
       </div>
       <div>
         <h3>Data sources</h3>

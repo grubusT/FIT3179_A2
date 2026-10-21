@@ -1,6 +1,7 @@
 # Learning outside
 
 A data story about outdoor education and learning in nature across Australia.
+FIT3179 Data Visualisation 2, Monash University. Ryan Nguyen, October 2026.
 
 - **Live page:** https://YOUR-USERNAME.github.io/REPO-NAME/
 - **Sketch:** [sketch.pdf](sketch.pdf)
@@ -29,8 +30,8 @@ tools/           Python scripts used to clean the data, build the specs and draw
 | 6 | State outdoor profiles | Parallel coordinates | AusPlay states |
 | 7 | Activity rank by age | Bump chart | AusPlay national |
 | 8 | Outdoor activity by age | Heatmap | AusPlay national |
-| 9 | Women vs men | Dumbbell chart | AusPlay national |
-| 10 | Reasons for being active | Radial bar chart | AusPlay national |
+| 9 | Women vs men | Dumbbell chart (two panels, both from 0%) | AusPlay national |
+| 10 | Reasons for being active | Ranked bar chart with age menu | AusPlay national |
 | 11 | Where people are active | Small multiples (bar) | AusPlay national |
 | 12 | VCE Outdoor and Environmental Studies enrolments | Annotated line chart | VCAA |
 | 13 | Boys vs girls in VCE OES | Diverging bar chart | VCAA |

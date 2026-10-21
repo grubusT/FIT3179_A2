@@ -10,7 +10,7 @@ const charts = {
   'viz-bump':       'specs/activity_rank_bump.vg.json',
   'viz-heatmap':    'specs/activity_age_heatmap.vg.json',
   'viz-dumbbell':   'specs/gender_dumbbell.vg.json',
-  'viz-radial':     'specs/motivations_radial.vg.json',
+  'viz-motives':    'specs/motivations_bar.vg.json',
   'viz-places':     'specs/places_small_multiples.vg.json',
   'viz-vce':        'specs/vce_enrolments_line.vg.json',
   'viz-gender':     'specs/vce_gender_diverging.vg.json',
@@ -36,17 +36,55 @@ const theme = {
 const views = {};
 window.chartViews = views; // handy for debugging in the browser console
 
-async function embed(id, spec) {
+/* On narrow screens (phones), adapt specs so labels stay readable:
+   small multiples stack in one column, legends move under the chart,
+   maps lose spare height, and the italic annotations (which need room) are dropped. */
+function isNote(layer) {
+  return layer && layer.mark && layer.mark.type === 'text' && layer.mark.fontStyle === 'italic';
+}
+function dropNotes(view) {
+  if (!view || !Array.isArray(view.layer)) return;
+  view.layer = view.layer.filter(l => !isNote(l));
+  view.layer.forEach(dropNotes);
+}
+
+function fitToScreen(spec, slotWidth, id) {
+  if (slotWidth >= 720) return spec;
+  const shrink = (view) => {
+    if (view && typeof view.width === 'number') view.width = Math.max(180, Math.min(view.width, slotWidth - 205));
+  };
+  if (spec.columns) spec.columns = 1;
+  if (spec.facet && spec.facet.column) spec.facet = { row: spec.facet.column };
+  shrink(spec.spec);
+  (spec.vconcat || []).forEach(shrink);
+  dropNotes(spec);
+  (spec.vconcat || []).forEach(dropNotes);
+  if (spec.config && spec.config.legend && spec.config.legend.orient === 'right') {
+    spec.config.legend.orient = 'bottom';
+    spec.config.legend.direction = 'vertical';
+  }
+  if (spec.projection && typeof spec.height === 'number') spec.height = Math.round(slotWidth * 0.85);
+  if (id === 'viz-parallel' || id === 'viz-bump' || id === 'viz-heatmap') {
+    const axis = spec.encoding.x.axis || (spec.encoding.x.axis = {});
+    Object.assign(axis, { labelAngle: -45, labelAlign: 'left', labelBaseline: 'middle' });
+    if (id === 'viz-parallel') spec.layer = spec.layer.filter(l => !(l.mark && l.mark.dy === -13));
+    if (spec.config && spec.config.padding) spec.config.padding.right = 80;
+  }
+  return spec;
+}
+
+async function embed(id, url) {
   const slot = document.querySelector(`#${id} .viz-slot`);
   if (!slot) return;
   try {
+    const spec = fitToScreen(await (await fetch(url)).json(), slot.clientWidth, id);
     const result = await vegaEmbed(slot, spec, { actions: false, config: theme, renderer: 'svg' });
     slot.classList.add('is-live');
     views[id] = result.view;
   } catch (err) {
     slot.classList.add('is-error');
     slot.textContent = 'This chart could not load. Please refresh the page.';
-    console.error(`Could not load ${spec}:`, err);
+    console.error(`Could not load ${url}:`, err);
   }
 }
 
@@ -61,5 +99,5 @@ function linkMapToProfiles() {
   });
 }
 
-Promise.all(Object.entries(charts).map(([id, spec]) => embed(id, spec)))
+Promise.all(Object.entries(charts).map(([id, url]) => embed(id, url)))
   .then(linkMapToProfiles);

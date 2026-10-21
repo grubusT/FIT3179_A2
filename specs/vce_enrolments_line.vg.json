@@ -52,8 +52,8 @@
       "title": "Students enrolled",
       "scale": {
         "domain": [
-          2400,
-          4100
+          0,
+          4200
         ]
       },
       "axis": {
@@ -68,7 +68,7 @@
         "values": [
           {
             "x": 2015.5,
-            "y": 2500
+            "y": 400
           }
         ]
       },
@@ -213,38 +213,6 @@
         },
         "text": {
           "value": "2021: COVID lockdowns"
-        }
-      }
-    },
-    {
-      "data": {
-        "values": [
-          {
-            "year": 2024,
-            "total": 3593
-          }
-        ]
-      },
-      "mark": {
-        "type": "text",
-        "align": "right",
-        "dx": -10,
-        "dy": -4,
-        "fontSize": 12,
-        "fontStyle": "italic",
-        "color": "#4b5b51"
-      },
-      "encoding": {
-        "x": {
-          "field": "year",
-          "type": "quantitative"
-        },
-        "y": {
-          "field": "total",
-          "type": "quantitative"
-        },
-        "text": {
-          "value": "Year 12 peak: 3,593"
         }
       }
     },

@@ -54,6 +54,10 @@
     {
       "calculate": "datum.weekly == datum.lo ? 'low' : datum.weekly == datum.hi ? 'high' : 'mid'",
       "as": "tone"
+    },
+    {
+      "calculate": "datum.tone == 'low' ? format(datum.weekly, '.0f') + '%, ' + format(datum.hi - datum.lo, '.0f') + ' points behind' : format(datum.weekly, '.0f') + '%'",
+      "as": "vlabel"
     }
   ],
   "facet": {
@@ -67,17 +71,18 @@
       "First Nations"
     ],
     "header": {
-      "labelFontSize": 14,
-      "labelFontWeight": 600,
+      "labelFontSize": 15,
+      "labelFontWeight": 700,
       "labelColor": "#1e2b24",
-      "labelAnchor": "start"
+      "labelAnchor": "start",
+      "labelPadding": 8
     }
   },
   "columns": 2,
   "spec": {
-    "width": 330,
+    "width": 370,
     "height": {
-      "step": 26
+      "step": 36
     },
     "encoding": {
       "y": {
@@ -88,7 +93,9 @@
         "axis": {
           "domain": false,
           "ticks": false,
-          "labelFontSize": 12
+          "labelFontSize": 13,
+          "minExtent": 150,
+          "maxExtent": 150
         }
       },
       "x": {
@@ -142,11 +149,11 @@
           "tooltip": [
             {
               "field": "panel",
-              "title": "Group"
+              "title": "Grouped by"
             },
             {
               "field": "label",
-              "title": " "
+              "title": "Group"
             },
             {
               "field": "weekly",
@@ -159,15 +166,20 @@
         "mark": {
           "type": "text",
           "align": "left",
-          "dx": 5,
-          "fontSize": 11.5,
-          "fontWeight": 600,
-          "color": "#1e2b24"
+          "dx": 6,
+          "fontSize": 13,
+          "fontWeight": 700
         },
         "encoding": {
           "text": {
-            "field": "weekly",
-            "format": ".0f"
+            "field": "vlabel"
+          },
+          "color": {
+            "condition": {
+              "test": "datum.tone == 'low'",
+              "value": "#a8462e"
+            },
+            "value": "#1e2b24"
           }
         }
       }
@@ -179,7 +191,7 @@
     }
   },
   "spacing": {
-    "row": 30,
+    "row": 40,
     "column": 60
   }
 }

@@ -1,8 +1,8 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "Parallel coordinates: each line is a state, each axis an outdoor activity. Axes run from the lowest to the highest state (AusPlay 2025).",
+  "description": "Parallel coordinates: each line is a state, each upright axis an outdoor activity. Every axis starts at 0% and tops out at the leading state (AusPlay 2025).",
   "width": "container",
-  "height": 330,
+  "height": 340,
   "data": {
     "url": "data/state_outdoor_activity_2025.csv",
     "format": {
@@ -62,12 +62,11 @@
       "as": "axis"
     },
     {
+      "calculate": "indexof([\"Bushwalking\", \"Cycling\", \"Mountain biking\", \"Canoe & kayak\", \"Surfing\", \"Fishing\"], datum.axis)",
+      "as": "axis_i"
+    },
+    {
       "joinaggregate": [
-        {
-          "op": "min",
-          "field": "rate",
-          "as": "lo"
-        },
         {
           "op": "max",
           "field": "rate",
@@ -79,7 +78,7 @@
       ]
     },
     {
-      "calculate": "(datum.rate - datum.lo) / (datum.hi - datum.lo)",
+      "calculate": "datum.rate / datum.hi",
       "as": "norm"
     },
     {
@@ -100,13 +99,16 @@
         "Surfing",
         "Fishing"
       ],
+      "scale": {
+        "padding": 0.25
+      },
       "axis": {
         "orient": "top",
         "domain": false,
         "ticks": false,
         "labelAngle": 0,
-        "labelPadding": 16,
-        "labelFontSize": 13,
+        "labelPadding": 26,
+        "labelFontSize": 13.5,
         "labelFontWeight": 600,
         "labelColor": "#1e2b24",
         "grid": true,
@@ -119,7 +121,8 @@
     {
       "mark": {
         "type": "line",
-        "interpolate": "linear"
+        "color": "#b3c0b1",
+        "strokeWidth": 1.6
       },
       "encoding": {
         "y": {
@@ -136,29 +139,8 @@
         "detail": {
           "field": "state"
         },
-        "color": {
-          "condition": {
-            "test": "datum.on",
-            "value": "#d0901f"
-          },
-          "value": "#a7b5a5"
-        },
-        "strokeWidth": {
-          "condition": {
-            "test": "datum.on",
-            "value": 4
-          },
-          "value": 1.6
-        },
-        "opacity": {
-          "condition": {
-            "test": "datum.on",
-            "value": 1
-          },
-          "value": 0.7
-        },
         "order": {
-          "field": "on"
+          "field": "axis_i"
         }
       }
     },
@@ -166,26 +148,20 @@
       "mark": {
         "type": "point",
         "filled": true,
-        "size": 50
+        "size": 34,
+        "color": "#a7b5a5"
       },
       "encoding": {
         "y": {
           "field": "norm",
-          "type": "quantitative"
-        },
-        "color": {
-          "condition": {
-            "test": "datum.on",
-            "value": "#d0901f"
-          },
-          "value": "#a7b5a5"
-        },
-        "size": {
-          "condition": {
-            "test": "datum.on",
-            "value": 90
-          },
-          "value": 30
+          "type": "quantitative",
+          "axis": null,
+          "scale": {
+            "domain": [
+              0,
+              1
+            ]
+          }
         },
         "tooltip": [
           {
@@ -210,21 +186,101 @@
         }
       ],
       "mark": {
+        "type": "line",
+        "color": "#d0901f",
+        "strokeWidth": 4
+      },
+      "encoding": {
+        "y": {
+          "field": "norm",
+          "type": "quantitative",
+          "axis": null,
+          "scale": {
+            "domain": [
+              0,
+              1
+            ]
+          }
+        },
+        "order": {
+          "field": "axis_i"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.on"
+        }
+      ],
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "size": 110,
+        "color": "#d0901f",
+        "stroke": "white",
+        "strokeWidth": 1.5
+      },
+      "encoding": {
+        "y": {
+          "field": "norm",
+          "type": "quantitative",
+          "axis": null,
+          "scale": {
+            "domain": [
+              0,
+              1
+            ]
+          }
+        },
+        "tooltip": [
+          {
+            "field": "state_name",
+            "title": "State"
+          },
+          {
+            "field": "axis",
+            "title": "Activity"
+          },
+          {
+            "field": "rate",
+            "title": "% of adults"
+          }
+        ]
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.on"
+        },
+        {
+          "calculate": "format(datum.rate, '.1f') + '%'",
+          "as": "lab"
+        }
+      ],
+      "mark": {
         "type": "text",
         "align": "left",
-        "dx": 9,
-        "fontSize": 12.5,
+        "dx": 10,
+        "fontSize": 13,
         "fontWeight": 700,
         "color": "#1e2b24"
       },
       "encoding": {
         "y": {
           "field": "norm",
-          "type": "quantitative"
+          "type": "quantitative",
+          "axis": null,
+          "scale": {
+            "domain": [
+              0,
+              1
+            ]
+          }
         },
         "text": {
-          "field": "rate",
-          "format": ".1f"
+          "field": "lab"
         }
       }
     },
@@ -232,11 +288,6 @@
       "transform": [
         {
           "aggregate": [
-            {
-              "op": "min",
-              "field": "lo",
-              "as": "lo"
-            },
             {
               "op": "max",
               "field": "hi",
@@ -249,7 +300,6 @@
         },
         {
           "fold": [
-            "lo",
             "hi"
           ],
           "as": [
@@ -258,38 +308,63 @@
           ]
         },
         {
-          "calculate": "datum.end == 'hi' ? 1 : 0",
-          "as": "pos"
-        },
-        {
-          "calculate": "format(datum.v, '.1f') + '%'",
+          "calculate": "'Top ' + format(datum.v, '.1f') + '%'",
           "as": "lab"
         }
       ],
       "mark": {
         "type": "text",
-        "align": "right",
-        "dx": -8,
-        "fontSize": 10.5,
+        "align": "center",
+        "dy": -13,
+        "fontSize": 11,
         "color": "#4b5b51"
       },
       "encoding": {
         "y": {
-          "field": "pos",
-          "type": "quantitative"
+          "datum": 1
         },
         "text": {
           "field": "lab"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "aggregate": [
+            {
+              "op": "count",
+              "as": "n"
+            }
+          ],
+          "groupby": [
+            "axis"
+          ]
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "center",
+        "dy": 14,
+        "fontSize": 11,
+        "color": "#4b5b51"
+      },
+      "encoding": {
+        "y": {
+          "datum": 0
+        },
+        "text": {
+          "value": "0%"
         }
       }
     }
   ],
   "config": {
     "padding": {
-      "left": 20,
-      "right": 40,
+      "left": 30,
+      "right": 50,
       "top": 10,
-      "bottom": 10
+      "bottom": 24
     }
   }
 }

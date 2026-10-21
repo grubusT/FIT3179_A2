@@ -188,11 +188,18 @@
           ]
         },
         {
+          "transform": [
+            {
+              "calculate": "[datum.state, format(datum.rate, '.0f') + '%']",
+              "as": "lab"
+            }
+          ],
           "mark": {
             "type": "text",
             "fontSize": 12,
             "fontWeight": 700,
-            "dy": 1
+            "lineHeight": 14,
+            "dy": -6
           },
           "encoding": {
             "longitude": {
@@ -204,11 +211,11 @@
               "type": "quantitative"
             },
             "text": {
-              "field": "state"
+              "field": "lab"
             },
             "color": {
               "condition": {
-                "test": "datum.state == 'ACT' || datum.state == 'TAS'",
+                "test": "datum.state == 'ACT' || datum.state == 'TAS' || datum.state == 'NT'",
                 "value": "#1e2b24"
               },
               "value": "white"

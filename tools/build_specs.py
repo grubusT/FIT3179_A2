@@ -215,45 +215,69 @@ save("activity_age_heatmap.vg.json", {
 })
 
 # ---------------------------------------------------------------- 9. Gender dumbbell
+# Two panels, both starting at 0%: the two big activities, then the smaller ones on a
+# shorter scale so their gaps stay visible without a log scale.
 G_ACTS = ["Bush walking", "Cycling", "Surfing", "Fishing (recreational)", "Canoeing/Kayaking",
           "Mountain biking", "Ski & snowboard", "Equestrian", "Rock climbing/Abseiling/Caving", "Sailing"]
-# Equestrian is labelled "Horse riding" for a general audience
+G_PREP = [
+    {"filter": {"field": "group", "oneOf": ["Males", "Females"]}},
+    {"filter": {"field": "activity", "oneOf": G_ACTS}},
+    {"calculate": "datum.group == 'Females' ? 'Women' : 'Men'", "as": "sex"},
+    # Equestrian is labelled "Horse riding" for a general audience
+    {"calculate": "replace(replace(replace(replace(datum.activity, 'Bush walking', 'Bushwalking'), 'Rock climbing/Abseiling/Caving', 'Climbing & caving'), 'Fishing (recreational)', 'Fishing'), 'Equestrian', 'Horse riding')", "as": "label"},
+    {"joinaggregate": [{"op": "max", "field": "rate", "as": "top"}], "groupby": ["activity"]},
+]
+
+
+def dumbbell_panel(title, test, xmax, ticks, notes):
+    return {
+        "title": {"text": title, "fontSize": 13, "font": "Figtree, sans-serif", "fontWeight": 700, "color": INK, "offset": 8},
+        "width": 380, "height": {"step": 30},
+        "transform": [{"filter": test}],
+        "encoding": {
+            "y": {"field": "label", "type": "nominal", "title": None, "sort": {"field": "top", "op": "max", "order": "descending"},
+                  "axis": {"domain": False, "ticks": False, "labelFontSize": 12.5, "grid": True, "gridDash": [2, 3], "minExtent": 120}},
+            "x": {"field": "rate", "type": "quantitative", "title": "% of adults taking part",
+                  "scale": {"domain": [0, xmax]}, "axis": {"values": ticks}}
+        },
+        "layer": [
+            {"mark": {"type": "line", "color": "#9aa79a", "strokeWidth": 2.5}, "encoding": {"detail": {"field": "label"}}},
+            {"mark": {"type": "point", "filled": True, "size": 110, "opacity": 1, "stroke": "#eef1ea", "strokeWidth": 1.5},
+             "encoding": {
+                 "color": {"field": "sex", "type": "nominal", "title": None, "scale": {"domain": ["Women", "Men"], "range": [RUST, BLUE]},
+                           "legend": {"orient": "top", "direction": "horizontal", "symbolSize": 120, "labelFontSize": 13}},
+                 "shape": {"field": "sex", "scale": {"domain": ["Women", "Men"], "range": ["circle", "diamond"]}, "legend": None},
+                 "tooltip": [{"field": "label", "title": "Activity"}, {"field": "sex", "title": "Group"},
+                             {"field": "rate", "title": "% taking part", "format": ".2f"}]}},
+            *notes
+        ]
+    }
+
+
 save("gender_dumbbell.vg.json", {
-    "description": "Dumbbell chart comparing women's and men's participation in outdoor activities, 2025 (AusPlay).",
-    "width": "container", "height": 340,
+    "description": "Dumbbell chart comparing women's and men's participation in outdoor activities, 2025 (AusPlay). Two panels, both starting at 0%.",
     "data": {"url": "data/outdoor_activity_adults_2025.csv"},
-    "transform": [
-        {"filter": {"field": "group", "oneOf": ["Males", "Females"]}},
-        {"filter": {"field": "activity", "oneOf": G_ACTS}},
-        {"calculate": "datum.group == 'Females' ? 'Women' : 'Men'", "as": "sex"},
-        {"calculate": "replace(replace(replace(replace(datum.activity, 'Bush walking', 'Bushwalking'), 'Rock climbing/Abseiling/Caving', 'Climbing & caving'), 'Fishing (recreational)', 'Fishing'), 'Equestrian', 'Horse riding')", "as": "label"},
-        {"joinaggregate": [{"op": "max", "field": "rate", "as": "top"}], "groupby": ["activity"]}
+    "transform": G_PREP,
+    "vconcat": [
+        dumbbell_panel("The two biggest activities", "datum.top >= 5", 20, [0, 5, 10, 15, 20],
+                       [note("Women lead", rate=18.6, label="Bushwalking", mark={"align": "right", "dx": -12, "dy": -12})]),
+        dumbbell_panel("Smaller activities (shorter scale)", "datum.top < 5", 2, [0, 0.5, 1, 1.5, 2],
+                       [note("Men about four\ntimes as likely", rate=1.25, label="Mountain biking", mark={"dx": 10, "dy": 2}),
+                        note("Women about five\ntimes as likely", rate=0.8, label="Horse riding", mark={"dx": 10, "dy": 2})])
     ],
-    "encoding": {
-        "y": {"field": "label", "type": "nominal", "title": None, "sort": {"field": "top", "op": "max", "order": "descending"},
-              "axis": {"domain": False, "ticks": False, "labelFontSize": 12.5, "grid": True, "gridDash": [2, 3]}},
-        "x": {"field": "rate", "type": "quantitative", "title": "% of adults taking part (log scale)",
-              "scale": {"type": "log", "domain": [0.1, 25]},
-              "axis": {"values": [0.1, 0.3, 1, 3, 10, 20], "format": "~g"}}
-    },
-    "layer": [
-        {"mark": {"type": "line", "color": "#9aa79a", "strokeWidth": 2.5}, "encoding": {"detail": {"field": "label"}}},
-        {"mark": {"type": "point", "filled": True, "size": 110, "opacity": 1, "stroke": "#eef1ea", "strokeWidth": 1.5},
-         "encoding": {
-             "color": {"field": "sex", "type": "nominal", "title": None, "scale": {"domain": ["Women", "Men"], "range": [RUST, BLUE]},
-                       "legend": {"orient": "top", "direction": "horizontal", "symbolSize": 120, "labelFontSize": 13}},
-             "shape": {"field": "sex", "scale": {"domain": ["Women", "Men"], "range": ["circle", "diamond"]}, "legend": None},
-             "tooltip": [{"field": "label", "title": "Activity"}, {"field": "sex", "title": "Group"},
-                         {"field": "rate", "title": "% taking part", "format": ".2f"}]}},
-        note("Women lead in bushwalking\nand horse riding", rate=13, label="Bushwalking", mark={"align": "right", "dx": -10, "dy": 8}),
-        note("Men are about four times as\nlikely to mountain bike", rate=1.45, label="Mountain biking", mark={"dx": 8})
-    ]
+    "spacing": 28,
+    "resolve": {"scale": {"color": "shared", "shape": "shared"}, "legend": {"color": "shared"}}
 })
 
-# ---------------------------------------------------------------- 10. Radial motivations
-save("motivations_radial.vg.json", {
-    "description": "Radial bar chart of reasons Australians give for being active, with an age filter (AusPlay 2025).",
-    "width": 420, "height": 420,
+# ---------------------------------------------------------------- 10. Reasons for being active (simple ranked bars)
+LABELS = ("{'Physical health or fitness':'Fitness','Fun/enjoyment':'Fun','To lose weight/ keep weight off/tone':'Weight',"
+          "'To be outdoors/to enjoy nature':'Being outdoors','Social reasons':'Social','Psychological/ mental health/ therapy':'Mental health',"
+          "'Sense of achievement':'Achievement','Hobby':'Hobby','Walk the dog':'Walk the dog','Training purposes':'Training',"
+          "'Learn a new skill':'Learn a new skill','Performance or competition':'Competition','Way of getting around':'Getting around',"
+          "'Physio/rehab/ physical therapy/post-op':'Rehab','To be a good role model':'Role model','Professional/ part of my job':'For work'}")
+save("motivations_bar.vg.json", {
+    "description": "Ranked bar chart of the top 10 reasons Australians give for being active, with an age-group menu (AusPlay 2025).",
+    "width": "container", "height": {"step": 30},
     "data": {"url": "data/motivations_2025.csv"},
     "params": [{"name": "Age", "value": "Total",
                 "bind": {"input": "select", "options": ["Total", "15-17", "18-24", "25-34", "35-44", "45-54", "55-64", "65+"],
@@ -263,23 +287,24 @@ save("motivations_radial.vg.json", {
         {"filter": "datum.sex == 'All' && datum.age == Age"},
         {"window": [{"op": "row_number", "as": "r"}], "sort": [{"field": "share", "order": "descending"}]},
         {"filter": "datum.r <= 10"},
-        {"calculate": "{'Physical health or fitness':'Fitness','Fun/enjoyment':'Fun','To lose weight/ keep weight off/tone':'Weight','To be outdoors/to enjoy nature':'Being outdoors','Social reasons':'Social','Psychological/ mental health/ therapy':'Mental health','Sense of achievement':'Achievement','Hobby':'Hobby','Walk the dog':'Walk the dog','Training purposes':'Training','Learn a new skill':'New skill','Performance or competition':'Competition','Way of getting around':'Getting around','Physio/rehab/ physical therapy/post-op':'Rehab','To be a good role model':'Role model','Professional/ part of my job':'For work'}[datum.motivation]", "as": "label"},
+        {"calculate": LABELS + "[datum.motivation]", "as": "label"},
         {"calculate": "datum.label == 'Being outdoors'", "as": "nature"}
     ],
     "encoding": {
-        "theta": {"field": "label", "type": "nominal", "sort": {"field": "share", "order": "descending"}, "stack": True},
-        "radius": {"field": "share", "type": "quantitative", "scale": {"type": "sqrt", "zero": True, "domain": [0, 80], "range": [40, 150]}}
+        "y": {"field": "label", "type": "nominal", "title": None, "sort": {"field": "share", "op": "max", "order": "descending"},
+              "axis": {"domain": False, "ticks": False, "labelFontSize": 13, "labelPadding": 8,
+                       "labelColor": {"condition": {"test": "datum.value == 'Being outdoors'", "value": GREEN}, "value": INK},
+                       "labelFontWeight": {"condition": {"test": "datum.value == 'Being outdoors'", "value": 700}, "value": 400}}},
+        "x": {"field": "share", "type": "quantitative", "title": "% of active adults", "scale": {"domain": [0, 80]},
+              "axis": {"values": [0, 20, 40, 60, 80], "grid": True}}
     },
     "layer": [
-        {"mark": {"type": "arc", "innerRadius": 40, "stroke": "#eef1ea", "strokeWidth": 3, "cornerRadius": 3, "padAngle": 0.01},
+        {"mark": {"type": "bar", "cornerRadiusEnd": 3, "height": {"band": 0.72}},
          "encoding": {"color": {"field": "nature", "type": "nominal", "legend": None, "scale": {"domain": [True, False], "range": [GREEN, "#b7c6b4"]}},
                       "tooltip": [{"field": "motivation", "title": "Reason"}, {"field": "share", "title": "% of active adults"}]}},
-        {"mark": {"type": "text", "radiusOffset": 34, "fontSize": 12},
-         "encoding": {"text": {"field": "label"}, "color": {"condition": {"test": "datum.nature", "value": GREEN}, "value": MUTED}}},
-        {"mark": {"type": "text", "radiusOffset": -12, "fontSize": 11, "fontWeight": 700, "color": "white"},
+        {"mark": {"type": "text", "align": "left", "dx": 5, "fontSize": 12.5, "fontWeight": 700, "color": INK},
          "encoding": {"text": {"field": "share", "format": ".0f"}}}
-    ],
-    "view": {"stroke": None}
+    ]
 })
 
 # ---------------------------------------------------------------- 11. Places small multiples
@@ -327,11 +352,11 @@ save("vce_enrolments_line.vg.json", {
     "encoding": {
         "x": {"field": "year", "type": "quantitative", "title": None, "scale": {"domain": [2014, 2025.6]},
               "axis": {"format": "d", "values": [2014, 2016, 2018, 2020, 2022, 2024], "grid": False}},
-        "y": {"field": "total", "type": "quantitative", "title": "Students enrolled", "scale": {"domain": [2400, 4100]},
+        "y": {"field": "total", "type": "quantitative", "title": "Students enrolled", "scale": {"domain": [0, 4200]},
               "axis": {"tickCount": 5, "format": ",.0f"}},
     },
     "layer": [
-        {"data": {"values": [{"x": 2015.5, "y": 2500}]},
+        {"data": {"values": [{"x": 2015.5, "y": 400}]},
          "mark": {"type": "text", "fontSize": 11, "color": MUTED, "fontStyle": "italic"},
          "encoding": {"x": {"field": "x", "type": "quantitative"}, "y": {"field": "y", "type": "quantitative"},
                       "text": {"value": "2015 and 2016: no data"}}},
@@ -349,10 +374,6 @@ save("vce_enrolments_line.vg.json", {
          "mark": {"type": "text", "dy": 22, **NOTE},
          "encoding": {"x": {"field": "year", "type": "quantitative"}, "y": {"field": "total", "type": "quantitative"},
                       "text": {"value": "2021: COVID lockdowns"}}},
-        {"data": {"values": [{"year": 2024, "total": 3593}]},
-         "mark": {"type": "text", "align": "right", "dx": -10, "dy": -4, **NOTE},
-         "encoding": {"x": {"field": "year", "type": "quantitative"}, "y": {"field": "total", "type": "quantitative"},
-                      "text": {"value": "Year 12 peak: 3,593"}}},
         {"data": {"values": [{"year": 2014, "total": 2825}]},
          "mark": {"type": "text", "align": "left", "dx": 6, "dy": 18, **NOTE},
          "encoding": {"x": {"field": "year", "type": "quantitative"}, "y": {"field": "total", "type": "quantitative"},
@@ -407,29 +428,32 @@ save("participation_gaps.vg.json", {
         {"calculate": "{'Annual household income~^':'Household income','Highest education completed':'Highest education','Disability or physical condition that restricts life in some way^':'Disability','Aboriginal or Torres Strait Islander origin^':'First Nations'}[datum.category]", "as": "panel"},
         {"calculate": "{'University degree or higher (including postgraduate diploma)':'University degree','Undergraduate diploma or associate diploma':'Diploma','Certificate, trade qualification or apprenticeship':'Trade or certificate','Highest level of secondary school':'Finished Year 12','Did not complete highest level of school':'Left school early','Yes':'Yes','No':'No'}[datum.group] || datum.group", "as": "label"},
         {"joinaggregate": [{"op": "min", "field": "weekly", "as": "lo"}, {"op": "max", "field": "weekly", "as": "hi"}], "groupby": ["panel"]},
-        {"calculate": "datum.weekly == datum.lo ? 'low' : datum.weekly == datum.hi ? 'high' : 'mid'", "as": "tone"}
+        {"calculate": "datum.weekly == datum.lo ? 'low' : datum.weekly == datum.hi ? 'high' : 'mid'", "as": "tone"},
+        {"calculate": "datum.tone == 'low' ? format(datum.weekly, '.0f') + '%, ' + format(datum.hi - datum.lo, '.0f') + ' points behind' : format(datum.weekly, '.0f') + '%'", "as": "vlabel"}
     ],
     "facet": {"field": "panel", "type": "nominal", "title": None, "sort": ["Household income", "Highest education", "Disability", "First Nations"],
-              "header": {"labelFontSize": 14, "labelFontWeight": 600, "labelColor": INK, "labelAnchor": "start"}},
+              "header": {"labelFontSize": 15, "labelFontWeight": 700, "labelColor": INK, "labelAnchor": "start", "labelPadding": 8}},
     "columns": 2,
     "spec": {
-        "width": 330, "height": {"step": 26},
+        "width": 370, "height": {"step": 36},
         "encoding": {
-            "y": {"field": "label", "type": "nominal", "title": None, "sort": None, "axis": {"domain": False, "ticks": False, "labelFontSize": 12}},
+            "y": {"field": "label", "type": "nominal", "title": None, "sort": None,
+                  "axis": {"domain": False, "ticks": False, "labelFontSize": 13, "minExtent": 150, "maxExtent": 150}},
             "x": {"field": "weekly", "type": "quantitative", "title": "% active at least once a week", "scale": {"domain": [0, 100]},
                   "axis": {"values": [0, 25, 50, 75, 100], "grid": True}}
         },
         "layer": [
             {"mark": {"type": "bar", "cornerRadiusEnd": 3, "height": {"band": 0.7}},
              "encoding": {"color": {"field": "tone", "legend": None, "scale": {"domain": ["low", "mid", "high"], "range": [RUST, "#b7c6b4", GREEN]}},
-                          "tooltip": [{"field": "panel", "title": "Group"}, {"field": "label", "title": " "},
+                          "tooltip": [{"field": "panel", "title": "Grouped by"}, {"field": "label", "title": "Group"},
                                       {"field": "weekly", "title": "% active weekly"}]}},
-            {"mark": {"type": "text", "align": "left", "dx": 5, "fontSize": 11.5, "fontWeight": 600, "color": INK},
-             "encoding": {"text": {"field": "weekly", "format": ".0f"}}}
+            {"mark": {"type": "text", "align": "left", "dx": 6, "fontSize": 13, "fontWeight": 700},
+             "encoding": {"text": {"field": "vlabel"},
+                          "color": {"condition": {"test": "datum.tone == 'low'", "value": RUST}, "value": INK}}}
         ]
     },
     "resolve": {"scale": {"y": "independent"}},
-    "spacing": {"row": 30, "column": 60}
+    "spacing": {"row": 40, "column": 60}
 })
 
 # ================================================================ MAPS
@@ -528,10 +552,11 @@ save("bushwalking_symbol_map.vg.json", {
                   "stroke": {"condition": {"param": "pickState", "empty": False, "value": OCHRE}, "value": "white"},
                   "tooltip": [{"field": "state_name", "title": "State"}, {"field": "participants", "title": "Adult bushwalkers", "format": ","},
                               {"field": "rate", "title": "% of adults"}]}},
-             {"mark": {"type": "text", "fontSize": 12, "fontWeight": 700, "dy": 1},
+             {"transform": [{"calculate": "[datum.state, format(datum.rate, '.0f') + '%']", "as": "lab"}],
+              "mark": {"type": "text", "fontSize": 12, "fontWeight": 700, "lineHeight": 14, "dy": -6},
               "encoding": {"longitude": {"field": "label_lon", "type": "quantitative"}, "latitude": {"field": "label_lat", "type": "quantitative"},
-                           "text": {"field": "state"},
-                           "color": {"condition": {"test": "datum.state == 'ACT' || datum.state == 'TAS'", "value": INK}, "value": "white"}}}
+                           "text": {"field": "lab"},
+                           "color": {"condition": {"test": "datum.state == 'ACT' || datum.state == 'TAS' || datum.state == 'NT'", "value": INK}, "value": "white"}}}
          ]},
         {"data": {"values": [{"lon": 149.5, "lat": -45.6, "t": "Tasmanians (28%) and Canberrans (27%)\nare the most likely to bushwalk"}]},
          "mark": {"type": "text", "align": "left", "lineBreak": "\n", **NOTE},
@@ -542,10 +567,17 @@ save("bushwalking_symbol_map.vg.json", {
 }, param_layer=[1, 0])
 
 # ---------------------------------------------------------------- 6. Parallel coordinates: state outdoor profiles
+# Every axis runs from 0% at the bottom to the highest state at the top, so a line's
+# height on an axis shows how close that state is to the leader. Lines are drawn in
+# axis order (left to right) using an explicit order channel.
+PC_AXES = ["Bushwalking", "Cycling", "Mountain biking", "Canoe & kayak", "Surfing", "Fishing"]
 PC_ACTS = ["Bush walking", "Cycling", "Mountain biking", "Canoeing/Kayaking", "Surfing", "Fishing (recreational)"]
+PC_BASE = {
+    "y": {"field": "norm", "type": "quantitative", "axis": None, "scale": {"domain": [0, 1]}},
+}
 save("state_parallel_coordinates.vg.json", {
-    "description": "Parallel coordinates: each line is a state, each axis an outdoor activity. Axes run from the lowest to the highest state (AusPlay 2025).",
-    "width": "container", "height": 330,
+    "description": "Parallel coordinates: each line is a state, each upright axis an outdoor activity. Every axis starts at 0% and tops out at the leading state (AusPlay 2025).",
+    "width": "container", "height": 340,
     "data": {"url": "data/state_outdoor_activity_2025.csv"},
     "params": [{"name": "hl", "value": "TAS",
                 "bind": {"input": "select", "options": ["TAS", "ACT", "NSW", "VIC", "QLD", "SA", "WA", "NT"],
@@ -554,40 +586,43 @@ save("state_parallel_coordinates.vg.json", {
     "transform": [
         {"filter": {"field": "activity", "oneOf": PC_ACTS}},
         {"calculate": "replace(replace(replace(datum.activity, 'Bush walking', 'Bushwalking'), 'Fishing (recreational)', 'Fishing'), 'Canoeing/Kayaking', 'Canoe & kayak')", "as": "axis"},
-        {"joinaggregate": [{"op": "min", "field": "rate", "as": "lo"}, {"op": "max", "field": "rate", "as": "hi"}], "groupby": ["activity"]},
-        {"calculate": "(datum.rate - datum.lo) / (datum.hi - datum.lo)", "as": "norm"},
+        {"calculate": "indexof(" + json.dumps(PC_AXES) + ", datum.axis)", "as": "axis_i"},
+        {"joinaggregate": [{"op": "max", "field": "rate", "as": "hi"}], "groupby": ["activity"]},
+        {"calculate": "datum.rate / datum.hi", "as": "norm"},
         {"calculate": "datum.state == hl", "as": "on"}
     ],
-    "encoding": {"x": {"field": "axis", "type": "nominal", "title": None, "sort": [
-        "Bushwalking", "Cycling", "Mountain biking", "Canoe & kayak", "Surfing", "Fishing"],
-        "axis": {"orient": "top", "domain": False, "ticks": False, "labelAngle": 0, "labelPadding": 16, "labelFontSize": 13, "labelFontWeight": 600, "labelColor": INK, "grid": True, "gridColor": "#9aa79a", "gridWidth": 1.5}}},
+    "encoding": {"x": {"field": "axis", "type": "nominal", "title": None, "sort": PC_AXES, "scale": {"padding": 0.25},
+        "axis": {"orient": "top", "domain": False, "ticks": False, "labelAngle": 0, "labelPadding": 26, "labelFontSize": 13.5,
+                 "labelFontWeight": 600, "labelColor": INK, "grid": True, "gridColor": "#9aa79a", "gridWidth": 1.5}}},
     "layer": [
-        {"mark": {"type": "line", "interpolate": "linear"},
-         "encoding": {
-             "y": {"field": "norm", "type": "quantitative", "axis": None, "scale": {"domain": [0, 1]}},
-             "detail": {"field": "state"},
-             "color": {"condition": {"test": "datum.on", "value": OCHRE}, "value": "#a7b5a5"},
-             "strokeWidth": {"condition": {"test": "datum.on", "value": 4}, "value": 1.6},
-             "opacity": {"condition": {"test": "datum.on", "value": 1}, "value": 0.7},
-             "order": {"field": "on"}}},
-        {"mark": {"type": "point", "filled": True, "size": 50},
-         "encoding": {
-             "y": {"field": "norm", "type": "quantitative"},
-             "color": {"condition": {"test": "datum.on", "value": OCHRE}, "value": "#a7b5a5"},
-             "size": {"condition": {"test": "datum.on", "value": 90}, "value": 30},
-             "tooltip": [{"field": "state_name", "title": "State"}, {"field": "axis", "title": "Activity"},
-                         {"field": "rate", "title": "% of adults"}]}},
+        # every state, drawn quietly
+        {"mark": {"type": "line", "color": "#b3c0b1", "strokeWidth": 1.6},
+         "encoding": {**PC_BASE, "detail": {"field": "state"}, "order": {"field": "axis_i"}}},
+        {"mark": {"type": "point", "filled": True, "size": 34, "color": "#a7b5a5"},
+         "encoding": {**PC_BASE, "tooltip": [{"field": "state_name", "title": "State"}, {"field": "axis", "title": "Activity"},
+                                             {"field": "rate", "title": "% of adults"}]}},
+        # the highlighted state, drawn on top
         {"transform": [{"filter": "datum.on"}],
-         "mark": {"type": "text", "align": "left", "dx": 9, "fontSize": 12.5, "fontWeight": 700, "color": INK},
-         "encoding": {"y": {"field": "norm", "type": "quantitative"}, "text": {"field": "rate", "format": ".1f"}}},
-        {"transform": [{"aggregate": [{"op": "min", "field": "lo", "as": "lo"}, {"op": "max", "field": "hi", "as": "hi"}], "groupby": ["axis"]},
-                       {"fold": ["lo", "hi"], "as": ["end", "v"]},
-                       {"calculate": "datum.end == 'hi' ? 1 : 0", "as": "pos"},
-                       {"calculate": "format(datum.v, '.1f') + '%'", "as": "lab"}],
-         "mark": {"type": "text", "align": "right", "dx": -8, "fontSize": 10.5, "color": MUTED},
-         "encoding": {"y": {"field": "pos", "type": "quantitative"}, "text": {"field": "lab"}}}
+         "mark": {"type": "line", "color": OCHRE, "strokeWidth": 4},
+         "encoding": {**PC_BASE, "order": {"field": "axis_i"}}},
+        {"transform": [{"filter": "datum.on"}],
+         "mark": {"type": "point", "filled": True, "size": 110, "color": OCHRE, "stroke": "white", "strokeWidth": 1.5},
+         "encoding": {**PC_BASE, "tooltip": [{"field": "state_name", "title": "State"}, {"field": "axis", "title": "Activity"},
+                                             {"field": "rate", "title": "% of adults"}]}},
+        {"transform": [{"filter": "datum.on"}, {"calculate": "format(datum.rate, '.1f') + '%'", "as": "lab"}],
+         "mark": {"type": "text", "align": "left", "dx": 10, "fontSize": 13, "fontWeight": 700, "color": INK},
+         "encoding": {**PC_BASE, "text": {"field": "lab"}}},
+        # axis ends: 0% at the bottom, the leading state at the top
+        {"transform": [{"aggregate": [{"op": "max", "field": "hi", "as": "hi"}], "groupby": ["axis"]},
+                       {"fold": ["hi"], "as": ["end", "v"]},
+                       {"calculate": "'Top ' + format(datum.v, '.1f') + '%'", "as": "lab"}],
+         "mark": {"type": "text", "align": "center", "dy": -13, "fontSize": 11, "color": MUTED},
+         "encoding": {"y": {"datum": 1}, "text": {"field": "lab"}}},
+        {"transform": [{"aggregate": [{"op": "count", "as": "n"}], "groupby": ["axis"]}],
+         "mark": {"type": "text", "align": "center", "dy": 14, "fontSize": 11, "color": MUTED},
+         "encoding": {"y": {"datum": 0}, "text": {"value": "0%"}}}
     ],
-    "config": {"padding": {"left": 20, "right": 40, "top": 10, "bottom": 10}}
+    "config": {"padding": {"left": 30, "right": 50, "top": 10, "bottom": 24}}
 })
 
 print("specs written")
