@@ -179,7 +179,7 @@ a:hover { color: var(--forest); }
 /* ==========================================================================
    Story blocks
    ========================================================================== */
-.intro { padding: var(--section-space) 0 0; }
+.intro { padding: var(--section-space) 0 calc(var(--section-space) * 0.25); }
 .opening-block { margin-bottom: var(--space-story); }
 
 .opening {
@@ -195,7 +195,11 @@ a:hover { color: var(--forest); }
    and threads the chapter markers together (wide screens only) */
 .chapters { position: relative; }
 
-.chapter { padding: var(--section-space) 0 calc(var(--section-space) * 0.4); }
+.chapter { padding: var(--section-space) 0 calc(var(--section-space) * 0.25); }
+/* The last story in a chapter adds no extra gap of its own, so the space between
+   chapters comes from one place and stays the same everywhere */
+.chapter > .wrap > :last-child,
+.intro > .wrap > :last-child { margin-bottom: 0; }
 
 .chapter-head {
   position: relative;
@@ -544,6 +548,8 @@ a:hover { color: var(--forest); }
   color: var(--ink-soft);
 }
 .vega-bind-name { font-weight: 600; color: var(--ink); }
+/* vega-embed adds an empty bindings box to every chart; hide it so it adds no gap */
+.vega-bindings:empty { display: none; }
 .vega-bindings select {
   font: inherit;
   color: var(--ink);
@@ -576,3 +582,6 @@ a:hover { color: var(--forest); }
 .legend-filter .role-legend-label text,
 .legend-filter .role-legend-entry { cursor: pointer; }
 .viz figcaption + .legend-note { margin-top: 0; }
+
+/* Text halos in charts sit behind the letters, not over them */
+.vega-embed svg text { paint-order: stroke; stroke-linejoin: round; }

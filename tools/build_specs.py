@@ -138,7 +138,7 @@ save("screens_vs_outdoors.vg.json", {
 OUTDOOR = ["Bush walking", "Cycling", "Golf"]
 TEAM = ["Basketball", "Football/soccer"]
 save("activity_rank_bump.vg.json", {
-    "description": "Bump chart: rank of each activity by number of participants, across adult age groups (AusPlay 2025). Lines leaving the bottom fall out of the top 12.",
+    "description": "Bump chart: rank of each activity by share taking part, across adult age groups (AusPlay 2025). Only the top 12 are drawn, so a line ends where an activity leaves the top 12.",
     "width": "container", "height": 380,
     "data": {"url": "data/activity_rank_by_age_2025.csv"},
     "params": [{"name": "focus", "select": {"type": "point", "fields": ["activity"], "on": "pointerover", "clear": "pointerout"}}],
@@ -157,12 +157,14 @@ save("activity_rank_bump.vg.json", {
     },
     "transform": [
         {"calculate": f"indexof({json.dumps(OUTDOOR)}, datum.activity) >= 0 ? datum.activity : indexof({json.dumps(TEAM)}, datum.activity) >= 0 ? 'Team sport' : 'Other'", "as": "group"},
-        {"calculate": "datum.activity == 'Bush walking' ? 'Bushwalking' : datum.activity == 'Walking (Recreational)' ? 'Walking' : datum.activity", "as": "label"}
+        {"calculate": "datum.activity == 'Bush walking' ? 'Bushwalking' : datum.activity == 'Walking (Recreational)' ? 'Walking' : datum.activity", "as": "label"},
+        # draw only the top 12: a line stops at its last point inside the chart instead of running off the bottom
+        {"filter": "datum.rank <= 12"}
     ],
     "layer": [
-        {"mark": {"type": "line", "clip": True, "interpolate": "monotone"},
+        {"mark": {"type": "line", "interpolate": "monotone"},
          "encoding": {"strokeWidth": {"condition": {"test": "datum.group != 'Other'", "value": 3.5}, "value": 2}}},
-        {"mark": {"type": "point", "filled": True, "size": 90, "clip": True, "stroke": "#eef1ea", "strokeWidth": 1.5},
+        {"mark": {"type": "point", "filled": True, "size": 90, "stroke": "#eef1ea", "strokeWidth": 1.5},
          "encoding": {"tooltip": [{"field": "label", "title": "Activity"}, {"field": "age", "title": "Age"},
                                   {"field": "rank", "title": "Rank"}, {"field": "rate", "title": "% of age group taking part"}]}},
         {"transform": [{"filter": "datum.age == '65+' && datum.rank <= 12"}],
@@ -175,9 +177,9 @@ save("activity_rank_bump.vg.json", {
          "mark": {"type": "text", "align": "left", "dx": 6, "dy": -26, "lineBreak": "\n", **NOTE},
          "encoding": {"text": {"value": "Bushwalking reaches 3rd\nfrom age 35"}, "color": {"value": MUTED},
                       "opacity": {"value": 1}}},
-        {"data": {"values": [{"age": "55-64", "rank": 12.3}]},
-         "mark": {"type": "text", "align": "center", "dy": -6, **NOTE},
-         "encoding": {"text": {"value": "Team sports drop out of the top 12"}, "color": {"value": MUTED},
+        {"data": {"values": [{"age": "45-54", "rank": 11.5}]},
+         "mark": {"type": "text", "align": "left", "dx": 14, "lineBreak": "\n", **NOTE},
+         "encoding": {"text": {"value": "Basketball and soccer\ndrop out of the top 12"}, "color": {"value": MUTED},
                       "opacity": {"value": 1}}}
     ],
     "config": {"padding": {"right": 110}}
@@ -516,7 +518,10 @@ save("parks_point_map.vg.json", {
              "longitude": {"field": "lon", "type": "quantitative"}, "latitude": {"field": "lat", "type": "quantitative"},
              "color": {"field": "manager", "type": "nominal", "title": "Managed by (click to filter)",
                        "scale": {"domain": MANAGERS, "range": [OCHRE, GREEN, OLIVE, BLUE]},
-                       "legend": {"symbolSize": 120, "labelFontSize": 12.5}},
+                       # sit the legend just off the north-east coast instead of at the far edge of the chart;
+                       # the map is centred, so its right edge is about width/2 + 240px
+                       "legend": {"symbolSize": 120, "labelFontSize": 12.5, "orient": "none",
+                                  "legendX": {"expr": "width / 2 + 270"}, "legendY": 30}},
              "opacity": {"condition": {"param": "who", "value": 0.9}, "value": 0.05},
              "order": {"field": "draw_order"},
              "tooltip": [{"field": "name", "title": "Name"}, {"field": "type", "title": "Type"}, {"field": "manager", "title": "Managed by"},
@@ -556,7 +561,11 @@ save("bushwalking_symbol_map.vg.json", {
               "mark": {"type": "text", "fontSize": 12, "fontWeight": 700, "lineHeight": 14, "dy": -6},
               "encoding": {"longitude": {"field": "label_lon", "type": "quantitative"}, "latitude": {"field": "label_lat", "type": "quantitative"},
                            "text": {"field": "lab"},
-                           "color": {"condition": {"test": "datum.state == 'ACT' || datum.state == 'TAS' || datum.state == 'NT'", "value": INK}, "value": "white"}}}
+                           "color": {"condition": {"test": "datum.state == 'ACT' || datum.state == 'TAS'", "value": INK}, "value": "white"},
+                           # NT's circle is too small for its label, so the white label gets a halo in the
+                           # circle's own colour (#78a17e = 19% on the colour scale); circle sizes stay true to the data
+                           "stroke": {"value": "#78a17e"},
+                           "strokeWidth": {"condition": {"test": "datum.state == 'NT'", "value": 5}, "value": 0}}}
          ]},
         {"data": {"values": [{"lon": 149.5, "lat": -45.6, "t": "Tasmanians (28%) and Canberrans (27%)\nare the most likely to bushwalk"}]},
          "mark": {"type": "text", "align": "left", "lineBreak": "\n", **NOTE},

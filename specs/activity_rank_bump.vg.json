@@ -1,6 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "Bump chart: rank of each activity by number of participants, across adult age groups (AusPlay 2025). Lines leaving the bottom fall out of the top 12.",
+  "description": "Bump chart: rank of each activity by share taking part, across adult age groups (AusPlay 2025). Only the top 12 are drawn, so a line ends where an activity leaves the top 12.",
   "width": "container",
   "height": 380,
   "data": {
@@ -101,13 +101,15 @@
     {
       "calculate": "datum.activity == 'Bush walking' ? 'Bushwalking' : datum.activity == 'Walking (Recreational)' ? 'Walking' : datum.activity",
       "as": "label"
+    },
+    {
+      "filter": "datum.rank <= 12"
     }
   ],
   "layer": [
     {
       "mark": {
         "type": "line",
-        "clip": true,
         "interpolate": "monotone"
       },
       "encoding": {
@@ -125,7 +127,6 @@
         "type": "point",
         "filled": true,
         "size": 90,
-        "clip": true,
         "stroke": "#eef1ea",
         "strokeWidth": 1.5
       },
@@ -237,22 +238,23 @@
       "data": {
         "values": [
           {
-            "age": "55-64",
-            "rank": 12.3
+            "age": "45-54",
+            "rank": 11.5
           }
         ]
       },
       "mark": {
         "type": "text",
-        "align": "center",
-        "dy": -6,
+        "align": "left",
+        "dx": 14,
+        "lineBreak": "\n",
         "fontSize": 12,
         "fontStyle": "italic",
         "color": "#4b5b51"
       },
       "encoding": {
         "text": {
-          "value": "Team sports drop out of the top 12"
+          "value": "Basketball and soccer\ndrop out of the top 12"
         },
         "color": {
           "value": "#4b5b51"

@@ -83,7 +83,12 @@
           },
           "legend": {
             "symbolSize": 120,
-            "labelFontSize": 12.5
+            "labelFontSize": 12.5,
+            "orient": "none",
+            "legendX": {
+              "expr": "width / 2 + 270"
+            },
+            "legendY": 30
           }
         },
         "opacity": {

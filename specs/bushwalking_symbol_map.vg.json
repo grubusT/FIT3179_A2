@@ -215,10 +215,20 @@
             },
             "color": {
               "condition": {
-                "test": "datum.state == 'ACT' || datum.state == 'TAS' || datum.state == 'NT'",
+                "test": "datum.state == 'ACT' || datum.state == 'TAS'",
                 "value": "#1e2b24"
               },
               "value": "white"
+            },
+            "stroke": {
+              "value": "#78a17e"
+            },
+            "strokeWidth": {
+              "condition": {
+                "test": "datum.state == 'NT'",
+                "value": 5
+              },
+              "value": 0
             }
           }
         }

@@ -49,7 +49,7 @@ function dropNotes(view) {
 }
 
 function fitToScreen(spec, slotWidth, id) {
-  if (slotWidth >= 720) return spec;
+  if (window.innerWidth >= 720) return spec;  // phones only; judged on the screen, not the column
   const shrink = (view) => {
     if (view && typeof view.width === 'number') view.width = Math.max(180, Math.min(view.width, slotWidth - 205));
   };
@@ -64,6 +64,13 @@ function fitToScreen(spec, slotWidth, id) {
     spec.config.legend.direction = 'vertical';
   }
   if (spec.projection && typeof spec.height === 'number') spec.height = Math.round(slotWidth * 0.85);
+  (spec.layer || []).forEach(l => {
+    const legend = l.encoding && l.encoding.color && l.encoding.color.legend;
+    if (legend && legend.orient === 'none') {  // a hand-placed legend goes under the map on phones
+      legend.orient = 'bottom'; legend.direction = 'vertical';
+      delete legend.legendX; delete legend.legendY;
+    }
+  });
   if (id === 'viz-parallel' || id === 'viz-bump' || id === 'viz-heatmap') {
     const axis = spec.encoding.x.axis || (spec.encoding.x.axis = {});
     Object.assign(axis, { labelAngle: -45, labelAlign: 'left', labelBaseline: 'middle' });
